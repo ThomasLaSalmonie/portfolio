@@ -9,11 +9,11 @@
 
 <template>
   <v-parallax class="hero-parallax" src="/background_parallax.jpeg">
-    <h1 class="text-black" style="font-size: 4rem;">Welcome to My Portfolio</h1>
+    <h1 class="text-black" style="font-size: 4rem">Welcome to My Portfolio</h1>
     <h2 class="text-black">Showcasing my passion for Software Development.</h2>
   </v-parallax>
   <v-container>
-    <section class="hero-text">
+    <v-container class="hero-text">
       <h2>TL;DR</h2>
       <p>
         Curious, passionate and selftaught.
@@ -27,7 +27,7 @@
         I continually question my work, in order to make quality work as close to user expectations
         as possible.
       </p>
-    </section>
+    </v-container>
     <async-loader :is-loading="isLoading" :error="error">
       <v-carousel
         v-if="Number(result?.length) > 0"
@@ -120,7 +120,6 @@
   }
 
   .hero-text {
-    height: 20vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
