@@ -10,7 +10,7 @@ blocks:
           commands:
             - npm install
             - npx nuxi generate
-            - scp -r output/public root@178.128.238.94:/var/www/thomaslasalmonie.me/release/$SEMAPHORE_WORKFLOW_ID
+            - scp -r .output/public root@178.128.238.94:/var/www/thomaslasalmonie.me/release/$SEMAPHORE_WORKFLOW_ID
             - ssh root@178.128.238.94 unlink /var/www/thomaslasalmonie.me/current
             - ssh root@178.128.238.94 ln -s /var/www/thomaslasalmonie.me/release/$SEMAPHORE_WORKFLOW_ID /var/www/thomaslasalmonie.me/current
             - ssh root@178.128.238.94 rm -rf $(ls -t1 | tail -n 1)
