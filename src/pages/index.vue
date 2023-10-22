@@ -8,9 +8,9 @@
 </script>
 
 <template>
-  <v-parallax class="hero-parallax" src="https://cdn.vuetifyjs.com/images/parallax/material.jpg">
-    <h1>Welcome to My Portfolio</h1>
-    <p>Showcasing my passion for Software Development.</p>
+  <v-parallax class="hero-parallax" src="/background_parallax.jpeg">
+    <h1 class="text-black" style="font-size: 4rem;">Welcome to My Portfolio</h1>
+    <h2 class="text-black">Showcasing my passion for Software Development.</h2>
   </v-parallax>
   <v-container>
     <section class="hero-text">
@@ -68,22 +68,28 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col col="4">
+      <v-col col="3">
+        <div class="service-card">
+          <h3>Web Development</h3>
+          <p>From static sites to full scale Web</p>
+        </div>
+      </v-col>
+      <v-col col="3">
         <div class="service-card">
           <h3>UI/UX Design</h3>
           <p>Designing intuitive and user-friendly interfaces for a seamless user experience.</p>
         </div>
       </v-col>
-      <v-col col="4">
+      <v-col col="3">
         <div class="service-card">
-          <h3>UI/UX Design</h3>
-          <p>Designing intuitive and user-friendly interfaces for a seamless user experience.</p>
+          <h3>Database</h3>
+          <p>Database/Mock Database Systems Creation, Management & Interfacing</p>
         </div>
       </v-col>
-      <v-col col="4">
+      <v-col col="3">
         <div class="service-card">
-          <h3>UI/UX Design</h3>
-          <p>Designing intuitive and user-friendly interfaces for a seamless user experience.</p>
+          <h3>CI/CD</h3>
+          <p>Automate your development practice</p>
         </div>
       </v-col>
     </v-row>
@@ -127,6 +133,7 @@
     text-align: center;
     padding: 1rem;
     border: 1px solid #ccc;
+    height: 100%;
     margin-bottom: 1rem;
   }
 
