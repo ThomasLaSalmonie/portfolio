@@ -23,5 +23,5 @@ blocks:
           - sem-version node 18
 agent:
   machine:
-    type: e1-standard-2
+    type: e2-standard-2
     os_image: ubuntu2204
