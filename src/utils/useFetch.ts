@@ -1,5 +1,5 @@
 import { useFetch } from 'nuxt/app';
-import { Nullable } from '~/utils/types/common.types';
+import type { Nullable } from '~/utils/types/common.types';
 
 const useFetchData = <T = any>(params: any) => {
   const isLoading = ref<boolean>(false);

@@ -1,0 +1,27 @@
+version: v1.0
+name: Deployment
+blocks:
+  - name: Deploy
+    task:
+      secrets:
+        - name: personnal-site
+      jobs:
+        - name: Deployment
+          commands:
+            - npm install
+            - npx nuxi generate
+            - scp -r output/public root@178.128.238.94:/var/www/thomaslasalmonie.me/release/$SEMAPHORE_WORKFLOW_ID
+            - ssh root@178.128.238.94 unlink /var/www/thomaslasalmonie.me/current
+            - ssh root@178.128.238.94 ln -s /var/www/thomaslasalmonie.me/release/$SEMAPHORE_WORKFLOW_ID /var/www/thomaslasalmonie.me/current
+            - ssh root@178.128.238.94 rm -rf $(ls -t1 | tail -n 1)
+      prologue:
+        commands:
+          - chmod 0600 ~/.ssh/ssh_key
+          - ssh-add ~/.ssh/ssh_key
+          - ssh-keyscan -H 178.128.238.94 >> ~/.ssh/known_hosts
+          - checkout
+          - sem-version node 18
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu2204

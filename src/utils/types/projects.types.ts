@@ -1,4 +1,4 @@
-import { Skill } from './skills.types';
+import type { Skill } from './skills.types';
 
 type ImagePosition = 'left' | 'right';
 

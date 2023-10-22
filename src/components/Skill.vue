@@ -19,7 +19,7 @@
           <v-icon color="black" size="x-large" :icon="`mdi-${props.skill.icon}`"></v-icon>
         </v-avatar>
       </v-col>
-      <v-col cols="8" v-if="!props.iconOnly">
+      <v-col v-if="!props.iconOnly" cols="8">
         <h4>{{ props.skill.name }}</h4>
         <v-progress-linear
           class="my-3"

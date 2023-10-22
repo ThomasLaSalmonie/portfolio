@@ -48,7 +48,7 @@
       </v-row>
     </v-container>
 
-    <v-container fluid class="project-container" v-if="project.skills?.length > 0">
+    <v-container v-if="project.skills?.length > 0" fluid class="project-container">
       <v-row>
         <v-col>
           <v-card>

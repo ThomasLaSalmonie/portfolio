@@ -1,0 +1,21 @@
+version: v1.0
+name: Test/Lint Portfolio
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu2204
+blocks:
+  - name: Test/Lint
+    task:
+      jobs:
+        - name: Test/Lint
+          commands:
+            - checkout
+            - sem-version node 18
+            - cache restore
+            - npm install
+            - cache store
+            # - npm run lint
+promotions:
+  - name: Deploy
+    pipeline_file: deployment.yml

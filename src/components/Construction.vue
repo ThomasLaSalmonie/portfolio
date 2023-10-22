@@ -1,3 +1,46 @@
+<script>
+  export default {
+    name: 'Construction',
+    data: () => ({
+      animate: null,
+      frameNumber: 0,
+      jackhammerTip: null,
+      jackhammer: null,
+      jackBody: null,
+      jackArms: null
+    }),
+    mounted() {
+      this.initJackhammer();
+    },
+    beforeUnmount() {
+      clearInterval(this.animate);
+    },
+    methods: {
+      initJackhammer() {
+        this.jackhammerTip = document.getElementById('jackhammerTip');
+        this.jackhammer = document.getElementById('jackhammer');
+        this.jackBody = document.getElementById('jackBody');
+        this.jackArms = document.getElementById('jackArms');
+        this.animate = setInterval(() => {
+          this.animateJackhammer();
+        }, 40);
+      },
+      animateJackhammer() {
+        this.frameNumber++;
+        this.jackhammerTip.setAttribute('transform', `translate(0,${(this.frameNumber % 3) * -3})`);
+        this.jackhammer.setAttribute(
+          'transform',
+          `translate(0,${-Math.sin(this.frameNumber * 1.5)})`
+        );
+        const jackBodyAmount = Math.sin(this.frameNumber) + 2;
+        this.jackBody.setAttribute('transform', `translate(0,${-jackBodyAmount})`);
+        this.jackArms.setAttribute('transform', `translate(0,${-jackBodyAmount})`);
+        if (this.frameNumber === 1000) this.frameNumber = 0;
+      }
+    }
+  };
+</script>
+
 <template>
   <div class="body">
     <div class="jackhammer">
@@ -380,49 +423,6 @@
     </div>
   </div>
 </template>
-
-<script>
-  export default {
-    name: 'Construction',
-    data: () => ({
-      animate: null,
-      frameNumber: 0,
-      jackhammerTip: null,
-      jackhammer: null,
-      jackBody: null,
-      jackArms: null
-    }),
-    mounted() {
-      this.initJackhammer();
-    },
-    beforeDestroy() {
-      clearInterval(this.animate);
-    },
-    methods: {
-      initJackhammer() {
-        this.jackhammerTip = document.getElementById('jackhammerTip');
-        this.jackhammer = document.getElementById('jackhammer');
-        this.jackBody = document.getElementById('jackBody');
-        this.jackArms = document.getElementById('jackArms');
-        this.animate = setInterval(() => {
-          this.animateJackhammer();
-        }, 40);
-      },
-      animateJackhammer() {
-        this.frameNumber++;
-        this.jackhammerTip.setAttribute('transform', `translate(0,${(this.frameNumber % 3) * -3})`);
-        this.jackhammer.setAttribute(
-          'transform',
-          `translate(0,${-Math.sin(this.frameNumber * 1.5)})`
-        );
-        const jackBodyAmount = Math.sin(this.frameNumber) + 2;
-        this.jackBody.setAttribute('transform', `translate(0,${-jackBodyAmount})`);
-        this.jackArms.setAttribute('transform', `translate(0,${-jackBodyAmount})`);
-        if (this.frameNumber === 1000) this.frameNumber = 0;
-      }
-    }
-  };
-</script>
 
 <style>
   .body {
