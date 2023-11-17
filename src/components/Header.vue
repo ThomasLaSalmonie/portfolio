@@ -7,7 +7,7 @@
 
 <template>
   <v-app-bar color="black">
-    <template v-slot:prepend v-if="mobile">
+    <template v-if="mobile" #prepend>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
     </template>
     <v-toolbar-title v-if="!mobile">

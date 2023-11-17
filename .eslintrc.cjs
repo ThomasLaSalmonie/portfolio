@@ -45,13 +45,8 @@ module.exports = {
       }
     ],
     /* Vue rules */
+    "vue/multi-word-component-names": 0,
     'vue/no-unused-components': ['warn'],
-    'vue/no-undef-components': [
-      'error',
-      {
-        ignorePatterns: ['rky-*', 'Router*', 'El*', 'Auth']
-      }
-    ],
     'vue/component-tags-order': [
       'warn',
       {

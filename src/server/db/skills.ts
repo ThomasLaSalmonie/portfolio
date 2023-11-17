@@ -40,8 +40,15 @@ const skills: Skill[] = [
     related: ['javascript']
   },
   {
-    key: 'elastic',
-    icon: 'elastic',
+    key: 'nuxt',
+    icon: 'nuxt',
+    name: 'Nuxt.js',
+    progress: 30,
+    show: true,
+    related: ['javascript']
+  },
+  {
+    key: 'elasticsearch',
     name: 'Elasticsearch',
     progress: 90,
     show: true,
@@ -57,7 +64,6 @@ const skills: Skill[] = [
   },
   {
     key: 'yarn',
-    icon: 'yarn',
     name: 'Yarn',
     progress: 90,
     show: true,
@@ -74,6 +80,22 @@ const skills: Skill[] = [
     key: 'git',
     icon: 'git',
     name: 'Git',
+    progress: 90,
+    show: true,
+    related: []
+  },
+  {
+    key: 'github',
+    icon: 'github',
+    name: 'Github',
+    progress: 90,
+    show: true,
+    related: []
+  },
+  {
+    key: 'gitlab',
+    icon: 'gitlab',
+    name: 'Gitlab',
     progress: 90,
     show: true,
     related: []
@@ -130,6 +152,14 @@ const skills: Skill[] = [
     key: 'gcp',
     icon: 'google-cloud',
     name: 'Google cloud',
+    progress: 90,
+    show: true,
+    related: ['kubernetes']
+  },
+  {
+    key: 'azure',
+    icon: 'microsoft-azure',
+    name: 'Microsoft azure',
     progress: 90,
     show: true,
     related: ['kubernetes']
@@ -200,7 +230,6 @@ const skills: Skill[] = [
   },
   {
     key: 'mysql',
-    icon: 'mysql',
     name: 'Mysql',
     progress: 90,
     show: true,
@@ -232,12 +261,49 @@ const skills: Skill[] = [
   },
   {
     key: 'redis',
-    icon: 'redis',
     name: 'Redis',
     show: true,
     progress: 90,
     related: []
-  }
+  },
+  {
+    key: 'mongodb',
+    name: 'MongoDB',
+    show: true,
+    progress: 90,
+    related: []
+  },
+  {
+    key: 'rabbitmq',
+    name: 'RabbitMQ',
+    show: true,
+    progress: 90,
+    related: []
+  },
+  {
+    key: 'unity',
+    icon: 'unity',
+    name: 'Unity',
+    show: true,
+    progress: 90,
+    related: []
+  },
+  {
+    key: 'csharp',
+    icon: 'language-csharp',
+    name: 'C#',
+    show: true,
+    progress: 90,
+    related: []
+  },
+  {
+    key: 'bash',
+    icon: 'bash',
+    name: 'Bash',
+    show: true,
+    progress: 90,
+    related: []
+  },
 ];
 
 export default skills;

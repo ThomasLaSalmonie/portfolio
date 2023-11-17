@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import type { Nullable } from '~/types/common';
+  import type { Nullable } from '~/utils/types/common.types';
 
   interface BaseAsyncLoaderProps {
     error?: Nullable<Error>;

@@ -10,7 +10,7 @@
 
 <style scoped>
   .main-content {
-    margin-bottom: 85px;
+    margin-bottom: 125px;
     margin-top: 64px;
   }
 </style>

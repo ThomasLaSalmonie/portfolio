@@ -2,6 +2,12 @@ import type { Skill } from './skills.types';
 
 type ImagePosition = 'left' | 'right';
 
+export enum StatusColor {
+  pause = 'orange',
+  stop = 'red',
+  play = 'green'
+}
+
 export type Block = {
   title?: string;
   content: string;
@@ -13,7 +19,10 @@ export type Project = {
   name: string;
   slug: string;
   shortDescription?: string;
-  blocks: Block[];
+  links?: string[];
+  status?: 'pause' | 'stop' | 'play';
+  banner?: string;
+  blocks?: Block[];
   technologiesUsed?: string[];
   skills?: Skill[];
 };

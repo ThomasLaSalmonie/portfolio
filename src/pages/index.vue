@@ -8,10 +8,17 @@
 </script>
 
 <template>
-  <v-parallax class="hero-parallax" src="/background_parallax.jpeg">
-    <h1 class="text-black" style="font-size: 4rem">Welcome to My Portfolio</h1>
-    <h2 class="text-black">Showcasing my passion for Software Development.</h2>
-  </v-parallax>
+  <Html lang="en">
+    <Head>
+      <Title>Thomas La Salmonie</Title>
+      <Meta name="description" content="Welcome page for Thomas La Salmonie Portfolio" />
+    </Head>
+  </Html>
+  <ParallaxItem
+    title="Welcome to My Portfolio"
+    description="Showcasing my passion for Software Development."
+    img="https://img.thomaslasalmonie.me/background_parallax.jpeg"
+  />
   <v-container>
     <v-container class="hero-text">
       <h2>TL;DR</h2>
@@ -28,7 +35,7 @@
         as possible.
       </p>
     </v-container>
-    <async-loader :is-loading="isLoading" :error="error">
+    <AsyncLoader :is-loading="isLoading" :error="error">
       <v-carousel
         v-if="Number(result?.length) > 0"
         height="400"
@@ -59,7 +66,7 @@
           </div>
         </v-carousel-item>
       </v-carousel>
-    </async-loader>
+    </AsyncLoader>
   </v-container>
   <v-container fluid class="bg-grey-darken-4">
     <v-row>
@@ -111,14 +118,6 @@
 </template>
 
 <style scoped>
-  .hero-parallax {
-    height: 70vh;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    color: white;
-  }
-
   .hero-text {
     display: flex;
     flex-direction: column;

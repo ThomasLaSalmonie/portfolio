@@ -1,6 +1,6 @@
 export type Skill = {
   key: string;
-  icon: string;
+  icon?: string;
   name: string;
   progress?: number;
   show?: boolean;
