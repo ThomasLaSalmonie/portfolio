@@ -303,7 +303,7 @@ const skills: Skill[] = [
     show: true,
     progress: 90,
     related: []
-  },
+  }
 ];
 
 export default skills;

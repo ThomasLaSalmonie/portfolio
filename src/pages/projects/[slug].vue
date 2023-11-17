@@ -49,22 +49,15 @@
         </v-col>
       </v-row>
     </v-container>
-    <v-container
-      v-if="project?.links && project.links?.length > 0"
-      fluid
-      class="project-container"
-    >
+    <v-container v-if="project?.links && project.links?.length > 0" fluid class="project-container">
       <v-row>
         <v-col>
           <v-card prepend-icon="mdi-link">
             <template #title> External Links </template>
             <v-card-text>
-                <li
-                    v-for="(link, index) in project?.links"
-                    :key="index"
-                >
-                    <a :href="link">{{ link }}</a>
-                </li>
+              <li v-for="(link, index) in project?.links" :key="index">
+                <a :href="link">{{ link }}</a>
+              </li>
             </v-card-text>
           </v-card>
         </v-col>
