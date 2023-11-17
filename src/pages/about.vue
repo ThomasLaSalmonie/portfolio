@@ -32,20 +32,20 @@
           fill-dot
         >
           <template v-if="item.date" #opposite>
-            <span class="text-h5">{{ item.date }}</span>
+            <span>{{ item.date }}</span>
           </template>
           <v-card>
-            <v-card-title class="text-h4">{{ item.title }}</v-card-title>
-            <v-card-title class="text-h6"
-              ><a :href="item.link" target="_blank">{{ item.company }}</a></v-card-title
-            >
+            <v-card-title class="font-weight-bold">{{ item.title }}</v-card-title>
+            <v-card-text>
+              <a :href="item.link" target="_blank">{{ item.company }}</a>
+            </v-card-text>
             <v-card-text class="text--primary">
               <li v-for="(task, key) in item.tasks" :key="key">
                 {{ task }}
               </li>
             </v-card-text>
             <template v-if="item.projects && item.projects?.length > 0">
-              <v-card-title class="text-h6">Projects:</v-card-title>
+              <v-card-title>Projects:</v-card-title>
               <v-card-text class="text--primary">
                 <li v-for="(project, key) in item.projects" :key="key">
                   <NuxtLink :to="`/projects/${project.slug}`">
@@ -55,7 +55,7 @@
               </v-card-text>
             </template>
             <template v-if="item.skills && item.skills?.length > 0">
-              <v-card-title class="text-h6">Technologies:</v-card-title>
+              <v-card-title>Technologies:</v-card-title>
               <v-card-text>
                 <div class="grid-container">
                   <SkillItem

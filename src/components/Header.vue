@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { useDisplay } from 'vuetify';
 
-  const { mobile } = useDisplay();
+  const { mobile } = useDisplay({ mobileBreakpoint: 960 });
   const drawer = ref<boolean>(false);
 </script>
 
