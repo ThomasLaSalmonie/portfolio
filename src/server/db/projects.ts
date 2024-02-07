@@ -25,7 +25,7 @@ const projects: Project[] = [
   {
     slug: 'baumpub',
     name: 'Baum publications',
-    // banner: 'https://picsum.photos/200/200',
+    banner: 'https://img.thomaslasalmonie.me/baum/banner.jpg',
     status: 'play',
     links: [
       'https://baumpub.com/',
@@ -51,10 +51,21 @@ const projects: Project[] = [
     ]
   },
   {
+    slug: 'ardatho',
+    name: 'Ardatho',
+    banner: 'https://img.thomaslasalmonie.me/ardatho/banner.jpg',
+    status: 'play',
+    links: [
+      'https://ardatho.com/',
+    ],
+    // shortDescription: 'Lorem ipsum dolor sit amet.',
+    technologiesUsed: []
+  },
+  {
     slug: 'fillactive',
     name: 'Fillactive',
     links: ['https://fillactive.ca/'],
-    // banner: 'https://picsum.photos/200/200',
+    banner: 'https://img.thomaslasalmonie.me/fillactive/banner.jpg',
     status: 'stop',
     // shortDescription: 'Lorem ipsum dolor sit amet.',
     technologiesUsed: [
@@ -148,6 +159,7 @@ const projects: Project[] = [
     slug: 'ax2',
     name: 'Ax2',
     links: ['https://ax2.ca/'],
+    banner: 'https://img.thomaslasalmonie.me/ax2/banner.jpg',
     // banner: 'https://picsum.photos/200/200',
     status: 'stop',
     // shortDescription: 'Lorem ipsum dolor sit amet.',
@@ -176,7 +188,7 @@ const projects: Project[] = [
       'https://fanclub.canadiens.com/',
       'https://www.nhl.com/canadiens/fans/7thplayer'
     ],
-    // banner: 'https://picsum.photos/200/200',
+    banner: 'https://img.thomaslasalmonie.me/canadiens/banner.jpg',
     status: 'stop',
     // shortDescription: 'Lorem ipsum dolor sit amet.',
     technologiesUsed: [
@@ -195,12 +207,11 @@ const projects: Project[] = [
     slug: 'lumenpulse',
     name: 'Lumenpulse',
     links: [
-      '',
       'https://www.lumenpulse.com/',
       'https://www.lmpg.com/',
       'https://www.exenia.eu/en/'
     ],
-    // banner: 'https://picsum.photos/200/200',
+    banner: 'https://img.thomaslasalmonie.me/lumenpulse/banner.jpg',
     status: 'stop',
     // shortDescription: 'Lorem ipsum dolor sit amet.',
     technologiesUsed: [
