@@ -1,5 +1,4 @@
 import type { NitroFetchRequest } from 'nitropack';
-import { useFetch } from 'nuxt/app';
 import type { Nullable } from '~/utils/types/common.types';
 
 const useFetchData = <T = unknown>(params: NitroFetchRequest) => {
@@ -7,7 +6,7 @@ const useFetchData = <T = unknown>(params: NitroFetchRequest) => {
   const hasError = ref<boolean>(false);
   const result = shallowRef<Nullable<T>>(null);
   const error = ref<Nullable<Error>>(null);
-  const fetchParams = ref<NitroFetchRequest>(params);
+  const fetchParams: NitroFetchRequest = params;
 
   const fetchData = async (): Promise<void> => {
     isLoading.value = true;

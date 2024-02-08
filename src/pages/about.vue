@@ -2,7 +2,7 @@
   import { watch } from 'vue';
   import { useDisplay } from 'vuetify';
   import type { AboutItem } from '~/utils/types/about.types';
-  import useFetchData from '~/utils/useFetch';
+  import useFetchData from '~/utils/useFetchData';
 
   const { mobile } = useDisplay();
 
@@ -92,3 +92,4 @@
     height: 50px;
   }
 </style>
+~/utils/useFetchData

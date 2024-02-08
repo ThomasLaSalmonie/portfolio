@@ -3,8 +3,8 @@ import projects from '../db/projects';
 import skills from '../db/skills';
 
 export default defineEventHandler((event) => {
-  const query = getQuery(event);
-  console.log({ query });
+//   const query = getQuery(event);
+
   for (const item of aboutItems) {
     item.projects = projects
       .filter((project) => item.retatedProjects?.includes(project.slug))

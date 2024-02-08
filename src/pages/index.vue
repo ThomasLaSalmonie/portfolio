@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import type { Project } from '~/utils/types/projects.types';
-  import useFetchData from '~/utils/useFetch';
+  import useFetchData from '~/utils/useFetchData';
 
   const { result, isLoading, error, fetchData } = useFetchData<Project[]>(`/api/projects/?limit=3`);
 
@@ -144,3 +144,4 @@
     font-size: 1rem;
   }
 </style>
+~/utils/useFetchData

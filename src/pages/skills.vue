@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import type { Skill } from '~/utils/types/skills.types';
-  import useFetchData from '~/utils/useFetch';
+  import useFetchData from '~/utils/useFetchData';
 
   const { result, isLoading, error, fetchData } = useFetchData<Skill[]>(`/api/skills/`);
 
@@ -16,7 +16,8 @@
       <Meta name="description" content="List of my skills that I develop along my carreer" />
     </Head>
   </Html>
-  <h1 class="text-center">My Skills</h1>
+  <Construction />
+  <!-- <h1 class="text-center">My Skills</h1>
   <AsyncLoader :is-loading="isLoading" :error="error">
     <v-container>
       <v-row justify="space-around">
@@ -25,5 +26,6 @@
         </v-col>
       </v-row>
     </v-container>
-  </AsyncLoader>
+  </AsyncLoader> -->
 </template>
+~/utils/useFetchData

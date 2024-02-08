@@ -2,7 +2,7 @@
   import { useRoute } from 'nuxt/app';
   import { watch } from 'vue';
   import type { Project } from '~/utils/types/projects.types';
-  import useFetchData from '~/utils/useFetch';
+  import useFetchData from '~/utils/useFetchData';
 
   const route = useRoute();
 
@@ -107,3 +107,4 @@
     height: 100px;
   }
 </style>
+~/utils/useFetchData
