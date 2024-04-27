@@ -40,9 +40,7 @@
               <a :href="item.link" target="_blank">{{ item.company }}</a>
             </v-card-text>
             <v-card-text class="text--primary">
-              <li v-for="(task, key) in item.tasks" :key="key">
-                {{ task }}
-              </li>
+              <li v-for="(task, key) in item.tasks" :key="key" v-html="task" />
             </v-card-text>
             <template v-if="item.projects && item.projects?.length > 0">
               <v-card-title>Projects:</v-card-title>

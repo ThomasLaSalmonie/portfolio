@@ -2,9 +2,37 @@ import type { AboutItem } from '~/utils/types/about.types';
 
 const aboutItems: AboutItem[] = [
   {
-    color: 'green-lighten-1',
-    icon: 'mdi-play',
-    date: '2022/10 - Current',
+    color: 'red-lighten-2',
+    icon: 'mdi-stop',
+    date: '2024/02 - 2024/04',
+    title: 'Back-end Developer',
+    link: 'https://unito.io/',
+    company: 'Unito, Montreal, QC',
+    tasks: [
+      'Building and maintaining integrations between Unito and a wide variety of third-party tools such as Jira, Asana, Azure Devops and many others',
+      'Deeply involved in the creative process of shaping our platform\'s future',
+      'Bugfixes and maintenance on Unito personnal deployer assitant <a href="https://unito.io/blog/unito-slackbot-for-shipping-software-le-capitaine/" target="_blank">"Le capitaine"</a>',
+      '',
+      'Unfortunately Unito had a significant internal restructuring that led to the departure of 17 individuals. This restructuring impacted not only my entire team but also two other teams, including myself.'
+    ],
+    retatedProjects: [],
+    technologiesUsed: [
+      'typescript',
+      'nodejs',
+      'restapi',
+      'aws',
+      'kubernetes',
+      'docker',
+      'redis',
+      'mongodb',
+      'github',
+      'npm'
+    ]
+  },
+  {
+    color: 'red-lighten-2',
+    icon: 'mdi-stop',
+    date: '2022/10 - 2024/02',
     title: 'Tech Lead Web Developer',
     link: 'https://business.bell.ca/shop/medium-large/internet-of-things/iot-applications',
     company: 'Bell, Montreal, QC',
@@ -56,7 +84,7 @@ const aboutItems: AboutItem[] = [
     color: 'green-lighten-1',
     icon: 'mdi-play',
     date: '2022/06 - Current',
-    title: 'Front-end Web Developer',
+    title: 'Full Stack Web Developer',
     company: 'Baum Publication (Freelance)',
     link: 'https://baumpub.com/',
     tasks: [
