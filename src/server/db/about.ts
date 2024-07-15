@@ -10,7 +10,7 @@ const aboutItems: AboutItem[] = [
     company: 'Unito, Montreal, QC',
     tasks: [
       'Building and maintaining integrations between Unito and a wide variety of third-party tools such as Jira, Asana, Azure Devops and many others',
-      'Deeply involved in the creative process of shaping our platform\'s future',
+      "Deeply involved in the creative process of shaping our platform's future",
       'Bugfixes and maintenance on Unito personnal deployer assitant <a href="https://unito.io/blog/unito-slackbot-for-shipping-software-le-capitaine/" target="_blank">"Le capitaine"</a>',
       '',
       'Unfortunately Unito had a significant internal restructuring that led to the departure of 17 individuals. This restructuring impacted not only my entire team but also two other teams, including myself.'

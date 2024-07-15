@@ -11,6 +11,6 @@
 <style scoped>
   .main-content {
     margin-bottom: 125px;
-    margin-top: 64px;
+    margin-top: 70px;
   }
 </style>

@@ -55,9 +55,7 @@ const projects: Project[] = [
     name: 'Ardatho',
     banner: 'https://img.thomaslasalmonie.me/ardatho/banner.jpg',
     status: 'play',
-    links: [
-      'https://ardatho.com/',
-    ],
+    links: ['https://ardatho.com/'],
     // shortDescription: 'Lorem ipsum dolor sit amet.',
     technologiesUsed: []
   },
@@ -206,11 +204,7 @@ const projects: Project[] = [
   {
     slug: 'lumenpulse',
     name: 'Lumenpulse',
-    links: [
-      'https://www.lumenpulse.com/',
-      'https://www.lmpg.com/',
-      'https://www.exenia.eu/en/'
-    ],
+    links: ['https://www.lumenpulse.com/', 'https://www.lmpg.com/', 'https://www.exenia.eu/en/'],
     banner: 'https://img.thomaslasalmonie.me/lumenpulse/banner.jpg',
     status: 'stop',
     // shortDescription: 'Lorem ipsum dolor sit amet.',

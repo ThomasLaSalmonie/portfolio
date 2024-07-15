@@ -3,7 +3,7 @@ import projects from '../db/projects';
 import skills from '../db/skills';
 
 export default defineEventHandler((event) => {
-//   const query = getQuery(event);
+  //   const query = getQuery(event);
 
   for (const item of aboutItems) {
     item.projects = projects
