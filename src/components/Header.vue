@@ -11,7 +11,7 @@
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
     </template>
     <v-toolbar-title v-if="!mobile">
-      <v-btn to="/">Thomas La Salmonie</v-btn>
+      <v-btn id="btn-home" to="/">Thomas La Salmonie</v-btn>
     </v-toolbar-title>
 
     <v-toolbar-items v-if="!mobile">

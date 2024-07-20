@@ -35,4 +35,3 @@
     gap: 10px;
   }
 </style>
-~/utils/useFetchData

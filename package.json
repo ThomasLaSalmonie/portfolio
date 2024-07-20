@@ -33,6 +33,7 @@
     "vuetify": "^3.4.0"
   },
   "dependencies": {
-    "@mdi/font": "^7.3.67"
+    "@mdi/font": "^7.3.67",
+    "driver.js": "^1.3.1"
   }
 }
