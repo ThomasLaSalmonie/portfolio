@@ -1,6 +1,6 @@
 import type { Skill } from '~/utils/types/skills.types';
 
-const skills: Skill[] = [
+export const skills: Skill[] = [
   {
     key: 'devops',
     icon: '',
@@ -305,5 +305,3 @@ const skills: Skill[] = [
     related: []
   }
 ];
-
-export default skills;

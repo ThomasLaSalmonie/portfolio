@@ -21,6 +21,9 @@ export default withNuxt({
     'vue/component-name-in-template-casing': ['error', 'PascalCase'],
     // Vue 3 allows fragment roots; needed for the <Html>/<Head> SEO pattern
     // until it moves to useSeoMeta in Phase 4.
-    'vue/no-multiple-template-root': 'off'
+    'vue/no-multiple-template-root': 'off',
+    // Self-closing style is Prettier's job — its Vue output ("<br />") otherwise
+    // fights this rule's autofix ("<br>").
+    'vue/html-self-closing': 'off'
   }
 });

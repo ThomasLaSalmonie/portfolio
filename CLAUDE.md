@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Personal portfolio site for Thomas La Salmonie. Nuxt 4 + Vue 3 + Vuetify 3, TypeScript, SASS. Deployed as a fully static site.
 
-> **Renovation in progress.** A full modernization is underway (Nuxt 4, Tailwind v4 + shadcn-vue, i18n, no analytics). Track and update progress in [`RENOVATION.md`](./RENOVATION.md) — check off items as they land and keep its Decisions/Deferred sections current. Design spec: the "TLS Design System" artifact linked from that file. **Phase 0 (foundation) is done; Vuetify is still in place until Phase 2.**
+> **Renovation in progress.** A full modernization is underway (Nuxt 4, Tailwind v4 + shadcn-vue, i18n, no analytics). Track and update progress in [`RENOVATION.md`](./RENOVATION.md) — check off items as they land and keep its Decisions/Deferred sections current. Design spec: the "TLS Design System" artifact linked from that file. **Phases 0–1 done (foundation + data-layer cleanup); Vuetify + the Vuetify-shaped templates stay until Phase 2.**
 
 ## Commands
 
@@ -27,31 +27,31 @@ npm run format     # prettier --write .
 
 ## Architecture
 
-Nuxt 4 default layout: app code in **`app/`** (`app/pages`, `app/components`, `app/plugins`, `app/utils`, `app/app.vue`), server code in **`server/`** at the repo root, static assets in **`public/`**. No `srcDir` override.
+Nuxt 4 default layout: app code in **`app/`** (`app/pages`, `app/components`, `app/plugins`, `app/utils`, `app/data`, `app/app.vue`), static assets in **`public/`**. No `srcDir` override, **no `server/` dir** — the site is fully static with no runtime API.
 
 ### Data flow
 
-There is no database. Content is hardcoded as typed TS arrays in `server/db/` (`projects.ts`, `skills.ts`, `about.ts`).
+There is no database and no API. Portfolio content is typed TS arrays in **`app/data/`** (`projects.ts`, `skills.ts`, `about.ts`), each a named export (`export const projects` / `skills` / `aboutItems`).
 
-Nitro API routes in `server/api/` read those arrays and do the joins:
+**`app/utils/portfolio.ts`** holds pure read/join helpers over that data — this is what pages call:
 
-- `projects/[slug].get.ts` — finds the project, then attaches `project.skills` by matching each skill's `key` against the project's `technologiesUsed`.
-- `about.get.ts` — for each about item, attaches related `projects` (by slug) and `skills` (by key).
-- `projects/index.get.ts` — supports a `?limit=` query that returns a random subset (mutates the shared array in place — a known bug, fixed in Phase 1).
+- `getProjects()`, `getProject(slug)`, `getProjectWithSkills(slug)` (attaches `skills` resolved from `technologiesUsed` by matching skill `key`).
+- `getFeaturedProjects(limit)` — random pick, Fisher–Yates on a **copy** (never mutates the source).
+- `getSkills()` / `getVisibleSkills()` / `getSkill(key)` / `resolveSkills(keys)`.
+- `getAboutTimeline()` — each `AboutItem` with `projects` (resolved from `relatedProjects` slugs to `ProjectRef` = `{name, slug}`) and `skills` resolved; blank task strings dropped.
 
-To add or edit portfolio content, edit the `db/` files and the matching type in `app/utils/types/*.types.ts`. Server files reference these types via the `~/` alias (→ `app/`). This whole layer is slated to move to `app/data/*.ts` in Phase 1.
+To add or edit content: edit the `app/data/*.ts` file and the matching type in `app/utils/types/*.types.ts`. Relations are by `key` / `slug` — no duplication.
 
-### Client fetching pattern
+### Page data pattern
 
-`app/utils/useFetchData.ts` is a thin composable over `useFetch` returning `{ result, isLoading, hasError, error, fetchData }`. Pages construct it with an API path and then call `fetchData()` — either `await`ed at the top of `<script setup>` (e.g. `work.vue`) or inside a `watch(..., { immediate: true })` when the route param drives it (e.g. `projects/[slug].vue`).
-
-Wrap the rendered result in `<AsyncLoader :is-loading="isLoading" :error="error">`; it has `#error` and default slots. This useFetchData + AsyncLoader pairing is the current data-driven page pattern (being replaced by direct imports in Phase 1).
+Data is synchronous, so pages just call a helper at the top of `<script setup>` — no `useFetch`, no loading/error state, no wrapper component (the old `useFetchData` composable and `AsyncLoader` are gone). `index.vue` wraps its random pick in `useState('home:featured', …)` so the choice is stable across SSR/hydration. `projects/[slug].vue` uses `computed(() => getProjectWithSkills(route.params.slug))` for reactive in-app nav, plus a server-only `createError(404)` guard for unknown slugs at prerender.
 
 ### Pages
 
 - Top-level routes: `app/pages/{index,work,skills,about,contact}.vue`.
-- `app/pages/projects/[slug].vue` — data-driven project detail page rendered from `project.blocks`, links, and skills.
-- `app/pages/projects/{pong,solar-system,driverjs}.vue` — standalone hand-built demo pages, **not** data-driven; they don't go through the `db/` or API layer.
+- `app/pages/projects/[slug].vue` — data-driven project detail from `project.blocks`, links, skills.
+- `app/pages/lab/` — `index.vue` plus the standalone hand-built demos `{pong,solar-system,driverjs}.vue` (not data-driven). Old `/projects/{pong,…}` URLs redirect here via `routeRules` in `nuxt.config.ts`.
+- `/skills` and `/contact` currently render `<Construction />` — real pages are Phase 2.
 
 ### App shell & UI
 
@@ -63,7 +63,7 @@ Wrap the rendered result in `<AsyncLoader :is-loading="isLoading" :error="error"
 ## Conventions enforced by lint/format
 
 - ESLint is flat config (`eslint.config.mjs`) built on `@nuxt/eslint`; stylistic rules are off (Prettier owns formatting).
-- `@typescript-eslint/no-explicit-any` is an **error** — use the helper types in `app/utils/types/common.types.ts` (`Nullable`, `Maybe`, etc.). The codebase uses `import type` for type-only imports by convention; the `consistent-type-imports` rule is disabled until type-aware linting lands with strict TS in Phase 1.
+- `@typescript-eslint/no-explicit-any` is an **error** — use the helper types in `app/utils/types/common.types.ts` (`Nullable`, `Maybe`, etc.). The codebase uses `import type` for type-only imports by convention; the `consistent-type-imports` rule is off (needs type-aware linting — not yet wired up).
 - Import path alias is `~/` → `app/` (`~~/` → repo root).
 - Vue SFC block order is `<script>` then `<template>` then `<style>`; template component refs are PascalCase; `prefer-const` and `no-unneeded-ternary` are errors; `vue/multi-word-component-names`, `vue/no-v-html`, `vue/require-default-prop` and `vue/no-multiple-template-root` are off.
 - Prettier (`.prettierrc.json`): single quotes, semicolons, `printWidth` 100, no trailing commas, `vueIndentScriptAndStyle`. Run `npm run format`.

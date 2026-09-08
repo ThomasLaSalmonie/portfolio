@@ -21,6 +21,17 @@ export default defineNuxtConfig({
       routes: ['/']
     }
   },
+  // Demo pages moved from /projects/* to /lab/* in Phase 1.
+  routeRules: {
+    '/projects/pong': { redirect: '/lab/pong' },
+    '/projects/solar-system': { redirect: '/lab/solar-system' },
+    '/projects/driverjs': { redirect: '/lab/driverjs' }
+  },
+  typescript: {
+    strict: true
+    // typeCheck stays off — CI runs `nuxt typecheck` as a separate gate, and
+    // enabling it here would pull vue-tsc into every dev/build run.
+  },
   vite: {
     vue: {
       template: {

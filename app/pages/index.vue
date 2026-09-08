@@ -1,10 +1,9 @@
 <script setup lang="ts">
-  import type { Project } from '~/utils/types/projects.types';
-  import useFetchData from '~/utils/useFetchData';
+  import { getFeaturedProjects } from '~/utils/portfolio';
 
-  const { result, isLoading, error, fetchData } = useFetchData<Project[]>(`/api/projects/?limit=3`);
-
-  await fetchData();
+  // useState so the random pick is chosen once (on the server / at prerender)
+  // and reused on hydration — avoids an SSR/client mismatch.
+  const featured = useState('home:featured', () => getFeaturedProjects(3));
 </script>
 
 <template>
@@ -35,38 +34,31 @@
         as possible.
       </p>
     </v-container>
-    <AsyncLoader :is-loading="isLoading" :error="error">
-      <v-carousel
-        v-if="Number(result?.length) > 0"
-        height="400"
-        hide-delimiters
-        cycle
-        interval="6000"
-        :show-arrows="false"
-      >
-        <v-carousel-item
-          v-for="(project, i) in result"
-          :key="i"
-          src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
-          cover
-        >
-          <section class="d-flex flex-column fill-height justify-center align-center">
-            <h2 class="pb-5" style="color: white">
-              {{ project.name }}
-            </h2>
-            <span v-if="project.shortDescription" class="ma-6" style="color: white">
-              {{ project.shortDescription }}
-            </span>
-            <v-btn :to="`/projects/${project.slug}`"> See more </v-btn>
-          </section>
-        </v-carousel-item>
-        <v-carousel-item>
-          <div class="d-flex fill-height justify-center align-center bg-grey-darken-2">
-            <v-btn to="/work"> See all projects </v-btn>
-          </div>
-        </v-carousel-item>
-      </v-carousel>
-    </AsyncLoader>
+    <v-carousel
+      v-if="featured.length > 0"
+      height="400"
+      hide-delimiters
+      cycle
+      interval="6000"
+      :show-arrows="false"
+    >
+      <v-carousel-item v-for="project in featured" :key="project.slug" :src="project.banner" cover>
+        <section class="d-flex flex-column fill-height justify-center align-center">
+          <h2 class="pb-5" style="color: white">
+            {{ project.name }}
+          </h2>
+          <span v-if="project.shortDescription" class="ma-6" style="color: white">
+            {{ project.shortDescription }}
+          </span>
+          <v-btn :to="`/projects/${project.slug}`"> See more </v-btn>
+        </section>
+      </v-carousel-item>
+      <v-carousel-item>
+        <div class="d-flex fill-height justify-center align-center bg-grey-darken-2">
+          <v-btn to="/work"> See all projects </v-btn>
+        </div>
+      </v-carousel-item>
+    </v-carousel>
   </v-container>
   <v-container fluid class="bg-grey-darken-4">
     <v-row>
@@ -144,4 +136,3 @@
     font-size: 1rem;
   }
 </style>
-~/utils/useFetchData

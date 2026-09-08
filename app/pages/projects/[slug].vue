@@ -1,23 +1,20 @@
 <script setup lang="ts">
+  import { computed } from 'vue';
   import { useRoute } from 'nuxt/app';
-  import { watch } from 'vue';
-  import type { Project } from '~/utils/types/projects.types';
-  import useFetchData from '~/utils/useFetchData';
+  import { getProjectWithSkills } from '~/utils/portfolio';
 
   const route = useRoute();
+  const project = computed(() => getProjectWithSkills(String(route.params.slug)));
 
-  const {
-    result: project,
-    isLoading,
-    error,
-    fetchData
-  } = useFetchData<Project>(`/api/projects/${route.params.slug}`);
-
-  watch(() => route.params.slug, fetchData, { immediate: true });
+  // At prerender / SSR an unknown slug is a 404; on the client the computed
+  // stays reactive so in-app navigation between projects works.
+  if (import.meta.server && !project.value) {
+    throw createError({ statusCode: 404, statusMessage: 'Project not found' });
+  }
 </script>
 
 <template>
-  <AsyncLoader :is-loading="isLoading" :error="error">
+  <div>
     <Html lang="en">
       <Head>
         <Title>{{ project?.name }} - Thomas La Salmonie</Title>
@@ -49,22 +46,24 @@
         </v-col>
       </v-row>
     </v-container>
-    <v-container v-if="project?.links && project.links?.length > 0" fluid class="project-container">
+    <v-container v-if="project?.links && project.links.length > 0" fluid class="project-container">
       <v-row>
         <v-col>
           <v-card prepend-icon="mdi-link">
             <template #title> External Links </template>
             <v-card-text>
-              <li v-for="(link, index) in project?.links" :key="index">
-                <a :href="link">{{ link }}</a>
-              </li>
+              <ul>
+                <li v-for="(link, index) in project.links" :key="index">
+                  <a :href="link">{{ link }}</a>
+                </li>
+              </ul>
             </v-card-text>
           </v-card>
         </v-col>
       </v-row>
     </v-container>
     <v-container
-      v-if="project?.skills && project.skills?.length > 0"
+      v-if="project?.skills && project.skills.length > 0"
       fluid
       class="project-container"
     >
@@ -75,7 +74,7 @@
             <v-card-text>
               <div class="grid-container">
                 <SkillItem
-                  v-for="(skill, index) in project?.skills"
+                  v-for="(skill, index) in project.skills"
                   :key="index"
                   class="block-element"
                   :skill="skill"
@@ -87,7 +86,7 @@
         </v-col>
       </v-row>
     </v-container>
-  </AsyncLoader>
+  </div>
 </template>
 
 <style scoped>
@@ -107,4 +106,3 @@
     height: 100px;
   }
 </style>
-~/utils/useFetchData
