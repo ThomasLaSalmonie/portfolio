@@ -40,7 +40,7 @@
           color="primary"
           :model-value="properties.skill.progress"
           :height="12"
-        ></v-progress-linear>
+        />
         <v-btn rounded> See more </v-btn>
       </v-col>
     </v-row>

@@ -8,8 +8,8 @@ blocks:
       jobs:
         - name: Deployment
           commands:
-            - npm install
-            - npx nuxi generate
+            - npm ci
+            - npm run generate
             - scp -r .output/public root@178.128.238.94:/var/www/thomaslasalmonie.me/release/$SEMAPHORE_WORKFLOW_ID
             - ssh root@178.128.238.94 unlink /var/www/thomaslasalmonie.me/current
             - ssh root@178.128.238.94 ln -s /var/www/thomaslasalmonie.me/release/$SEMAPHORE_WORKFLOW_ID /var/www/thomaslasalmonie.me/current
@@ -20,8 +20,8 @@ blocks:
           - ssh-add ~/.ssh/ssh_key
           - ssh-keyscan -H 178.128.238.94 >> ~/.ssh/known_hosts
           - checkout
-          - sem-version node 18
+          - sem-version node 22
 agent:
   machine:
     type: e1-standard-2
-    os_image: ubuntu2004
+    os_image: ubuntu2204
