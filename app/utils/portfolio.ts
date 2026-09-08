@@ -3,7 +3,7 @@ import { projects } from '~/data/projects';
 import { skills } from '~/data/skills';
 import type { AboutItem, ProjectRef } from '~/utils/types/about.types';
 import type { Project } from '~/utils/types/projects.types';
-import type { Skill } from '~/utils/types/skills.types';
+import type { Skill, SkillCategory } from '~/utils/types/skills.types';
 
 /**
  * Pure read helpers over the static portfolio data in `app/data/`.
@@ -27,6 +27,46 @@ export function getSkill(key: string): Skill | undefined {
 /** Resolve skill keys to `Skill` objects, preserving order and dropping unknowns. */
 export function resolveSkills(keys: string[] = []): Skill[] {
   return keys.map((key) => getSkill(key)).filter((skill): skill is Skill => skill !== undefined);
+}
+
+/** Ordered category buckets for the Skills page. */
+export const SKILL_CATEGORY_ORDER: SkillCategory[] = [
+  'languages',
+  'frameworks',
+  'data',
+  'platforms',
+  'testing'
+];
+
+export const SKILL_CATEGORY_LABELS: Record<SkillCategory, string> = {
+  languages: 'Languages',
+  frameworks: 'Frameworks & libraries',
+  data: 'Data & messaging',
+  platforms: 'Platforms & DevOps',
+  testing: 'Testing'
+};
+
+const LEVEL_RANK: Record<NonNullable<Skill['level']>, number> = {
+  core: 0,
+  working: 1,
+  familiar: 2
+};
+
+export type SkillGroup = {
+  category: SkillCategory;
+  label: string;
+  skills: Skill[];
+};
+
+/** Visible skills grouped by category, each group sorted core → working → familiar. */
+export function getSkillGroups(): SkillGroup[] {
+  return SKILL_CATEGORY_ORDER.map((category) => ({
+    category,
+    label: SKILL_CATEGORY_LABELS[category],
+    skills: getVisibleSkills()
+      .filter((skill) => skill.category === category)
+      .sort((a, b) => LEVEL_RANK[a.level ?? 'familiar'] - LEVEL_RANK[b.level ?? 'familiar'])
+  })).filter((group) => group.skills.length > 0);
 }
 
 export function getProjects(): Project[] {

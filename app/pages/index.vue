@@ -1,138 +1,95 @@
 <script setup lang="ts">
+  import { Button } from '~/components/ui/button';
   import { getFeaturedProjects } from '~/utils/portfolio';
 
-  // useState so the random pick is chosen once (on the server / at prerender)
-  // and reused on hydration — avoids an SSR/client mismatch.
+  // useState so the random pick is chosen once (at prerender) and reused on
+  // hydration — avoids an SSR/client mismatch.
   const featured = useState('home:featured', () => getFeaturedProjects(3));
+
+  const services = [
+    { title: 'Web development', body: 'From static sites to full-scale web applications.' },
+    { title: 'UI / UX', body: 'Interfaces that stay legible under real-world data and load.' },
+    { title: 'Data & APIs', body: 'Schema design, GraphQL and REST services, caching layers.' },
+    { title: 'CI / CD', body: 'Pipelines, containers and the infrastructure underneath.' }
+  ];
 </script>
 
 <template>
-  <Html lang="en">
-    <Head>
-      <Title>Thomas La Salmonie</Title>
-      <Meta name="description" content="Welcome page for Thomas La Salmonie Portfolio" />
-    </Head>
-  </Html>
-  <ParallaxItem
-    title="Welcome to My Portfolio"
-    description="Showcasing my passion for Software Development."
-    img="https://img.thomaslasalmonie.me/background_parallax.jpeg"
-  />
-  <v-container>
-    <v-container class="hero-text">
-      <h2>TL;DR</h2>
-      <p>
-        Curious, passionate and selftaught.
-        <br />
-        I focus on the quality of my web development, collaborative work and knowledge-sharing.
-        <br />
-        Engineer in software studies and development, specializing in web technologies, I know how
-        to take the step back to measure the stakes of a project and I can adapt quickly to new
-        environments.
-        <br />
-        I continually question my work, in order to make quality work as close to user expectations
-        as possible.
-      </p>
-    </v-container>
-    <v-carousel
-      v-if="featured.length > 0"
-      height="400"
-      hide-delimiters
-      cycle
-      interval="6000"
-      :show-arrows="false"
+  <div class="flex flex-col gap-20">
+    <Html lang="en">
+      <Head>
+        <Title>Thomas La Salmonie</Title>
+        <Meta
+          name="description"
+          content="Thomas La Salmonie — full-stack web engineer based in Montréal."
+        />
+      </Head>
+    </Html>
+
+    <Hero
+      eyebrow="Montréal · Full-stack web"
+      title="I build web software, end to end."
+      lead="Self-taught engineer working across Vue / Nuxt front-ends, Node services and the infrastructure under them. Curious, precise, and focused on quality and knowledge-sharing."
     >
-      <v-carousel-item v-for="project in featured" :key="project.slug" :src="project.banner" cover>
-        <section class="d-flex flex-column fill-height justify-center align-center">
-          <h2 class="pb-5" style="color: white">
-            {{ project.name }}
-          </h2>
-          <span v-if="project.shortDescription" class="ma-6" style="color: white">
-            {{ project.shortDescription }}
-          </span>
-          <v-btn :to="`/projects/${project.slug}`"> See more </v-btn>
-        </section>
-      </v-carousel-item>
-      <v-carousel-item>
-        <div class="d-flex fill-height justify-center align-center bg-grey-darken-2">
-          <v-btn to="/work"> See all projects </v-btn>
-        </div>
-      </v-carousel-item>
-    </v-carousel>
-  </v-container>
-  <v-container fluid class="bg-grey-darken-4">
-    <v-row>
-      <v-col class="d-flex justify-center">
-        <h2>Development Services</h2>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col col="3">
-        <div class="service-card">
-          <h3>Web Development</h3>
-          <p>From static sites to full scale Web</p>
-        </div>
-      </v-col>
-      <v-col col="3">
-        <div class="service-card">
-          <h3>UI/UX Design</h3>
-          <p>Designing intuitive and user-friendly interfaces for a seamless user experience.</p>
-        </div>
-      </v-col>
-      <v-col col="3">
-        <div class="service-card">
-          <h3>Database</h3>
-          <p>Database/Mock Database Systems Creation, Management & Interfacing</p>
-        </div>
-      </v-col>
-      <v-col col="3">
-        <div class="service-card">
-          <h3>CI/CD</h3>
-          <p>Automate your development practice</p>
-        </div>
-      </v-col>
-    </v-row>
-  </v-container>
+      <template #actions>
+        <Button as-child>
+          <NuxtLink to="/work">See the work</NuxtLink>
+        </Button>
+        <Button as-child variant="outline">
+          <NuxtLink to="/contact">Get in touch</NuxtLink>
+        </Button>
+      </template>
+    </Hero>
 
-  <v-container fluid>
-    <v-row>
-      <v-col class="d-flex justify-center">
-        <h2>My Articles</h2>
-      </v-col>
-    </v-row>
+    <section class="flex flex-col gap-5">
+      <SectionHeading eyebrow="TL;DR" title="How I work" />
+      <div class="prose-measure flex flex-col gap-3 text-muted-foreground">
+        <p>
+          Engineer by training, specialised in web technologies. I take a step back to measure the
+          stakes of a project and adapt quickly to new environments.
+        </p>
+        <p>
+          I keep questioning the work in order to bring it as close as possible to what users
+          actually expect — and I care about the collaboration and knowledge-sharing around it as
+          much as the code.
+        </p>
+      </div>
+    </section>
 
-    <v-row>
-      <v-col class="d-flex justify-center">
-        <span>Coming soon</span>
-      </v-col>
-    </v-row>
-  </v-container>
+    <section v-if="featured.length" class="flex flex-col gap-6">
+      <SectionHeading eyebrow="Selected work" title="Featured projects">
+        A rotating pick from the full list.
+      </SectionHeading>
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <ProjectCard v-for="project in featured" :key="project.slug" :project="project" />
+      </div>
+      <NuxtLink to="/work" class="link-accent w-fit text-sm font-medium">
+        See all projects →
+      </NuxtLink>
+    </section>
+
+    <section class="flex flex-col gap-6">
+      <SectionHeading eyebrow="Services" title="What I take on" />
+      <div class="grid gap-px overflow-hidden rounded-lg border bg-border sm:grid-cols-2">
+        <div
+          v-for="service in services"
+          :key="service.title"
+          class="flex flex-col gap-1.5 bg-background p-5"
+        >
+          <h3 class="font-mono text-sm font-medium tracking-wide uppercase">{{ service.title }}</h3>
+          <p class="text-sm text-muted-foreground">{{ service.body }}</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="flex flex-col gap-4">
+      <SectionHeading eyebrow="Writing" title="Notes — coming soon" />
+      <div class="rounded-lg border border-dashed p-6">
+        <p class="prose-measure text-sm text-muted-foreground">
+          Notes on Nuxt, type systems and shipping side projects. Not published yet — the section is
+          wired and waiting for the first post.
+        </p>
+      </div>
+    </section>
+  </div>
 </template>
-
-<style scoped>
-  .hero-text {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: black;
-    text-align: center;
-  }
-
-  .service-card {
-    text-align: center;
-    padding: 1rem;
-    border: 1px solid #ccc;
-    height: 100%;
-    margin-bottom: 1rem;
-  }
-
-  .service-card h3 {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .service-card p {
-    font-size: 1rem;
-  }
-</style>

@@ -5,8 +5,6 @@ import type { Skill } from './skills.types';
 export type ProjectRef = Pick<Project, 'name' | 'slug'>;
 
 export type AboutItem = {
-  color: string;
-  icon: string;
   date: string;
   title: string;
   company: string;

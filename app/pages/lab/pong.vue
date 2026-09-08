@@ -182,12 +182,6 @@
     <div id="canvas">
       <canvas id="pongCanvas" width="600" height="600" />
       <div id="score" />
-
-      <p id="made">
-        made by
-        <a href="https://koenvangilst.nl/labs/pong-wars">Koen van Gilst</a> | source on
-        <a href="https://github.com/vnglst/pong-wars">github</a>
-      </p>
     </div>
   </div>
 </template>
