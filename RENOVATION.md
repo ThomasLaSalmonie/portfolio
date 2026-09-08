@@ -110,26 +110,36 @@ Tracking doc for modernizing this site. Check items off as they land. Keep the
   needed hardening (canvas ctx guard + array-access guards); rest of the app was clean.
   `app/utils/useFetchData.ts` got a one-line `?? null` (file is deleted in Phase 1).
 
-## Phase 1 — Architecture cleanup
+## Phase 1 — Architecture cleanup ✅ done (branch `renovation/phase-1`)
 
-- [ ] Delete `useFetchData.ts`. Replace usages with direct data imports (static content)
-      or native `useAsyncData` where a route param is involved.
-- [ ] Move `server/db/{projects,skills,about}.ts` → `app/data/*.ts` as typed modules.
-- [ ] Extract join logic into `utils/` pure functions:
-      `projectWithSkills(slug)`, `aboutWithRelations()`, etc. (mirrors current API route
-      behaviour, minus the HTTP round-trip and the in-place `Array.sort` mutation).
-- [ ] Delete `server/api/**` routes (`projects/index`, `projects/[slug]`, `skills/index`,
-      `about`) once nothing references them.
-- [ ] Fix data typo: `retatedProjects` → `relatedProjects` in the about data.
-- [ ] Enable strict TS: `typescript.strict`, `typescript.typeCheck` in `nuxt.config`.
-- [ ] Give the standalone demos (`pong`, `solar-system`, `driverjs`) a consistent shell —
-      an "Experiments" / "Lab" section or route group.
-- [ ] Bug: `index.vue` carousel uses a hardcoded `cdn.vuetifyjs.com/.../docks.jpg` for
-      every slide — replace with real per-project imagery (or drop the carousel in the
-      redesign).
-- [ ] Bug: `about.vue` `watch(() => {}, fetchData, ...)` hack — gone once `useFetchData`
-      is removed; verify data still loads.
-- [ ] Bug: bare `<li>` without `<ul>`/`<ol>` in `about.vue` and `projects/[slug].vue`.
+- [x] Deleted `app/utils/useFetchData.ts` and `app/components/AsyncLoader.vue`. Pages now
+      call the data helpers synchronously in `<script setup>` (data is static — no loading
+      or error state). Also removed the stray `~/utils/useFetchData` lines sitting after
+      `</style>` in several pages.
+- [x] `server/db/{projects,skills,about}.ts` → `app/data/*.ts`, converted from
+      `export default` to named exports (`export const projects` / `skills` / `aboutItems`).
+- [x] Join logic → `app/utils/portfolio.ts` (pure functions): `getProjects`, `getProject`,
+      `getProjectWithSkills`, `getFeaturedProjects` (Fisher–Yates on a **copy** — no source
+      mutation), `getSkills`/`getVisibleSkills`/`getSkill`, `resolveSkills`,
+      `getAboutTimeline` (resolves `projects` refs + `skills`, drops blank task strings).
+- [x] Deleted all `server/api/**` routes; `server/` removed entirely (incl. its tsconfig).
+- [x] `retatedProjects` → `relatedProjects` in `app/data/about.ts` **and**
+      `app/utils/types/about.types.ts`; `AboutItem.projects` retyped `Project[]` →
+      `ProjectRef[]` (`Pick<Project, 'name' | 'slug'>`).
+- [x] `typescript.strict: true` set explicitly in `nuxt.config.ts`. `typeCheck` left off
+      (CI runs `nuxt typecheck` separately; enabling it pulls vue-tsc into every build).
+- [x] Demos moved `app/pages/projects/{pong,solar-system,driverjs}.vue` →
+      `app/pages/lab/*`; added `app/pages/lab/index.vue`. `routeRules` redirects the old
+      `/projects/*` paths to `/lab/*` (verified: redirect stubs emitted, `/lab/*` prerendered).
+- [x] Bug: `index.vue` carousel no longer ships `cdn.vuetifyjs.com/.../docks.jpg` — uses
+      `project.banner` (may be empty for now). Featured picks run once via `useState`
+      (no SSR/client mismatch). Carousel itself is dropped in the Phase 2 redesign.
+- [x] Bug: `about.vue` `watch(() => {}, …)` hack gone with `useFetchData`.
+- [x] Bug: bare `<li>` in `about.vue` and `projects/[slug].vue` wrapped in `<ul>`.
+
+**Notes:** `/skills` and `/contact` still render `<Construction />` — the real pages are
+Phase 2 work (decisions #5, #6). `AsyncLoader` is gone rather than rebuilt (Phase 2 note
+about it is moot — the data is synchronous).
 
 ## Phase 2 — Design system & UI (Tailwind v4 + shadcn-vue)
 

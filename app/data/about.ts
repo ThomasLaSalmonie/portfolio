@@ -1,6 +1,6 @@
 import type { AboutItem } from '~/utils/types/about.types';
 
-const aboutItems: AboutItem[] = [
+export const aboutItems: AboutItem[] = [
   {
     color: 'red-lighten-2',
     icon: 'mdi-stop',
@@ -15,7 +15,7 @@ const aboutItems: AboutItem[] = [
       '',
       'Unfortunately Unito had a significant internal restructuring that led to the departure of 17 individuals. This restructuring impacted not only my entire team but also two other teams, including myself.'
     ],
-    retatedProjects: [],
+    relatedProjects: [],
     technologiesUsed: [
       'typescript',
       'nodejs',
@@ -47,7 +47,7 @@ const aboutItems: AboutItem[] = [
       'Translate intricate requirements into scalable, elegant designs, demonstrating a keen ability to balance creativity with pragmatism',
       'Proficient in implementing robust monitoring and observability solutions, ensuring real-time insights into system performance and facilitating proactive measures for optimal functionality and reliability'
     ],
-    retatedProjects: ['bell-iot'],
+    relatedProjects: ['bell-iot'],
     technologiesUsed: [
       'typescript',
       'vuejs',
@@ -77,7 +77,7 @@ const aboutItems: AboutItem[] = [
       'Focused on elevating API performance, I contribute to the development of reusable widgets, implementing internal libraries such as reusable form components',
       'Spearhead the creation and integration of reusable widgets across various IoT dashboards, showcasing a commitment to efficiency and innovation in every aspect of development'
     ],
-    retatedProjects: ['bell-iot'],
+    relatedProjects: ['bell-iot'],
     technologiesUsed: ['typescript', 'vuejs', 'azure', 'kubernetes', 'docker', 'gitlab', 'npm']
   },
   {
@@ -92,7 +92,7 @@ const aboutItems: AboutItem[] = [
       'Skillfully managing server maintenance, providing dedicated support, and contributing to the development of lead generation pages',
       "Maintaining a holistic approach, addressing both front-end and back-end intricacies, to uphold the project's stability, security, and overall performance"
     ],
-    retatedProjects: ['baumpub'],
+    relatedProjects: ['baumpub'],
     technologiesUsed: [
       'typescript',
       'vuejs',
@@ -123,7 +123,7 @@ const aboutItems: AboutItem[] = [
       'Efficiently integrating form processes into the internal content manager and innovatively crafting dashboards that provide a comprehensive overview of historical data',
       'Managing the entire web project independently, I ensure the seamless maintenance and optimization of both front-end and back-end components, delivering a cohesive and user-friendly experience'
     ],
-    retatedProjects: ['fillactive'],
+    relatedProjects: ['fillactive'],
     technologiesUsed: [
       'typescript',
       'vuejs',
@@ -154,7 +154,7 @@ const aboutItems: AboutItem[] = [
       'Committed to enhancing API performance',
       'creation of R&D prototypes, ensuring a continuous evolution of cutting-edge solutions'
     ],
-    retatedProjects: ['ax2', 'fillactive', 'monet', 'lumenpulse', 'canadiens', 'baumpub'],
+    relatedProjects: ['ax2', 'fillactive', 'monet', 'lumenpulse', 'canadiens', 'baumpub'],
     technologiesUsed: [
       'typescript',
       'vuejs',
@@ -192,7 +192,7 @@ const aboutItems: AboutItem[] = [
       'Proficient in crafting and optimizing robust database architectures to ensure efficient data storage, retrieval, and management',
       'Skilled in designing scalable and performance-driven database solutions, implementing data security measures, and conducting thorough database performance tuning'
     ],
-    retatedProjects: ['monet', 'lumenpulse', 'canadiens', 'baumpub'],
+    relatedProjects: ['monet', 'lumenpulse', 'canadiens', 'baumpub'],
     technologiesUsed: [
       'typescript',
       'nodejs',
@@ -220,7 +220,7 @@ const aboutItems: AboutItem[] = [
       'Active participation in the diverse phases of a project coupled with the agile application of methodologies to ensure seamless integration and functionality in the backend systems',
       'Contribute to the database architecture for the internal content manager'
     ],
-    retatedProjects: ['lumenpulse', 'canadiens', 'baumpub'],
+    relatedProjects: ['lumenpulse', 'canadiens', 'baumpub'],
     technologiesUsed: ['typescript', 'nodejs', 'restapi', 'github', 'php', 'mysql']
   },
   {
@@ -238,5 +238,3 @@ const aboutItems: AboutItem[] = [
     ]
   }
 ];
-
-export default aboutItems;

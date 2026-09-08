@@ -1,10 +1,7 @@
 <script setup lang="ts">
-  import type { Project } from '~/utils/types/projects.types';
-  import useFetchData from '~/utils/useFetchData';
+  import { getProjects } from '~/utils/portfolio';
 
-  const { result, isLoading, error, fetchData } = useFetchData<Project[]>(`/api/projects/`);
-
-  await fetchData();
+  const projects = getProjects();
 </script>
 
 <template>
@@ -15,13 +12,11 @@
     </Head>
   </Html>
   <h1 class="text-center">My projects</h1>
-  <AsyncLoader :is-loading="isLoading" :error="error">
-    <v-container fluid class="project-container">
-      <div class="grid-container">
-        <ProjectCard v-for="(project, index) in result" :key="index" icon-only :project="project" />
-      </div>
-    </v-container>
-  </AsyncLoader>
+  <v-container fluid class="project-container">
+    <div class="grid-container">
+      <ProjectCard v-for="project in projects" :key="project.slug" icon-only :project="project" />
+    </div>
+  </v-container>
 </template>
 
 <style scoped>

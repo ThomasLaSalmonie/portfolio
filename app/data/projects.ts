@@ -1,6 +1,6 @@
 import type { Project } from '~/utils/types/projects.types';
 
-const projects: Project[] = [
+export const projects: Project[] = [
   {
     slug: 'bell-iot',
     name: 'Bell IoT platform',
@@ -255,5 +255,3 @@ const projects: Project[] = [
   //     technologiesUsed: ['typescript', 'vuejs', 'nodejs', 'graphql', 'digital-ocean', 'docker', 'redis', 'github', 'mysql']
   //   },
 ];
-
-export default projects;
