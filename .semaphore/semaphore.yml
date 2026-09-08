@@ -3,19 +3,21 @@ name: Test/Lint Portfolio
 agent:
   machine:
     type: e1-standard-2
-    os_image: ubuntu2004
+    os_image: ubuntu2204
 blocks:
-  - name: Test/Lint
+  - name: Verify
     task:
       jobs:
-        - name: Test/Lint
+        - name: Lint · Typecheck · Build
           commands:
             - checkout
-            - sem-version node 18
+            - sem-version node 22
             - cache restore
-            - npm install
+            - npm ci
             - cache store
-            # - npm run lint
+            - npm run lint
+            - npm run typecheck
+            - npm run generate
 promotions:
   - name: Deploy
     pipeline_file: deployment.yml

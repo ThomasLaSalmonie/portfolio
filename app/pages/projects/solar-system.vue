@@ -1,9 +1,9 @@
 <template>
   <body>
     <div class="container">
-      <div class="sun"></div>
+      <div class="sun" />
       <div class="earth">
-        <div class="moon"></div>
+        <div class="moon" />
       </div>
     </div>
   </body>

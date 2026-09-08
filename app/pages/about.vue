@@ -6,7 +6,6 @@
 
   const { mobile } = useDisplay();
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { result: items, isLoading, error, fetchData } = useFetchData<AboutItem[]>(`/api/about`);
 
   watch(() => {}, fetchData, { immediate: true });

@@ -24,9 +24,9 @@
     <v-spacer />
   </v-app-bar>
   <v-navigation-drawer v-if="mobile" v-model="drawer" temporary>
-    <v-list-item prepend-avatar="/profile.jpeg" title="Thomas La Salmonie" to="/"></v-list-item>
+    <v-list-item prepend-avatar="/profile.jpeg" title="Thomas La Salmonie" to="/" />
 
-    <v-divider></v-divider>
+    <v-divider />
 
     <v-list density="compact" nav>
       <v-list-item prepend-icon="mdi-view-dashboard" to="/about" title="About me" />

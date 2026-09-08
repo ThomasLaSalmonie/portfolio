@@ -15,7 +15,7 @@ const useFetchData = <T = unknown>(params: NitroFetchRequest) => {
       if (data.value) {
         result.value = data.value as T;
       }
-      error.value = errorFetch.value;
+      error.value = errorFetch.value ?? null;
     } catch (err) {
       error.value = err as Error;
     } finally {

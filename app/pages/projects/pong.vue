@@ -18,9 +18,13 @@
   };
 
   onMounted(() => {
-    const canvas = document.getElementById('pongCanvas');
+    const canvas = document.getElementById('pongCanvas') as HTMLCanvasElement | null;
     const ctx = canvas?.getContext('2d');
     const scoreElement = document.getElementById('score');
+    if (!canvas || !ctx || !scoreElement) return;
+    // Narrowed aliases so the nested (hoisted) draw functions keep the non-null type.
+    const context: CanvasRenderingContext2D = ctx;
+    const scoreEl: HTMLElement = scoreElement;
 
     const DAY_COLOR = colorPalette.MysticMint;
     const DAY_BALL_COLOR = colorPalette.NocturnalExpedition;
@@ -43,10 +47,11 @@
 
     // Populate the fields, one half day, one half night
     for (let i = 0; i < numSquaresX; i++) {
-      squares[i] = [];
+      const row: string[] = [];
       for (let j = 0; j < numSquaresY; j++) {
-        squares[i][j] = i < numSquaresX / 2 ? DAY_COLOR : NIGHT_COLOR;
+        row[j] = i < numSquaresX / 2 ? DAY_COLOR : NIGHT_COLOR;
       }
+      squares[i] = row;
     }
 
     const balls: Ball[] = [
@@ -71,11 +76,11 @@
     let iteration = 0;
 
     function drawBall(ball: Ball) {
-      ctx.beginPath();
-      ctx.arc(ball.x, ball.y, SQUARE_SIZE / 2, 0, Math.PI * 2, false);
-      ctx.fillStyle = ball.ballColor;
-      ctx.fill();
-      ctx.closePath();
+      context.beginPath();
+      context.arc(ball.x, ball.y, SQUARE_SIZE / 2, 0, Math.PI * 2, false);
+      context.fillStyle = ball.ballColor;
+      context.fill();
+      context.closePath();
     }
 
     function drawSquares() {
@@ -83,13 +88,17 @@
       nightScore = 0;
 
       for (let i = 0; i < numSquaresX; i++) {
+        const row = squares[i];
+        if (!row) continue;
         for (let j = 0; j < numSquaresY; j++) {
-          ctx.fillStyle = squares[i][j];
-          ctx.fillRect(i * SQUARE_SIZE, j * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
+          const cell = row[j];
+          if (cell === undefined) continue;
+          context.fillStyle = cell;
+          context.fillRect(i * SQUARE_SIZE, j * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
 
           // Update scores
-          if (squares[i][j] === DAY_COLOR) dayScore++;
-          if (squares[i][j] === NIGHT_COLOR) nightScore++;
+          if (cell === DAY_COLOR) dayScore++;
+          if (cell === NIGHT_COLOR) nightScore++;
         }
       }
     }
@@ -103,10 +112,11 @@
         const i = Math.floor(checkX / SQUARE_SIZE);
         const j = Math.floor(checkY / SQUARE_SIZE);
 
-        if (i >= 0 && i < numSquaresX && j >= 0 && j < numSquaresY) {
-          if (squares[i][j] !== ball.reverseColor) {
+        const row = squares[i];
+        if (row && i >= 0 && i < numSquaresX && j >= 0 && j < numSquaresY) {
+          if (row[j] !== ball.reverseColor) {
             // Square hit! Update square color
-            squares[i][j] = ball.reverseColor;
+            row[j] = ball.reverseColor;
 
             // Determine bounce direction based on the angle
             if (Math.abs(Math.cos(angle)) > Math.abs(Math.sin(angle))) {
@@ -142,10 +152,10 @@
     }
 
     function draw() {
-      ctx.clearRect(0, 0, clientWidth, clientHeight);
+      context.clearRect(0, 0, clientWidth, clientHeight);
       drawSquares();
 
-      scoreElement.textContent = `day ${dayScore} | night ${nightScore}`;
+      scoreEl.textContent = `day ${dayScore} | night ${nightScore}`;
 
       balls.forEach((ball) => {
         drawBall(ball);
@@ -170,8 +180,8 @@
 <template>
   <div id="container">
     <div id="canvas">
-      <canvas id="pongCanvas" width="600" height="600"></canvas>
-      <div id="score"></div>
+      <canvas id="pongCanvas" width="600" height="600" />
+      <div id="score" />
 
       <p id="made">
         made by
