@@ -52,8 +52,16 @@ Tracking doc for modernizing this site. Check items off as they land. Keep the
    - Type: **Schibsted Grotesk** (display) + **IBM Plex Sans** (body/UI) + **IBM Plex Mono**
      (labels, dates, tech tags, code).
    - Radii 6/10/14px; two shadows (light only); motion 120/180/280ms, `cubic-bezier(.2,0,0,1)`.
-   - Open for owner review: paper warmth, dark ground neutrality, keep/drop home carousel,
-     timeline layout, skill % meters. (Listed at the end of the artifact.)
+   - **Review items resolved (2026-09-08):**
+     1. _Paper warmth_ — keep the faint warm bias (`oklch(~0.99 0.004 85)`); do not push warmer.
+     2. _Dark ground_ — keep the cool blue-black (hue 265) so cobalt reads as native to the surface.
+     3. _Home carousel_ — **dropped**. Static 3-up featured-work grid (no JS, no CLS).
+     4. _Timeline_ — single hairline column, one layout at every width. No alternating dots.
+     5. _Skill meters_ — **no percentages**. Grouped-by-category list with an optional
+        three-tier label **Core / Working / Familiar**. Needs a `Skill.level` tier field
+        plus a data pass (Phase 2 sub-task).
+     6. _French copy width_ — no change; pressure-test nav/button wrapping during Phase 5
+        (plan ~25–35% FR string expansion).
 10. **Analytics:** remove entirely — `nuxt-gtag` dep, `gtag` config block, module entry.
 11. **i18n:** add French + English via `@nuxtjs/i18n`. Static-friendly routing
     strategy (`prefix_except_default`, default = `en`), prerender all locale routes.
@@ -141,37 +149,54 @@ Tracking doc for modernizing this site. Check items off as they land. Keep the
 Phase 2 work (decisions #5, #6). `AsyncLoader` is gone rather than rebuilt (Phase 2 note
 about it is moot — the data is synchronous).
 
-## Phase 2 — Design system & UI (Tailwind v4 + shadcn-vue)
+## Phase 2 — Design system & UI (Tailwind v4 + shadcn-vue) ✅ done (branch `renovation/phase-2`)
 
-- [ ] Remove Vuetify: `vuetify`, `vite-plugin-vuetify`, `sass`, `@mdi/font` deps;
-      `plugins/vuetify.ts`; the `vite`/`build.transpile` Vuetify config in `nuxt.config`.
-- [ ] Install Tailwind v4 (`@tailwindcss/vite` or `@nuxtjs/tailwindcss` v7) + shadcn-vue
-      (follow its Nuxt setup guide; reka-ui under the hood).
-- [ ] Add `@nuxt/icon`, `@nuxt/fonts`, `@nuxtjs/color-mode`, `@nuxt/image`.
-- [ ] **Owner input (decision #9):** lock typography scale, color palette (brand +
-      neutrals), radii/spacing tokens, light + dark themes, motion language.
-- [ ] Define tokens as CSS variables / Tailwind v4 `@theme`; both light and dark.
-- [ ] Rebuild app shell: `app.vue` layout, header (scroll-aware, accessible mobile nav),
-      footer. Replace `v-app`/`v-app-bar`/`v-navigation-drawer`/`v-footer`.
-- [ ] Rebuild components without Vuetify:
-  - [ ] `Header` (replace `useDisplay` with a CSS/JS breakpoint util)
-  - [ ] `Footer` (social links — reuse as the contact surface)
-  - [ ] `ProjectCard`
-  - [ ] `SkillItem`
-  - [ ] `ParallaxItem` → modern hero (no `v-parallax`)
-  - [ ] `AsyncLoader` → simple loading/error wrapper or Suspense
-  - [ ] Delete `Construction.vue`
-- [ ] Redesign pages:
-  - [ ] **Home** — real hero, featured work grid, short intro, CTA; keep a single
-        "Articles — coming soon" teaser wired for later.
-  - [ ] **Work** — card grid, hover/focus states, filter by tech/tag, real screenshots.
-  - [ ] **Project detail** — layout, tech chips, live/repo links, gallery, prev/next.
-  - [ ] **About** — restyle the timeline; add CV download.
-  - [ ] **Skills** — build from skills data (decision #6).
-  - [ ] **Contact** — static email + social links (decision #5).
-- [ ] Motion: View Transitions API page transitions, scroll-reveal, honour
-      `prefers-reduced-motion`.
-- [ ] Dark mode toggle — system default, persisted.
+- [x] Removed Vuetify: `vuetify`, `vite-plugin-vuetify`, `sass`, `@mdi/font` deps;
+      `app/plugins/vuetify.ts`; the `vite`/`build.transpile`/`transformAssetUrls` config.
+- [x] Tailwind v4 via `@tailwindcss/vite` (`vite.plugins`), single entry
+      `app/assets/css/main.css` (`css:` in nuxt.config).
+- [x] shadcn-vue via `shadcn-nuxt` (`components.json`, `app/lib/utils.ts` `cn()`,
+      `app/components/ui/`). Vendored only what's used: `ui/button` (Button + `buttonVariants`).
+      `reka-ui` used directly for the mobile-nav dialog. `class-variance-authority`, `clsx`,
+      `tailwind-merge` added.
+- [x] Added `@nuxt/icon` (lucide, `serverBundle.collections: ['lucide']` + `@iconify-json/lucide`
+      — icons render as inlined CSS-mask spans, no runtime fetch), `@nuxt/fonts`
+      (self-hosts Schibsted Grotesk / IBM Plex Sans / IBM Plex Mono at build), `@nuxt/image`
+      (`NuxtImg` on project media), `@nuxtjs/color-mode` (`classSuffix: ''`).
+- [x] **Owner input (decision #9):** locked — see decision #9.
+- [x] Tokens: full light + dark OKLCH sets + `@theme inline` + `@custom-variant dark` +
+      base/`@layer components` (`.container-page`, `.eyebrow`, `.chip*`, `.link-accent`,
+      focus ring, reduced-motion) in `app/assets/css/main.css`.
+- [x] App shell: `app/app.vue` = flex-column `min-h-dvh`; `Header` (sticky, scroll-aware
+      border/blur, desktop nav + reka-ui `Dialog` sheet on mobile, `ThemeToggle`); `Footer`
+      (border-top, email + social links — doubles as the contact surface).
+- [x] Components: `ProjectCard` (link-card, `NuxtImg` media, `StatusBadge`, tech chips + `+N`,
+      hover-lift), `SkillItem` (chip, variant by `level`), new `Hero` / `SectionHeading` /
+      `StatusBadge` / `ThemeToggle`. Deleted `Construction.vue` and `ParallaxItem.vue`.
+- [x] Pages rebuilt: **Home** (hero + TL;DR + featured 3-up + services grid + writing teaser,
+      no carousel), **Work** (card grid + client-side tech filter), **Project detail**
+      (hero, alternating image blocks, links, stack, prev/next), **About** (single
+      hairline-column `<ol>` timeline), **Skills** (category groups + Core/Working/Familiar
+      legend, built from `getSkillGroups()`), **Contact** (static email + socials + location),
+      **Lab** index + `driverjs` rebuilt as a real demo — a driver.js guided tour that
+      spotlights the actual header (`#btn-home`, `#nav-work`, `#theme-toggle`) and two on-page
+      sections about the stack / data layer, with the popover themed to the design tokens.
+- [x] `Skill` type: `progress` → `level` (`core`/`working`/`familiar`) + `category`
+      (`languages`/`frameworks`/`data`/`platforms`/`testing`); `app/data/skills.ts` backfilled;
+      `getSkillGroups()` + `SKILL_CATEGORY_*` added to `portfolio.ts`.
+- [x] Dark mode toggle — system default, persisted by `@nuxtjs/color-mode`.
+- [x] Motion: token durations/easings, hover-lift on cards, `prefers-reduced-motion` collapse.
+
+**Notes / deferred to later phases:**
+
+- View Transitions API page transitions — not wired yet (small; fold into Phase 3 polish).
+- Scroll-reveal — skipped by design (design system: "show the page at rest"); revisit only if wanted.
+- **CV download** on About — no asset yet; needs a PDF from the owner (Phase 3).
+- Skill tiers in `app/data/skills.ts` are a reasonable first pass — **owner should tune**.
+- Contact email is `tlasalmonie@gmail.com` (owner's personal address) in `app/utils/contact.ts`.
+- Real project screenshots / `shortDescription` copy still missing for most projects (Phase 3);
+  `ProjectCard` shows a mono slug placeholder when `banner` is unset.
+- `@nuxtjs/i18n` / `@nuxtjs/seo` intentionally **not** added here — Phases 5 / 4.
 
 ## Phase 3 — Content & polish
 

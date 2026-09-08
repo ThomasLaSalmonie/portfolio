@@ -1,40 +1,38 @@
 <script setup lang="ts">
-  const iconList: { name: string; href: string }[] = [
-    {
-      name: 'mdi-twitter',
-      href: 'https://twitter.com/tlasalmonie'
-    },
-    {
-      name: 'mdi-linkedin',
-      href: 'https://www.linkedin.com/in/lasalmoniethomas/'
-    },
-    {
-      name: 'mdi-github',
-      href: 'https://github.com/ThomasLaSalmonie'
-    }
-  ];
+  import { socials, CONTACT_EMAIL } from '~/utils/contact';
+
+  const year = new Date().getFullYear();
 </script>
 
 <template>
-  <v-footer class="d-flex flex-column" app style="padding: 0px">
-    <div class="bg-black d-flex w-100 align-center px-4">
-      <strong>Get connected with me on social networks!</strong>
+  <footer class="mt-24 border-t">
+    <div
+      class="container-page flex flex-col gap-6 py-10 sm:flex-row sm:items-center sm:justify-between"
+    >
+      <div class="flex flex-col gap-1">
+        <span class="eyebrow">Get in touch</span>
+        <a :href="`mailto:${CONTACT_EMAIL}`" class="link-accent text-sm font-medium">
+          {{ CONTACT_EMAIL }}
+        </a>
+      </div>
 
-      <v-spacer />
-
-      <v-btn
-        v-for="icon in iconList"
-        :key="icon.name"
-        :href="icon.href"
-        class="mx-4"
-        :icon="icon.name"
-        variant="plain"
-        size="small"
-      />
+      <div class="flex items-center gap-1">
+        <a
+          v-for="social in socials"
+          :key="social.label"
+          :href="social.href"
+          target="_blank"
+          rel="me noopener"
+          :aria-label="social.label"
+          class="inline-flex size-9 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+        >
+          <Icon :name="social.icon" size="18" />
+        </a>
+      </div>
     </div>
 
-    <div class="px-4 py-2 bg-black text-center w-100">
-      {{ new Date().getFullYear() }} — <strong>Thomas La Salmonie</strong>
+    <div class="container-page pb-10">
+      <p class="font-mono text-xs text-muted-foreground">© {{ year }} Thomas La Salmonie.</p>
     </div>
-  </v-footer>
+  </footer>
 </template>

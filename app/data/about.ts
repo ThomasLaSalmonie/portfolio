@@ -2,8 +2,6 @@ import type { AboutItem } from '~/utils/types/about.types';
 
 export const aboutItems: AboutItem[] = [
   {
-    color: 'red-lighten-2',
-    icon: 'mdi-stop',
     date: '2024/02 - 2024/04',
     title: 'Back-end Developer',
     link: 'https://unito.io/',
@@ -30,8 +28,6 @@ export const aboutItems: AboutItem[] = [
     ]
   },
   {
-    color: 'red-lighten-2',
-    icon: 'mdi-stop',
     date: '2022/10 - 2024/02',
     title: 'Tech Lead Web Developer',
     link: 'https://business.bell.ca/shop/medium-large/internet-of-things/iot-applications',
@@ -64,8 +60,6 @@ export const aboutItems: AboutItem[] = [
     ]
   },
   {
-    color: 'red-lighten-2',
-    icon: 'mdi-stop',
     date: '2022/06 - 2022/09',
     title: 'Full Stack Web Developer',
     company: 'Bell, Montreal, QC',
@@ -81,8 +75,6 @@ export const aboutItems: AboutItem[] = [
     technologiesUsed: ['typescript', 'vuejs', 'azure', 'kubernetes', 'docker', 'gitlab', 'npm']
   },
   {
-    color: 'green-lighten-1',
-    icon: 'mdi-play',
     date: '2022/06 - Current',
     title: 'Full Stack Web Developer',
     company: 'Baum Publication (Freelance)',
@@ -112,8 +104,6 @@ export const aboutItems: AboutItem[] = [
     ]
   },
   {
-    color: 'red-lighten-2',
-    icon: 'mdi-stop',
     date: '2022/06 - 2023/03',
     title: 'Full Stack Web Developer',
     company: 'Fillactive (Freelance)',
@@ -140,8 +130,6 @@ export const aboutItems: AboutItem[] = [
     ]
   },
   {
-    color: 'red-lighten-2',
-    icon: 'mdi-stop',
     date: '2020/04 - 2022/05',
     title: 'Tech Lead Web Developer',
     company: 'Ax2, Montreal, QC',
@@ -177,8 +165,6 @@ export const aboutItems: AboutItem[] = [
     ]
   },
   {
-    color: 'red-lighten-2',
-    icon: 'mdi-stop',
     date: '2018/10 - 2020/04',
     title: 'Back-end and Devops Developer',
     company: 'Ax2, Montreal, QC',
@@ -208,8 +194,6 @@ export const aboutItems: AboutItem[] = [
     ]
   },
   {
-    color: 'red-lighten-2',
-    icon: 'mdi-stop',
     date: '2018/03 - 2018/09',
     title: 'Back-end Developer (internship)',
     company: 'Ax2, Montreal, QC',
@@ -224,8 +208,6 @@ export const aboutItems: AboutItem[] = [
     technologiesUsed: ['typescript', 'nodejs', 'restapi', 'github', 'php', 'mysql']
   },
   {
-    color: 'red-lighten-2',
-    icon: 'mdi-stop',
     date: '2017/05 - 2017/09',
     title: 'Back-end Developer (internship)',
     company: 'Timeone, Bordeaux, France',

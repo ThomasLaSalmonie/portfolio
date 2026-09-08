@@ -1,16 +1,9 @@
 <template>
-  <v-app>
+  <div class="flex min-h-dvh flex-col">
     <Header />
-    <div class="main-content">
+    <main class="container-page flex-1 py-10 sm:py-14">
       <NuxtPage />
-    </div>
+    </main>
     <Footer />
-  </v-app>
+  </div>
 </template>
-
-<style scoped>
-  .main-content {
-    margin-bottom: 125px;
-    margin-top: 70px;
-  }
-</style>
