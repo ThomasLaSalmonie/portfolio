@@ -1,6 +1,7 @@
 <script setup lang="ts">
   import { socials, CONTACT_EMAIL } from '~/utils/contact';
 
+  const { t } = useI18n();
   const year = new Date().getFullYear();
 </script>
 
@@ -10,7 +11,7 @@
       class="container-page flex flex-col gap-6 py-10 sm:flex-row sm:items-center sm:justify-between"
     >
       <div class="flex flex-col gap-1">
-        <span class="eyebrow">Get in touch</span>
+        <span class="eyebrow">{{ t('footer.getInTouch') }}</span>
         <a :href="`mailto:${CONTACT_EMAIL}`" class="link-accent text-sm font-medium">
           {{ CONTACT_EMAIL }}
         </a>
@@ -32,7 +33,7 @@
     </div>
 
     <div class="container-page pb-10">
-      <p class="font-mono text-xs text-muted-foreground">© {{ year }} Thomas La Salmonie.</p>
+      <p class="font-mono text-xs text-muted-foreground">{{ t('footer.copyright', { year }) }}</p>
     </div>
   </footer>
 </template>

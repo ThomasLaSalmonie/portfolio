@@ -1,8 +1,10 @@
 import { aboutItems } from '~/data/about';
 import { projects } from '~/data/projects';
 import { skills } from '~/data/skills';
+import { loc } from '~/utils/i18n';
+import type { Lang } from '~/utils/types/common.types';
 import type { AboutItem, ProjectRef } from '~/utils/types/about.types';
-import type { Project } from '~/utils/types/projects.types';
+import type { Block, Project, RawBlock, RawProject } from '~/utils/types/projects.types';
 import type { Skill, SkillCategory } from '~/utils/types/skills.types';
 
 /**
@@ -10,6 +12,10 @@ import type { Skill, SkillCategory } from '~/utils/types/skills.types';
  * These replace the old `server/api/**` routes — same joins (skill/project
  * lookups by `key` / `slug`), no HTTP round-trip, and no mutation of the
  * source arrays.
+ *
+ * Helpers that touch translatable fields take a `locale` and return the
+ * resolved (`string`) `Project` / `AboutItem` shape, so components stay
+ * locale-agnostic. UI chrome strings live in `i18n/locales/*.json`, not here.
  */
 
 export function getSkills(): Skill[] {
@@ -29,7 +35,7 @@ export function resolveSkills(keys: string[] = []): Skill[] {
   return keys.map((key) => getSkill(key)).filter((skill): skill is Skill => skill !== undefined);
 }
 
-/** Ordered category buckets for the Skills page. */
+/** Ordered category buckets for the Skills page. Labels come from i18n (`skills.categories.*`). */
 export const SKILL_CATEGORY_ORDER: SkillCategory[] = [
   'languages',
   'frameworks',
@@ -37,14 +43,6 @@ export const SKILL_CATEGORY_ORDER: SkillCategory[] = [
   'platforms',
   'testing'
 ];
-
-export const SKILL_CATEGORY_LABELS: Record<SkillCategory, string> = {
-  languages: 'Languages',
-  frameworks: 'Frameworks & libraries',
-  data: 'Data & messaging',
-  platforms: 'Platforms & DevOps',
-  testing: 'Testing'
-};
 
 const LEVEL_RANK: Record<NonNullable<Skill['level']>, number> = {
   core: 0,
@@ -54,7 +52,6 @@ const LEVEL_RANK: Record<NonNullable<Skill['level']>, number> = {
 
 export type SkillGroup = {
   category: SkillCategory;
-  label: string;
   skills: Skill[];
 };
 
@@ -62,30 +59,47 @@ export type SkillGroup = {
 export function getSkillGroups(): SkillGroup[] {
   return SKILL_CATEGORY_ORDER.map((category) => ({
     category,
-    label: SKILL_CATEGORY_LABELS[category],
     skills: getVisibleSkills()
       .filter((skill) => skill.category === category)
       .sort((a, b) => LEVEL_RANK[a.level ?? 'familiar'] - LEVEL_RANK[b.level ?? 'familiar'])
   })).filter((group) => group.skills.length > 0);
 }
 
-export function getProjects(): Project[] {
-  return projects;
+function resolveBlock(block: RawBlock, locale: Lang): Block {
+  return {
+    ...block,
+    title: block.title === undefined ? undefined : loc(block.title, locale),
+    content: loc(block.content, locale)
+  };
 }
 
-export function getProject(slug: string): Project | undefined {
-  return projects.find((project) => project.slug === slug);
+function resolveProject(project: RawProject, locale: Lang): Project {
+  return {
+    ...project,
+    shortDescription:
+      project.shortDescription === undefined ? undefined : loc(project.shortDescription, locale),
+    blocks: project.blocks?.map((block) => resolveBlock(block, locale))
+  };
+}
+
+export function getProjects(locale: Lang): Project[] {
+  return projects.map((project) => resolveProject(project, locale));
+}
+
+export function getProject(slug: string, locale: Lang): Project | undefined {
+  const project = projects.find((p) => p.slug === slug);
+  return project ? resolveProject(project, locale) : undefined;
 }
 
 /** A project with its `skills` resolved from `technologiesUsed`. */
-export function getProjectWithSkills(slug: string): Project | undefined {
-  const project = getProject(slug);
+export function getProjectWithSkills(slug: string, locale: Lang): Project | undefined {
+  const project = getProject(slug, locale);
   if (!project) return undefined;
   return { ...project, skills: resolveSkills(project.technologiesUsed) };
 }
 
-/** `limit` projects picked at random (Fisher–Yates on a copy — source is untouched). */
-export function getFeaturedProjects(limit: number): Project[] {
+/** `limit` project slugs picked at random (Fisher–Yates on a copy — source is untouched). */
+export function getFeaturedProjectSlugs(limit: number): string[] {
   const pool = [...projects];
   for (let i = pool.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -96,22 +110,27 @@ export function getFeaturedProjects(limit: number): Project[] {
       pool[j] = a;
     }
   }
-  return pool.slice(0, Math.max(0, limit));
+  return pool.slice(0, Math.max(0, limit)).map((project) => project.slug);
 }
 
-const toProjectRef = (project: Project): ProjectRef => ({
+const toProjectRef = (project: RawProject): ProjectRef => ({
   name: project.name,
   slug: project.slug
 });
 
 /** The about timeline with `projects` (refs) and `skills` resolved per entry. */
-export function getAboutTimeline(): AboutItem[] {
+export function getAboutTimeline(locale: Lang): AboutItem[] {
   return aboutItems.map((item) => ({
     ...item,
-    tasks: (item.tasks ?? []).filter((task) => task.trim().length > 0),
+    date: loc(item.date, locale),
+    title: loc(item.title, locale),
+    company: loc(item.company, locale),
+    tasks: (item.tasks ?? [])
+      .map((task) => loc(task, locale))
+      .filter((task) => task.trim().length > 0),
     projects: (item.relatedProjects ?? [])
-      .map((slug) => getProject(slug))
-      .filter((project): project is Project => project !== undefined)
+      .map((slug) => projects.find((project) => project.slug === slug))
+      .filter((project): project is RawProject => project !== undefined)
       .map(toProjectRef),
     skills: resolveSkills(item.technologiesUsed)
   }));

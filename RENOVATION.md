@@ -196,7 +196,7 @@ about it is moot — the data is synchronous).
 - Contact email is `tlasalmonie@gmail.com` (owner's personal address) in `app/utils/contact.ts`.
 - Real project screenshots / `shortDescription` copy still missing for most projects (Phase 3);
   `ProjectCard` shows a mono slug placeholder when `banner` is unset.
-- `@nuxtjs/i18n` intentionally **not** added here — Phase 5. (`@nuxtjs/seo` landed in Phase 4.)
+- `@nuxtjs/i18n` landed in Phase 5; `@nuxtjs/seo` in Phase 4.
 
 ## Phase 3 — Content & polish ✅ code-side done (branch `renovation/phase-3`) — owner content still outstanding
 
@@ -278,16 +278,39 @@ about it is moot — the data is synchronous).
       build and act on the report; apply `deploy/nginx.conf.example`; per-project OG
       images; real project write-ups + screenshots; About CV-download PDF.
 
-## Phase 5 — i18n (FR + EN)
+## Phase 5 — i18n (FR + EN) ✅ code-side done (branch `renovation/phase-5`)
 
-- [ ] Add `@nuxtjs/i18n` v9. Strategy `prefix_except_default`, default locale `en`,
-      `fr` prefixed. Ensure all locale routes are in the prerender list.
-- [ ] `i18n/locales/en.json`, `i18n/locales/fr.json` for all UI strings.
-- [ ] Add `{ en, fr }` locale maps to translatable fields in `app/data/*.ts`; add a
-      `t(field)` / `localize()` helper that reads the active locale.
-- [ ] Locale switcher in the header.
-- [ ] `hreflang` alternates + localized `<title>`/meta via `@nuxtjs/seo` integration.
-- [ ] French translations of project/skill/about copy (owner).
+- [x] `@nuxtjs/i18n` **v10** (v9 in the plan; v10 shipped — `lazy` and
+      `bundle.optimizeTranslationDirective` options dropped, otherwise the same).
+      `strategy: 'prefix_except_default'`, `defaultLocale: 'en'`, `fr` at `/fr/**`,
+      `langDir: 'locales'`, `detectBrowserLanguage` (cookie, `redirectOn: 'root'`).
+      `nitro.prerender.routes` seeds `/` and `/fr`; the header switcher + hreflang
+      links are crawled → **89 routes prerendered** (was 48), every `/fr/**` page
+      included.
+- [x] `i18n/locales/en.json` + `fr.json` — all UI chrome (nav, buttons, section
+      eyebrows/titles, status badges, skill legend + category labels, filter/empty
+      states, SEO titles/descriptions, driver.js tour + prose, 404). FR is a full
+      translation, not placeholders.
+- [x] Translatable data fields use `LocalizedText` (`string | { en, fr }`, in
+      `common.types.ts`) + `loc(value, locale)` (`app/utils/i18n.ts`). Data files
+      export `RawProject[]` / `RawAboutItem[]`; `portfolio.ts` read helpers take a
+      `locale` and return the resolved (`string`) `Project` / `AboutItem` shape, so
+      components stay locale-agnostic. `useLang()` composable narrows the active
+      locale to the `Lang` union for those calls.
+  - **Translated:** every project `shortDescription`; about `title` / `company` /
+    `date` / **all `tasks`**. FR here is a **first pass by the build** — owner
+    should review voice/accuracy (it's a CV).
+- [x] `LangSwitcher.vue` (`en / fr`, `aria-current` on active, `useSwitchLocalePath`)
+      in the header — desktop nav + mobile bar. All in-app `NuxtLink`s go through
+      `useLocalePath()`.
+- [x] hreflang alternates (both directions, `x-default`), per-locale `<html lang>` /
+      `<title>` / `canonical` / `og:locale`, and a multi-file sitemap
+      (`sitemap_index.xml` → `/__sitemap__/{en-CA,fr-CA}.xml` with `xhtml:link`
+      alternates; `/sitemap.xml` meta-refreshes to the index; `robots.txt` updated).
+- [x] `app/error.vue` — branded, localized 404 / error page (was Nuxt's default).
+- [ ] **Owner follow-up:** review the machine-drafted FR copy in `app/data/*.ts` and
+      the longer marketing strings in `i18n/locales/fr.json` (hero lead, "how I work",
+      services, writing). Pressure-test nav/chip wrapping at FR length (decision #9.6).
 
 ## Phase 6 — Analytics removal ✅ done (in Phase 0)
 

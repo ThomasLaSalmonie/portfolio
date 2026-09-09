@@ -1,18 +1,21 @@
 <script setup lang="ts">
   import { getAboutTimeline } from '~/utils/portfolio';
 
+  const { t } = useI18n();
+  const localePath = useLocalePath();
+  const lang = useLang();
+
   useSeoMeta({
-    title: 'About',
-    description:
-      'Career timeline of Thomas La Salmonie — roles, companies and the work behind them.'
+    title: () => t('about.seoTitle'),
+    description: () => t('about.seoDescription')
   });
 
-  const items = getAboutTimeline();
+  const items = computed(() => getAboutTimeline(lang.value));
 </script>
 
 <template>
   <div class="flex flex-col gap-8">
-    <h1 class="sr-only">About — career timeline</h1>
+    <h1 class="sr-only">{{ t('about.h1') }}</h1>
 
     <ol class="flex flex-col">
       <li
@@ -45,12 +48,12 @@
           </ul>
 
           <div v-if="item.projects && item.projects.length" class="flex flex-col gap-1.5">
-            <span class="eyebrow">Projects</span>
+            <span class="eyebrow">{{ t('about.projects') }}</span>
             <div class="flex flex-wrap gap-x-4 gap-y-1 text-sm">
               <NuxtLink
                 v-for="project in item.projects"
                 :key="project.slug"
-                :to="`/projects/${project.slug}`"
+                :to="localePath(`/projects/${project.slug}`)"
                 class="link-accent"
               >
                 {{ project.name }}
@@ -59,7 +62,7 @@
           </div>
 
           <div v-if="item.skills && item.skills.length" class="flex flex-col gap-1.5">
-            <span class="eyebrow">Stack</span>
+            <span class="eyebrow">{{ t('about.stack') }}</span>
             <div class="flex flex-wrap gap-1.5">
               <SkillItem v-for="skill in item.skills" :key="skill.key" :skill="skill" />
             </div>

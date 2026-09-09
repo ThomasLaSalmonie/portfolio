@@ -1,4 +1,5 @@
 <script setup lang="ts">
+  const { t } = useI18n();
   const colorMode = useColorMode();
 
   const isDark = computed(() => colorMode.value === 'dark');
@@ -12,7 +13,7 @@
   <button
     type="button"
     class="inline-flex size-9 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
-    :aria-label="isDark ? 'Switch to light theme' : 'Switch to dark theme'"
+    :aria-label="isDark ? t('theme.toLight') : t('theme.toDark')"
     @click="toggle"
   >
     <ClientOnly>
