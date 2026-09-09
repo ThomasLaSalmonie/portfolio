@@ -14,10 +14,6 @@
       </Head>
     </Html>
 
-    <SectionHeading eyebrow="Contact" title="Get in touch" as="h1">
-      No form — just an email address and the usual profiles. I read everything; I reply to most.
-    </SectionHeading>
-
     <div class="flex flex-col gap-2">
       <span class="eyebrow">Email</span>
       <a

@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Personal portfolio site for Thomas La Salmonie. Nuxt 4 + Vue 3, Tailwind v4 + shadcn-vue, TypeScript. Deployed as a fully static site.
 
-> **Renovation in progress.** A full modernization is underway. Track and update progress in [`RENOVATION.md`](./RENOVATION.md) — check off items as they land and keep its Decisions/Deferred sections current. Design spec: the "TLS Design System" artifact linked from that file. **Phases 0–2 done (foundation, data-layer cleanup, design system + full de-Vuetify).** Remaining: Phase 3 (content & polish), Phase 4 (SEO/a11y/perf), Phase 5 (FR + EN i18n).
+> **Renovation in progress.** A full modernization is underway. Track and update progress in [`RENOVATION.md`](./RENOVATION.md) — check off items as they land and keep its Decisions/Deferred sections current. Design spec: the "TLS Design System" artifact linked from that file. **Phases 0–3 done (foundation, data-layer cleanup, design system + full de-Vuetify, content & polish).** Remaining: Phase 4 (SEO/a11y/perf), Phase 5 (FR + EN i18n), plus owner-blocked content (real project write-ups + screenshots, CV PDF).
 
 ## Commands
 
@@ -63,8 +63,10 @@ Data is synchronous, so pages just call a helper at the top of `<script setup>` 
 - **shadcn-vue** via `shadcn-nuxt` (`components.json`, `cn()` in `app/lib/utils.ts`). Primitives live in `app/components/ui/`, unprefixed — currently only `ui/button` (`<Button>` + `buttonVariants`; supports `as-child` to style a `NuxtLink`). Add more with the shadcn-vue CLI or by hand. `reka-ui` is used directly for the mobile-nav dialog in `Header.vue`.
 - **Icons:** `@nuxt/icon` with the `lucide` collection (`<Icon name="lucide:x" />`). `icon.serverBundle.collections: ['lucide']` + `@iconify-json/lucide` → icons are inlined as CSS-mask spans at prerender, no runtime fetch.
 - **Fonts:** `@nuxt/fonts` self-hosts Schibsted Grotesk (display), IBM Plex Sans (body/UI), IBM Plex Mono (labels/dates/tags/code) at build. Exposed as `--font-display` / `--font-sans` / `--font-mono` and the `font-display|sans|mono` utilities.
-- **Dark mode:** `@nuxtjs/color-mode` (`classSuffix: ''` → bare `.dark` on `<html>`, system default, persisted). `ThemeToggle.vue` flips `colorMode.preference`; the sun/moon swap is pure CSS (`dark:hidden` / `hidden dark:block`).
-- **Images:** `@nuxt/image` — `<NuxtImg>` on project media (`ProjectCard`, `[slug].vue`).
+- **Dark mode:** `@nuxtjs/color-mode` (`classSuffix: ''` → bare `.dark` on `<html>`, system default, persisted). `ThemeToggle.vue` flips `colorMode.preference` and renders a single `<Icon>` (sun/moon by `colorMode.value`) inside `<ClientOnly>` with a sun fallback, so there's no SSR mismatch.
+- **Images:** `@nuxt/image` — `<NuxtImg>` on project media (`ProjectCard`, `[slug].vue`), with an `@error` fallback to the slug placeholder. `img.thomaslasalmonie.me` is **not** in `image.domains` on purpose — those remote banners pass through un-optimised until the host is migrated / images are pulled in-repo.
+- **Head / favicons:** `app/app.vue` sets `htmlAttrs.lang`, the favicon set (`favicon.svg` + `.ico` + `-96x96.png` + `apple-touch-icon.png`), `site.webmanifest`, and light/dark `theme-color` via `useHead`. Regenerate the PNGs from `public/favicon.svg` with `node scripts/gen-favicons.mjs` (not part of the build).
+- **Route transitions:** `experimental.viewTransition` — a 360ms cross-fade (`::view-transition-*(root)` in `main.css`), disabled under `prefers-reduced-motion`.
 - Shared building blocks: `Hero`, `SectionHeading` (mono eyebrow + rule + `h2`), `ProjectCard`, `SkillItem` (chip, variant by `level`), `StatusBadge` (`play→Shipped` / `pause→Paused` / `stop→Archived`).
 - Per-page SEO is still done inline with `<Html><Head><Title>/<Meta></Head></Html>` (moves to `useSeoMeta` in Phase 4).
 - Static output is configured via `nitro.prerender` (`crawlLinks: true` from `/`), so every linked route — including all `projects/*` detail pages — is prerendered to HTML.

@@ -9,7 +9,7 @@ export const aboutItems: AboutItem[] = [
     tasks: [
       'Building and maintaining integrations between Unito and a wide variety of third-party tools such as Jira, Asana, Azure Devops and many others',
       "Deeply involved in the creative process of shaping our platform's future",
-      'Bugfixes and maintenance on Unito personnal deployer assitant <a href="https://unito.io/blog/unito-slackbot-for-shipping-software-le-capitaine/" target="_blank">"Le capitaine"</a>',
+      'Bugfixes and maintenance on Unito personal Slack deploy assistant, "Le capitaine"',
       '',
       'Unfortunately Unito had a significant internal restructuring that led to the departure of 17 individuals. This restructuring impacted not only my entire team but also two other teams, including myself.'
     ],
@@ -34,7 +34,7 @@ export const aboutItems: AboutItem[] = [
     company: 'Bell, Montreal, QC',
     tasks: [
       'Conducting high-level needs analysis in collaboration with architects',
-      'Pearheading the high-level definition and implementation of software architecture and innovative functionalities',
+      'Spearheading the high-level definition and implementation of software architecture and innovative functionalities',
       'Creating high-performance, configurable APIs to query telemetry database (ADX)',
       'Ensuring accessibility compliance with WCAG 2.1 AA standards',
       'Take proactive measures to address technical debt accumulated from numerous prototypes',

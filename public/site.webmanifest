@@ -1,0 +1,19 @@
+{
+  "name": "Thomas La Salmonie",
+  "short_name": "TLS",
+  "description": "Portfolio of Thomas La Salmonie, full-stack web engineer based in Montréal.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fbfaf7",
+  "theme_color": "#3a5ccc",
+  "icons": [
+    { "src": "/web-app-manifest-192x192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/web-app-manifest-512x512.png", "sizes": "512x512", "type": "image/png" },
+    {
+      "src": "/web-app-manifest-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

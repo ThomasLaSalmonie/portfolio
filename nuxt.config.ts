@@ -53,6 +53,19 @@ export default defineNuxtConfig({
       collections: ['lucide']
     }
   },
+  // Project banners still live on an external host (see RENOVATION.md — hosting
+  // migration is deferred), so that domain is intentionally NOT in `domains`:
+  // remote URLs pass through untouched instead of being baked through IPX at
+  // build. `format`/`screens` apply once images are pulled in-repo.
+  image: {
+    format: ['avif', 'webp'],
+    screens: { xs: 360, sm: 640, md: 768, lg: 1024, xl: 1280, xxl: 1536 }
+  },
+  // Cross-fade between routes via the View Transitions API (design system: ~360ms
+  // route transition). Reduced-motion is honoured in app/assets/css/main.css.
+  experimental: {
+    viewTransition: true
+  },
   typescript: {
     strict: true
     // typeCheck stays off — CI runs `nuxt typecheck` as a separate gate, and
