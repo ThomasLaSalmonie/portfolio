@@ -1,17 +1,18 @@
 <script setup lang="ts">
   import { getAboutTimeline } from '~/utils/portfolio';
 
+  useSeoMeta({
+    title: 'About',
+    description:
+      'Career timeline of Thomas La Salmonie — roles, companies and the work behind them.'
+  });
+
   const items = getAboutTimeline();
 </script>
 
 <template>
   <div class="flex flex-col gap-8">
-    <Html lang="en">
-      <Head>
-        <Title>About — Thomas La Salmonie</Title>
-        <Meta name="description" content="Career timeline of Thomas La Salmonie, web engineer." />
-      </Head>
-    </Html>
+    <h1 class="sr-only">About — career timeline</h1>
 
     <ol class="flex flex-col">
       <li

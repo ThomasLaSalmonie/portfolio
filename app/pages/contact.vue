@@ -1,18 +1,15 @@
 <script setup lang="ts">
   import { socials, CONTACT_EMAIL, LOCATION } from '~/utils/contact';
+
+  useSeoMeta({
+    title: 'Contact',
+    description: 'Get in touch with Thomas La Salmonie — email and social links.'
+  });
 </script>
 
 <template>
   <div class="flex flex-col gap-10">
-    <Html lang="en">
-      <Head>
-        <Title>Contact — Thomas La Salmonie</Title>
-        <Meta
-          name="description"
-          content="Get in touch with Thomas La Salmonie — email and social links."
-        />
-      </Head>
-    </Html>
+    <h1 class="sr-only">Contact</h1>
 
     <div class="flex flex-col gap-2">
       <span class="eyebrow">Email</span>

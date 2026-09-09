@@ -8,6 +8,11 @@
     ballColor: string;
   }
 
+  useSeoMeta({
+    title: 'Pong Wars',
+    description: 'A day-vs-night canvas simulation — Lab experiment.'
+  });
+
   const colorPalette = {
     ArcticPowder: '#F1F6F4',
     MysticMint: '#D9E8E3',
@@ -179,9 +184,16 @@
 
 <template>
   <div id="container">
+    <h1 class="sr-only">Pong Wars</h1>
     <div id="canvas">
-      <canvas id="pongCanvas" width="600" height="600" />
-      <div id="score" />
+      <canvas
+        id="pongCanvas"
+        width="600"
+        height="600"
+        role="img"
+        aria-label="Day-vs-night Pong Wars simulation"
+      />
+      <div id="score" role="status" aria-live="polite" aria-label="Score" />
     </div>
   </div>
 </template>

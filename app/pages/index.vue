@@ -2,6 +2,11 @@
   import { Button } from '~/components/ui/button';
   import { getFeaturedProjects } from '~/utils/portfolio';
 
+  useSeoMeta({
+    description:
+      'Self-taught full-stack web engineer in Montréal — Vue / Nuxt front-ends, Node services and the infrastructure under them.'
+  });
+
   // useState so the random pick is chosen once (at prerender) and reused on
   // hydration — avoids an SSR/client mismatch.
   const featured = useState('home:featured', () => getFeaturedProjects(3));
@@ -16,16 +21,6 @@
 
 <template>
   <div class="flex flex-col gap-20">
-    <Html lang="en">
-      <Head>
-        <Title>Thomas La Salmonie</Title>
-        <Meta
-          name="description"
-          content="Thomas La Salmonie — full-stack web engineer based in Montréal."
-        />
-      </Head>
-    </Html>
-
     <Hero
       eyebrow="Montréal · Full-stack web"
       title="I build web software, end to end."
@@ -62,9 +57,11 @@
       <SectionHeading eyebrow="Selected work" title="Featured projects">
         A rotating pick from the full list.
       </SectionHeading>
-      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        <ProjectCard v-for="project in featured" :key="project.slug" :project="project" />
-      </div>
+      <ul class="grid list-none gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <li v-for="project in featured" :key="project.slug">
+          <ProjectCard :project="project" />
+        </li>
+      </ul>
       <NuxtLink to="/work" class="link-accent w-fit text-sm font-medium">
         See all projects →
       </NuxtLink>

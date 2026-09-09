@@ -3,6 +3,11 @@
   import 'driver.js/dist/driver.css';
   import { Button } from '~/components/ui/button';
 
+  useSeoMeta({
+    title: 'Driver.js tour',
+    description: 'A driver.js guided tour that walks through this portfolio site — Lab experiment.'
+  });
+
   const SEEN_KEY = 'lab:driverjs-seen';
   let tour: Driver | undefined;
 
@@ -103,16 +108,6 @@
 
 <template>
   <div class="flex flex-col gap-10">
-    <Html lang="en">
-      <Head>
-        <Title>Driver.js tour — Lab — Thomas La Salmonie</Title>
-        <Meta
-          name="description"
-          content="A driver.js guided tour that walks through this portfolio site."
-        />
-      </Head>
-    </Html>
-
     <SectionHeading eyebrow="Lab · driver.js" title="A guided tour of this site" as="h1">
       <a href="https://driverjs.com" target="_blank" rel="noopener" class="link-accent"
         >driver.js</a

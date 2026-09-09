@@ -1,6 +1,12 @@
 <script setup lang="ts">
   import { getProjects, resolveSkills } from '~/utils/portfolio';
 
+  useSeoMeta({
+    title: 'Work',
+    description:
+      'Client platforms and internal tools I have designed, built or led as a web engineer.'
+  });
+
   const projects = getProjects();
 
   // Unique tech across every project, in first-seen order.
@@ -33,18 +39,15 @@
 
 <template>
   <div class="flex flex-col gap-8">
-    <Html lang="en">
-      <Head>
-        <Title>Work — Thomas La Salmonie</Title>
-        <Meta name="description" content="Projects and platforms I have built as a web engineer." />
-      </Head>
-    </Html>
-
     <SectionHeading eyebrow="Work" title="Projects" as="h1">
       Things I have designed, built or led — client platforms and internal tools.
     </SectionHeading>
 
-    <div class="flex flex-wrap items-center gap-1.5">
+    <div
+      class="flex flex-wrap items-center gap-1.5"
+      role="group"
+      aria-label="Filter projects by technology"
+    >
       <button
         v-for="tech in allTech"
         :key="tech.key"
@@ -66,11 +69,13 @@
       </button>
     </div>
 
-    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      <ProjectCard v-for="project in filtered" :key="project.slug" :project="project" />
-    </div>
+    <ul class="grid list-none gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <li v-for="project in filtered" :key="project.slug">
+        <ProjectCard :project="project" />
+      </li>
+    </ul>
 
-    <p v-if="!filtered.length" class="text-sm text-muted-foreground">
+    <p v-if="!filtered.length" role="status" class="text-sm text-muted-foreground">
       No projects match that filter.
     </p>
   </div>

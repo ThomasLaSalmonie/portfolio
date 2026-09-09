@@ -1,4 +1,9 @@
 <script setup lang="ts">
+  useSeoMeta({
+    title: 'Lab',
+    description: 'Small front-end experiments and demos — canvas, CSS, tour libraries.'
+  });
+
   const experiments = [
     {
       slug: 'pong',
@@ -20,13 +25,6 @@
 
 <template>
   <div class="flex flex-col gap-8">
-    <Html lang="en">
-      <Head>
-        <Title>Lab — Thomas La Salmonie</Title>
-        <Meta name="description" content="Small front-end experiments and demos." />
-      </Head>
-    </Html>
-
     <SectionHeading eyebrow="Lab" title="Experiments" as="h1">
       Throwaway front-end sketches — canvas, CSS, tour libraries. Not portfolio pieces.
     </SectionHeading>

@@ -10,9 +10,19 @@ export default defineNuxtConfig({
     '@nuxt/fonts',
     '@nuxt/image',
     '@nuxtjs/color-mode',
+    '@nuxtjs/seo',
     'shadcn-nuxt'
   ],
   css: ['~/assets/css/main.css'],
+  // Canonical identity for @nuxtjs/seo (sitemap, robots, canonicals, OG tags,
+  // schema.org). `url` must match the deployed origin.
+  site: {
+    url: 'https://thomaslasalmonie.me',
+    name: 'Thomas La Salmonie',
+    description:
+      'Full-stack web engineer based in Montréal — Vue / Nuxt front-ends, Node services and the infrastructure under them.',
+    defaultLocale: 'en'
+  },
   // Fully static output — every route prerendered to HTML (see RENOVATION.md, decision #8).
   ssr: true,
   nitro: {
@@ -60,6 +70,28 @@ export default defineNuxtConfig({
   image: {
     format: ['avif', 'webp'],
     screens: { xs: 360, sm: 640, md: 768, lg: 1024, xl: 1280, xxl: 1536 }
+  },
+  // Runtime OG-image generation (nuxt-og-image, bundled with @nuxtjs/seo) is off:
+  // it needs a satori/takumi renderer + font resolution at prerender, which adds
+  // real CI surface for little gain here. The site ships one static branded card
+  // (public/og.png, built by scripts/gen-og.mjs) referenced from app.vue.
+  // Per-project OG art is a documented owner follow-up (RENOVATION.md).
+  ogImage: { enabled: false },
+  // Person identity — @nuxtjs/seo injects Person + WebSite + WebPage JSON-LD on
+  // every page from this.
+  schemaOrg: {
+    identity: {
+      type: 'Person',
+      name: 'Thomas La Salmonie',
+      url: 'https://thomaslasalmonie.me',
+      image: 'https://thomaslasalmonie.me/profile.jpeg',
+      jobTitle: 'Full-stack web engineer',
+      sameAs: [
+        'https://github.com/ThomasLaSalmonie',
+        'https://www.linkedin.com/in/lasalmoniethomas/',
+        'https://twitter.com/tlasalmonie'
+      ]
+    }
   },
   // Cross-fade between routes via the View Transitions API (design system: ~360ms
   // route transition). Reduced-motion is honoured in app/assets/css/main.css.

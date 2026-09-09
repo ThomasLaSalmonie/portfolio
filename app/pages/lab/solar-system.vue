@@ -1,16 +1,24 @@
+<script setup lang="ts">
+  useSeoMeta({
+    title: 'Solar System',
+    description: 'CSS-driven orbiting planets — Lab experiment.'
+  });
+</script>
+
 <template>
-  <body>
+  <div class="solar-stage">
+    <h1 class="sr-only">Solar system</h1>
     <div class="container">
       <div class="sun" />
       <div class="earth">
         <div class="moon" />
       </div>
     </div>
-  </body>
+  </div>
 </template>
 
 <style scoped>
-  body {
+  .solar-stage {
     margin: 0;
     height: 100vh;
     display: flex;
@@ -80,6 +88,13 @@
   @keyframes orbit {
     to {
       transform: rotate(360deg);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .earth,
+    .moon {
+      animation: none;
     }
   }
 </style>

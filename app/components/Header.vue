@@ -48,7 +48,7 @@
         Thomas La Salmonie
       </NuxtLink>
 
-      <nav class="hidden items-center gap-7 md:flex">
+      <nav aria-label="Primary" class="hidden items-center gap-7 md:flex">
         <NuxtLink
           v-for="link in links"
           :id="link.id"
@@ -88,7 +88,7 @@
                 </DialogClose>
               </div>
               <DialogDescription class="sr-only">Site navigation</DialogDescription>
-              <nav class="flex flex-col gap-1">
+              <nav aria-label="Mobile" class="flex flex-col gap-1">
                 <NuxtLink
                   v-for="link in links"
                   :key="link.to"
