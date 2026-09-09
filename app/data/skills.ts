@@ -80,6 +80,24 @@ export const skills: Skill[] = [
     show: true,
     related: ['unity']
   },
+  {
+    key: 'python',
+    icon: 'language-python',
+    name: 'Python',
+    category: 'languages',
+    level: 'working',
+    show: true,
+    related: ['genai', 'llamaindex']
+  },
+  {
+    key: 'go',
+    icon: 'language-go',
+    name: 'Go',
+    category: 'languages',
+    level: 'familiar',
+    show: true,
+    related: []
+  },
 
   // ---- Frameworks & libraries ----
   {
@@ -180,6 +198,64 @@ export const skills: Skill[] = [
     level: 'familiar',
     show: true,
     related: ['csharp']
+  },
+  {
+    key: 'web-components',
+    name: 'Web Components',
+    category: 'frameworks',
+    level: 'working',
+    show: true,
+    related: ['javascript']
+  },
+
+  // ---- AI & LLMs ----
+  {
+    key: 'genai',
+    name: 'Generative AI',
+    category: 'ai',
+    level: 'working',
+    show: true,
+    related: ['ai-agents', 'rag', 'python']
+  },
+  {
+    key: 'ai-agents',
+    name: 'AI agents',
+    category: 'ai',
+    level: 'working',
+    show: true,
+    related: ['genai', 'rag']
+  },
+  {
+    key: 'rag',
+    name: 'RAG',
+    category: 'ai',
+    level: 'working',
+    show: true,
+    related: ['genai', 'llamaindex']
+  },
+  {
+    key: 'llamaindex',
+    name: 'LlamaIndex',
+    category: 'ai',
+    level: 'working',
+    show: true,
+    related: ['rag', 'python']
+  },
+  {
+    key: 'vertexai',
+    name: 'Vertex AI',
+    category: 'ai',
+    level: 'working',
+    show: true,
+    related: ['gcp', 'genai']
+  },
+  {
+    key: 'langfuse',
+    name: 'Langfuse',
+    category: 'ai',
+    level: 'familiar',
+    show: true,
+    related: ['ai-agents']
   },
 
   // ---- Data & messaging ----

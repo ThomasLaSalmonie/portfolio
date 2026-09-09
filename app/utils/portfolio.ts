@@ -39,6 +39,7 @@ export function resolveSkills(keys: string[] = []): Skill[] {
 export const SKILL_CATEGORY_ORDER: SkillCategory[] = [
   'languages',
   'frameworks',
+  'ai',
   'data',
   'platforms',
   'testing'

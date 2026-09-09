@@ -2,7 +2,7 @@
 export type SkillLevel = 'core' | 'working' | 'familiar';
 
 /** Grouping bucket for the Skills page. */
-export type SkillCategory = 'languages' | 'frameworks' | 'data' | 'platforms' | 'testing';
+export type SkillCategory = 'languages' | 'frameworks' | 'ai' | 'data' | 'platforms' | 'testing';
 
 export type Skill = {
   key: string;

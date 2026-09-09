@@ -43,6 +43,7 @@
     "categories": {
       "languages": "Langages",
       "frameworks": "Frameworks et librairies",
+      "ai": "IA et LLM",
       "data": "Données et messagerie",
       "platforms": "Plateformes et DevOps",
       "testing": "Tests"

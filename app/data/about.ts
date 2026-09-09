@@ -5,6 +5,103 @@ import type { RawAboutItem } from '~/utils/types/about.types';
 // (RENOVATION.md, Phase 5).
 export const aboutItems: RawAboutItem[] = [
   {
+    date: { en: '2025/08 - Current', fr: '2025/08 - à ce jour' },
+    title: { en: 'Senior Software Developer', fr: 'Développeur logiciel senior' },
+    link: 'https://www.bell.ca/',
+    company: { en: 'Bell, Montreal, QC', fr: 'Bell, Montréal, QC' },
+    tasks: [
+      {
+        en: 'Spearheaded the architecture, development, and deployment of MILO, an internal plug-and-play conversational AI framework that unifies chatbot interfaces and infrastructure across the platform, sharply accelerating how new AI agents are built and integrated',
+        fr: "Pilotage de l'architecture, du développement et de la mise en production de MILO, un cadriciel d'IA conversationnelle interne et prêt à l'emploi qui unifie les interfaces de robots conversationnels et l'infrastructure de la plateforme, accélérant nettement la création et l'intégration de nouveaux agents IA"
+      },
+      {
+        en: 'Engineered a scalable, language-agnostic (Python, Java, Go) backend gateway and a reusable web-component UI that abstract conversational mechanics, authentication, and rendering, letting developers focus solely on agent logic against a defined REST API schema',
+        fr: "Conception d'une passerelle back-end évolutive et agnostique au langage (Python, Java, Go) et d'une interface en composant web réutilisable qui abstraient la mécanique conversationnelle, l'authentification et le rendu, pour que les développeurs se concentrent uniquement sur la logique de l'agent via un schéma d'API REST défini"
+      },
+      {
+        en: 'Developed milo-agents-sdk, a Python SDK that streamlines agent development with utilities for Google GenAI / Vertex AI / ADK integration and rich interactive message formats (text, markdown, collapsible, Chart.js, files, JSON)',
+        fr: "Développement de milo-agents-sdk, un SDK Python qui simplifie la création d'agents avec des utilitaires d'intégration à Google GenAI / Vertex AI / ADK et des formats de messages interactifs riches (texte, markdown, sections repliables, Chart.js, fichiers, JSON)"
+      },
+      {
+        en: 'Implemented platform-wide features: multi-language support, usage analytics, dynamic agent configuration, conversation history, and enterprise-grade security',
+        fr: "Mise en place de fonctionnalités transversales : prise en charge multilingue, analytique d'utilisation, configuration dynamique des agents, historique des conversations et sécurité de niveau entreprise"
+      },
+      {
+        en: 'Led the build and integration of several production AI agents across use cases such as meeting summarization, business intelligence, workflow automation, and data analysis',
+        fr: "Pilotage de la réalisation et de l'intégration de plusieurs agents IA en production pour des cas d'usage comme le résumé de réunions, l'informatique décisionnelle, l'automatisation de flux de travail et l'analyse de données"
+      },
+      {
+        en: 'Designed advanced agent capabilities: dynamic initial messages, custom event mapping for analytics, file upload, and a customizable feedback system',
+        fr: "Conception de capacités avancées pour les agents : messages initiaux dynamiques, mappage d'événements personnalisés pour l'analytique, téléversement de fichiers et système de rétroaction personnalisable"
+      }
+    ],
+    relatedProjects: [],
+    technologiesUsed: [
+      'typescript',
+      'python',
+      'nodejs',
+      'java',
+      'go',
+      'genai',
+      'ai-agents',
+      'vertexai',
+      'restapi',
+      'gcp',
+      'docker',
+      'kubernetes',
+      'devops',
+      'redis',
+      'github'
+    ]
+  },
+  {
+    date: '2024/08 - 2025/08',
+    title: { en: 'Senior Software Engineering', fr: 'Ingénieur logiciel senior' },
+    link: 'https://www.fxinnovation.com/',
+    company: {
+      en: 'FX Innovation (a Bell Canada company), Montreal, QC',
+      fr: 'FX Innovation, une compagnie de Bell Canada, Montréal, QC'
+    },
+    tasks: [
+      {
+        en: 'As Tech Lead of an innovation team, built an internal platform to democratize access to AI tools and agents for developers and internal users',
+        fr: "Responsable technique d'une équipe d'innovation : construction d'une plateforme interne pour démocratiser l'accès aux outils d'IA et aux agents auprès des développeurs et des utilisateurs internes"
+      },
+      {
+        en: 'Designed and developed the full stack — a Vue.js chatbot front-end and Node.js back-end services acting as a gateway for conversation history, feedback, observability, and agent configuration and orchestration',
+        fr: "Conception et développement de l'ensemble de la pile — un front-end de robot conversationnel en Vue.js et des services back-end en Node.js servant de passerelle pour l'historique des conversations, la rétroaction, l'observabilité ainsi que la configuration et l'orchestration des agents"
+      },
+      {
+        en: 'Created a Python SDK that lets teams focus on the business logic of their AI agents while integrating easily with the platform',
+        fr: "Création d'un SDK Python permettant aux équipes de se concentrer sur la logique métier de leurs agents IA tout en s'intégrant facilement à la plateforme"
+      },
+      {
+        en: 'Ran an AI agent development service for teams without the in-house skills, from RAG implementation to complex agents with workflows and reasoning',
+        fr: "Offre d'un service de développement d'agents IA pour les équipes n'ayant pas les compétences à l'interne, de la mise en œuvre de RAG jusqu'aux agents complexes avec flux de travail et raisonnement"
+      }
+    ],
+    relatedProjects: [],
+    technologiesUsed: [
+      'typescript',
+      'python',
+      'nodejs',
+      'vuejs',
+      'genai',
+      'ai-agents',
+      'rag',
+      'llamaindex',
+      'langfuse',
+      'gcp',
+      'azure',
+      'redis',
+      'mongodb',
+      'docker',
+      'kubernetes',
+      'devops',
+      'github'
+    ]
+  },
+  {
     date: '2024/02 - 2024/04',
     title: { en: 'Back-end Developer', fr: 'Développeur back-end' },
     link: 'https://unito.io/',
