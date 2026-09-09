@@ -78,10 +78,21 @@ export default defineNuxtConfig({
       { name: 'IBM Plex Mono', provider: 'google', weights: [400, 500] }
     ]
   },
-  // Bundle the Lucide set at build so static output needs no runtime icon API.
+  // Bundle every icon at build. The static output + CSP `connect-src 'self'`
+  // make the Iconify API fallback dead in production, so anything that can
+  // render on the client (e.g. the theme toggle swapping sun/moon, social icons
+  // on client-side nav) must be in the client bundle too — `scan` picks up the
+  // static `<Icon name="lucide:…">` / data-file usages, `icons` pins the
+  // dynamic ones.
   icon: {
     serverBundle: {
       collections: ['lucide']
+    },
+    clientBundle: {
+      // Dynamic `:name` bindings `scan` can't see: the theme toggle and the
+      // social icons (from app/utils/contact.ts).
+      icons: ['lucide:sun', 'lucide:moon', 'lucide:github', 'lucide:linkedin', 'lucide:twitter'],
+      scan: true
     }
   },
   // Project banners still live on an external host (see RENOVATION.md — hosting

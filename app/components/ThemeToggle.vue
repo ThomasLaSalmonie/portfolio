@@ -17,7 +17,8 @@
     @click="toggle"
   >
     <ClientOnly>
-      <Icon :name="isDark ? 'lucide:moon' : 'lucide:sun'" size="20" />
+      <Icon v-if="isDark" name="lucide:moon" size="20" />
+      <Icon v-else name="lucide:sun" size="20" />
       <template #fallback>
         <Icon name="lucide:sun" size="20" />
       </template>
