@@ -1,6 +1,13 @@
 /** Locales available in the app */
 export type Lang = 'fr' | 'en';
 
+/**
+ * A string that may carry per-locale variants. A bare `string` means "the same
+ * in every locale", so data files can be translated field by field. Resolve it
+ * with `loc()` from `~/utils/i18n`.
+ */
+export type LocalizedText = string | Partial<Record<Lang, string>>;
+
 export type Nullable<T> = T | null;
 
 /** Makes an interface to also be undefined */

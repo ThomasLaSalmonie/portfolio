@@ -1,0 +1,185 @@
+{
+  "nav": {
+    "work": "Projets",
+    "about": "À propos",
+    "skills": "Compétences",
+    "lab": "Labo",
+    "contact": "Contact",
+    "primary": "Principale",
+    "mobile": "Mobile",
+    "menu": "Menu",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu",
+    "siteNav": "Navigation du site",
+    "skipToContent": "Aller au contenu"
+  },
+  "theme": {
+    "toLight": "Passer au thème clair",
+    "toDark": "Passer au thème sombre"
+  },
+  "langSwitcher": {
+    "label": "Langue"
+  },
+  "footer": {
+    "getInTouch": "Me contacter",
+    "copyright": "© {year} Thomas La Salmonie."
+  },
+  "actions": {
+    "seeWork": "Voir les projets",
+    "getInTouch": "Me contacter",
+    "seeAllProjects": "Voir tous les projets",
+    "viewProject": "Voir le projet",
+    "open": "Ouvrir",
+    "replayTour": "Relancer la visite",
+    "backToWork": "Projets",
+    "backHome": "Retour à l’accueil"
+  },
+  "status": {
+    "play": "Livré",
+    "pause": "En pause",
+    "stop": "Archivé"
+  },
+  "skills": {
+    "categories": {
+      "languages": "Langages",
+      "frameworks": "Frameworks et librairies",
+      "data": "Données et messagerie",
+      "platforms": "Plateformes et DevOps",
+      "testing": "Tests"
+    },
+    "levels": {
+      "core": "Maîtrisé",
+      "working": "Courant",
+      "familiar": "Notions",
+      "coreNote": "au quotidien ; capable de piloter un projet dessus",
+      "workingNote": "productif ; utilisé sur de vrais projets",
+      "familiarNote": "j’ai livré avec, sans que ce soit quotidien"
+    }
+  },
+  "home": {
+    "seoDescription": "Ingénieur web full-stack autodidacte à Montréal — front-ends Vue / Nuxt, services Node et l’infrastructure en dessous.",
+    "heroEyebrow": "Montréal · Web full-stack",
+    "heroTitle": "Je conçois des applications web, de bout en bout.",
+    "heroLead": "Ingénieur autodidacte, je travaille sur les front-ends Vue / Nuxt, les services Node et l’infrastructure qui les porte. Curieux, précis, attaché à la qualité et au partage de connaissances.",
+    "heroImageAlt": "Thomas La Salmonie",
+    "howEyebrow": "En bref",
+    "howTitle": "Ma façon de travailler",
+    "howP1": "Ingénieur de formation, spécialisé dans les technologies web. Je prends du recul pour mesurer les enjeux d’un projet et je m’adapte vite à un nouvel environnement.",
+    "howP2": "Je remets sans cesse le travail en question pour l’amener au plus près de ce que les utilisateurs attendent vraiment — et je tiens autant à la collaboration et au partage autour du code qu’au code lui-même.",
+    "featuredEyebrow": "Sélection",
+    "featuredTitle": "Projets en vedette",
+    "featuredNote": "Une sélection qui change, tirée de la liste complète.",
+    "servicesEyebrow": "Services",
+    "servicesTitle": "Ce que je prends en charge",
+    "serviceWebTitle": "Développement web",
+    "serviceWebBody": "Du site statique à l’application web complète.",
+    "serviceUiTitle": "UI / UX",
+    "serviceUiBody": "Des interfaces qui restent lisibles sous des données et une charge réelles.",
+    "serviceDataTitle": "Données et API",
+    "serviceDataBody": "Conception de schémas, services GraphQL et REST, couches de cache.",
+    "serviceCicdTitle": "CI / CD",
+    "serviceCicdBody": "Pipelines, conteneurs et l’infrastructure en dessous.",
+    "writingEyebrow": "Écrits",
+    "writingTitle": "Notes — bientôt",
+    "writingBody": "Des notes sur Nuxt, les systèmes de types et la mise en ligne de projets perso. Rien de publié pour l’instant — la section est prête et attend le premier billet."
+  },
+  "work": {
+    "seoTitle": "Projets",
+    "seoDescription": "Plateformes clients et outils internes que j’ai conçus, développés ou dirigés comme ingénieur web.",
+    "eyebrow": "Projets",
+    "title": "Projets",
+    "intro": "Ce que j’ai conçu, développé ou dirigé — plateformes clients et outils internes.",
+    "filterLabel": "Filtrer les projets par technologie",
+    "clear": "effacer",
+    "empty": "Aucun projet ne correspond à ce filtre."
+  },
+  "project": {
+    "fallbackTitle": "Projet",
+    "linksEyebrow": "Liens",
+    "linksTitle": "Externes",
+    "stackEyebrow": "Stack",
+    "stackTitle": "Technologies utilisées",
+    "pagination": "Navigation entre projets",
+    "screenshotAlt": "{name} — capture d’écran"
+  },
+  "skillsPage": {
+    "seoTitle": "Compétences",
+    "seoDescription": "Les langages, frameworks et plateformes avec lesquels je travaille, regroupés par domaine et par niveau.",
+    "eyebrow": "Compétences",
+    "title": "Ce avec quoi je travaille",
+    "intro": "Regroupé par domaine et étiqueté selon la proximité avec mon quotidien."
+  },
+  "about": {
+    "seoTitle": "À propos",
+    "seoDescription": "Parcours professionnel de Thomas La Salmonie — postes, entreprises et le travail derrière.",
+    "h1": "À propos — parcours professionnel",
+    "projects": "Projets",
+    "stack": "Stack"
+  },
+  "contact": {
+    "seoTitle": "Contact",
+    "seoDescription": "Contacter Thomas La Salmonie — courriel et liens sociaux.",
+    "h1": "Contact",
+    "email": "Courriel"
+  },
+  "lab": {
+    "seoTitle": "Labo",
+    "seoDescription": "Petites expériences et démos front-end — canvas, CSS, librairies de visite guidée.",
+    "eyebrow": "Labo",
+    "title": "Expériences",
+    "intro": "Des essais front-end jetables — canvas, CSS, librairies de visite guidée. Pas des pièces de portfolio.",
+    "pongTitle": "Pong Wars",
+    "pongDescription": "Simulation canvas jour contre nuit.",
+    "solarTitle": "Système solaire",
+    "solarDescription": "Planètes en orbite, pilotées en CSS.",
+    "driverjsTitle": "Visite driver.js",
+    "driverjsDescription": "Démo de visite guidée réalisée avec driver.js."
+  },
+  "pong": {
+    "seoTitle": "Pong Wars",
+    "seoDescription": "Une simulation canvas jour contre nuit — expérience du labo.",
+    "h1": "Pong Wars",
+    "canvasAlt": "Simulation Pong Wars jour contre nuit",
+    "score": "Score"
+  },
+  "solar": {
+    "seoTitle": "Système solaire",
+    "seoDescription": "Planètes en orbite pilotées en CSS — expérience du labo.",
+    "h1": "Système solaire"
+  },
+  "driverjs": {
+    "seoTitle": "Visite driver.js",
+    "seoDescription": "Une visite guidée driver.js à travers ce portfolio — expérience du labo.",
+    "eyebrow": "Labo · driver.js",
+    "title": "Une visite guidée de ce site",
+    "blurb": "{link} fait des visites guidées à projecteur en quelques Ko.",
+    "linkText": "driver.js",
+    "stackHeading": "La stack",
+    "stackProse": "Les icônes sont intégrées au build, les polices auto-hébergées, et tout le système de couleurs repose sur des propriétés personnalisées OKLCH avec un pendant sombre pensé pour.",
+    "dataHeading": "La couche de données",
+    "dataProse": "Les projets, les compétences et le parcours sont de simples tableaux typés dans {dataDir}. Des fonctions pures dans {utilFile} font les jointures — compétences par clé, projets par slug.",
+    "next": "Suivant",
+    "prev": "Retour",
+    "done": "Terminé",
+    "s1Title": "Une visite rapide",
+    "s1Body": "Ceci est une démo de driver.js. Utilisez Suivant / Retour, ou appuyez sur Échap pour quitter.",
+    "s2Title": "Le logo texte",
+    "s2Body": "En haut à gauche sur chaque page — il ramène toujours à l’accueil.",
+    "s3Title": "Navigation principale",
+    "s3Body": "Projets, À propos, Compétences, Labo, Contact.",
+    "s4Title": "Clair / sombre",
+    "s4Body": "Les thèmes forment une paire pensée, pas une inversion — le cobalt s’éclaircit et se désature sur le fond sombre. Votre choix est mémorisé.",
+    "s5Title": "Comment c’est construit",
+    "s5Body": "Nuxt 4 + Vue 3, Tailwind v4 avec shadcn-vue.",
+    "s6Title": "Pas de backend",
+    "s6Body": "Les projets, les compétences et le parcours sont du TypeScript typé.",
+    "s7Title": "Voilà driver.js",
+    "s7Body": "Une quarantaine de lignes de config pour l’ensemble. Relancez la visite quand vous voulez."
+  },
+  "error": {
+    "notFoundTitle": "Page introuvable",
+    "notFoundBody": "Cette page n’existe pas ou a été déplacée.",
+    "genericTitle": "Une erreur est survenue",
+    "status": "Erreur {code}"
+  }
+}

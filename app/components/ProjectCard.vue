@@ -4,6 +4,9 @@
 
   const props = defineProps<{ project: Project }>();
 
+  const { t } = useI18n();
+  const localePath = useLocalePath();
+
   const MAX_TAGS = 5;
   const tags = computed(() => resolveSkills(props.project.technologiesUsed));
   const shownTags = computed(() => tags.value.slice(0, MAX_TAGS));
@@ -16,14 +19,14 @@
 
 <template>
   <NuxtLink
-    :to="`/projects/${project.slug}`"
+    :to="localePath(`/projects/${project.slug}`)"
     class="group flex flex-col overflow-hidden rounded-lg border bg-card shadow-sm transition-[transform,box-shadow,border-color] duration-[280ms] ease-[var(--ease-standard)] hover:-translate-y-[3px] hover:border-primary/40 hover:shadow-md"
   >
     <div class="relative aspect-[16/9] overflow-hidden border-b bg-muted">
       <NuxtImg
         v-if="project.banner && !bannerFailed"
         :src="project.banner"
-        :alt="`${project.name} — screenshot`"
+        :alt="t('project.screenshotAlt', { name: project.name })"
         class="size-full object-cover"
         loading="lazy"
         sizes="sm:100vw md:50vw lg:380px"
@@ -53,7 +56,7 @@
       </div>
 
       <div class="mt-auto flex items-center gap-1 pt-1 text-sm font-medium text-primary">
-        View project
+        {{ t('actions.viewProject') }}
         <Icon
           name="lucide:arrow-up-right"
           size="16"

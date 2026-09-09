@@ -1,0 +1,185 @@
+{
+  "nav": {
+    "work": "Work",
+    "about": "About",
+    "skills": "Skills",
+    "lab": "Lab",
+    "contact": "Contact",
+    "primary": "Primary",
+    "mobile": "Mobile",
+    "menu": "Menu",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "siteNav": "Site navigation",
+    "skipToContent": "Skip to content"
+  },
+  "theme": {
+    "toLight": "Switch to light theme",
+    "toDark": "Switch to dark theme"
+  },
+  "langSwitcher": {
+    "label": "Language"
+  },
+  "footer": {
+    "getInTouch": "Get in touch",
+    "copyright": "© {year} Thomas La Salmonie."
+  },
+  "actions": {
+    "seeWork": "See the work",
+    "getInTouch": "Get in touch",
+    "seeAllProjects": "See all projects",
+    "viewProject": "View project",
+    "open": "Open",
+    "replayTour": "Replay the tour",
+    "backToWork": "Work",
+    "backHome": "Back home"
+  },
+  "status": {
+    "play": "Shipped",
+    "pause": "Paused",
+    "stop": "Archived"
+  },
+  "skills": {
+    "categories": {
+      "languages": "Languages",
+      "frameworks": "Frameworks & libraries",
+      "data": "Data & messaging",
+      "platforms": "Platforms & DevOps",
+      "testing": "Testing"
+    },
+    "levels": {
+      "core": "Core",
+      "working": "Working",
+      "familiar": "Familiar",
+      "coreNote": "reach for daily; can lead work in it",
+      "workingNote": "productive; used on real projects",
+      "familiarNote": "have shipped with it; not day-to-day"
+    }
+  },
+  "home": {
+    "seoDescription": "Self-taught full-stack web engineer in Montréal — Vue / Nuxt front-ends, Node services and the infrastructure under them.",
+    "heroEyebrow": "Montréal · Full-stack web",
+    "heroTitle": "I build web software, end to end.",
+    "heroLead": "Self-taught engineer working across Vue / Nuxt front-ends, Node services and the infrastructure under them. Curious, precise, and focused on quality and knowledge-sharing.",
+    "heroImageAlt": "Thomas La Salmonie",
+    "howEyebrow": "TL;DR",
+    "howTitle": "How I work",
+    "howP1": "Engineer by training, specialised in web technologies. I take a step back to measure the stakes of a project and adapt quickly to new environments.",
+    "howP2": "I keep questioning the work in order to bring it as close as possible to what users actually expect — and I care about the collaboration and knowledge-sharing around it as much as the code.",
+    "featuredEyebrow": "Selected work",
+    "featuredTitle": "Featured projects",
+    "featuredNote": "A rotating pick from the full list.",
+    "servicesEyebrow": "Services",
+    "servicesTitle": "What I take on",
+    "serviceWebTitle": "Web development",
+    "serviceWebBody": "From static sites to full-scale web applications.",
+    "serviceUiTitle": "UI / UX",
+    "serviceUiBody": "Interfaces that stay legible under real-world data and load.",
+    "serviceDataTitle": "Data & APIs",
+    "serviceDataBody": "Schema design, GraphQL and REST services, caching layers.",
+    "serviceCicdTitle": "CI / CD",
+    "serviceCicdBody": "Pipelines, containers and the infrastructure underneath.",
+    "writingEyebrow": "Writing",
+    "writingTitle": "Notes — coming soon",
+    "writingBody": "Notes on Nuxt, type systems and shipping side projects. Not published yet — the section is wired and waiting for the first post."
+  },
+  "work": {
+    "seoTitle": "Work",
+    "seoDescription": "Client platforms and internal tools I have designed, built or led as a web engineer.",
+    "eyebrow": "Work",
+    "title": "Projects",
+    "intro": "Things I have designed, built or led — client platforms and internal tools.",
+    "filterLabel": "Filter projects by technology",
+    "clear": "clear",
+    "empty": "No projects match that filter."
+  },
+  "project": {
+    "fallbackTitle": "Project",
+    "linksEyebrow": "Links",
+    "linksTitle": "External",
+    "stackEyebrow": "Stack",
+    "stackTitle": "Technologies used",
+    "pagination": "Project pagination",
+    "screenshotAlt": "{name} — screenshot"
+  },
+  "skillsPage": {
+    "seoTitle": "Skills",
+    "seoDescription": "Languages, frameworks and platforms I work with, grouped by area and proficiency.",
+    "eyebrow": "Skills",
+    "title": "What I work with",
+    "intro": "Grouped by area and tagged by how close it is to my day-to-day."
+  },
+  "about": {
+    "seoTitle": "About",
+    "seoDescription": "Career timeline of Thomas La Salmonie — roles, companies and the work behind them.",
+    "h1": "About — career timeline",
+    "projects": "Projects",
+    "stack": "Stack"
+  },
+  "contact": {
+    "seoTitle": "Contact",
+    "seoDescription": "Get in touch with Thomas La Salmonie — email and social links.",
+    "h1": "Contact",
+    "email": "Email"
+  },
+  "lab": {
+    "seoTitle": "Lab",
+    "seoDescription": "Small front-end experiments and demos — canvas, CSS, tour libraries.",
+    "eyebrow": "Lab",
+    "title": "Experiments",
+    "intro": "Throwaway front-end sketches — canvas, CSS, tour libraries. Not portfolio pieces.",
+    "pongTitle": "Pong Wars",
+    "pongDescription": "Day-vs-night canvas simulation.",
+    "solarTitle": "Solar System",
+    "solarDescription": "CSS-driven orbiting planets.",
+    "driverjsTitle": "Driver.js Tour",
+    "driverjsDescription": "Guided product-tour demo built with driver.js."
+  },
+  "pong": {
+    "seoTitle": "Pong Wars",
+    "seoDescription": "A day-vs-night canvas simulation — Lab experiment.",
+    "h1": "Pong Wars",
+    "canvasAlt": "Day-vs-night Pong Wars simulation",
+    "score": "Score"
+  },
+  "solar": {
+    "seoTitle": "Solar System",
+    "seoDescription": "CSS-driven orbiting planets — Lab experiment.",
+    "h1": "Solar system"
+  },
+  "driverjs": {
+    "seoTitle": "Driver.js tour",
+    "seoDescription": "A driver.js guided tour that walks through this portfolio site — Lab experiment.",
+    "eyebrow": "Lab · driver.js",
+    "title": "A guided tour of this site",
+    "blurb": "{link} does spotlight product tours in a few KB.",
+    "linkText": "driver.js",
+    "stackHeading": "The stack",
+    "stackProse": "Icons are inlined at build, fonts are self-hosted, and the whole colour system is OKLCH custom properties with a designed dark counterpart.",
+    "dataHeading": "The data layer",
+    "dataProse": "Projects, skills and the career timeline are plain typed arrays in {dataDir}. Pure functions in {utilFile} do the joins — skills resolved by key, projects by slug.",
+    "next": "Next",
+    "prev": "Back",
+    "done": "Done",
+    "s1Title": "A quick tour",
+    "s1Body": "This is a driver.js demo. Use Next / Back, or press Esc to leave.",
+    "s2Title": "The wordmark",
+    "s2Body": "Top-left on every page — it always takes you back home.",
+    "s3Title": "Primary navigation",
+    "s3Body": "Work, About, Skills, Lab, Contact.",
+    "s4Title": "Light / dark",
+    "s4Body": "Themes are a designed pair, not an inversion — cobalt lightens and desaturates on the dark ground. Your choice is remembered.",
+    "s5Title": "How it is built",
+    "s5Body": "Nuxt 4 + Vue 3, Tailwind v4 with shadcn-vue.",
+    "s6Title": "No backend",
+    "s6Body": "Projects, skills and the career timeline are typed TypeScript.",
+    "s7Title": "That is driver.js",
+    "s7Body": "Roughly 40 lines of config for the whole thing. Hit replay any time."
+  },
+  "error": {
+    "notFoundTitle": "Page not found",
+    "notFoundBody": "That page doesn’t exist or has moved.",
+    "genericTitle": "Something went wrong",
+    "status": "Error {code}"
+  }
+}

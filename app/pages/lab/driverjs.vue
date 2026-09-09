@@ -3,9 +3,11 @@
   import 'driver.js/dist/driver.css';
   import { Button } from '~/components/ui/button';
 
+  const { t } = useI18n();
+
   useSeoMeta({
-    title: 'Driver.js tour',
-    description: 'A driver.js guided tour that walks through this portfolio site — Lab experiment.'
+    title: () => t('driverjs.seoTitle'),
+    description: () => t('driverjs.seoDescription')
   });
 
   const SEEN_KEY = 'lab:driverjs-seen';
@@ -15,9 +17,9 @@
     return driver({
       showProgress: true,
       overlayOpacity: 0.6,
-      nextBtnText: 'Next',
-      prevBtnText: 'Back',
-      doneBtnText: 'Done',
+      nextBtnText: t('driverjs.next'),
+      prevBtnText: t('driverjs.prev'),
+      doneBtnText: t('driverjs.done'),
       onDestroyStarted: () => {
         try {
           localStorage.setItem(SEEN_KEY, 'true');
@@ -28,16 +30,13 @@
       },
       steps: [
         {
-          popover: {
-            title: 'A quick tour',
-            description: 'This is a driver.js demo. Use Next / Back, or press Esc to leave.'
-          }
+          popover: { title: t('driverjs.s1Title'), description: t('driverjs.s1Body') }
         },
         {
           element: '#btn-home',
           popover: {
-            title: 'The wordmark',
-            description: 'Top-left on every page — it always takes you back home.',
+            title: t('driverjs.s2Title'),
+            description: t('driverjs.s2Body'),
             side: 'bottom',
             align: 'start'
           }
@@ -45,17 +44,16 @@
         {
           element: '#nav-work',
           popover: {
-            title: 'Primary navigation',
-            description: 'Work, About, Skills, Lab, Contact.',
+            title: t('driverjs.s3Title'),
+            description: t('driverjs.s3Body'),
             side: 'bottom'
           }
         },
         {
           element: '#theme-toggle',
           popover: {
-            title: 'Light / dark',
-            description:
-              'Themes are a designed pair, not an inversion — cobalt lightens and desaturates on the dark ground. Your choice is remembered.',
+            title: t('driverjs.s4Title'),
+            description: t('driverjs.s4Body'),
             side: 'bottom',
             align: 'end'
           }
@@ -63,24 +61,24 @@
         {
           element: '#tour-stack',
           popover: {
-            title: 'How it is built',
-            description: 'Nuxt 4 + Vue 3, Tailwind v4 with shadcn-vue.',
+            title: t('driverjs.s5Title'),
+            description: t('driverjs.s5Body'),
             side: 'top'
           }
         },
         {
           element: '#tour-data',
           popover: {
-            title: 'No backend',
-            description: 'Projects, skills and the career timeline are typed TypeScript',
+            title: t('driverjs.s6Title'),
+            description: t('driverjs.s6Body'),
             side: 'top'
           }
         },
         {
           element: '#btn-restart',
           popover: {
-            title: 'That is driver.js',
-            description: 'Roughly 40 lines of config for the whole thing. Hit replay any time.',
+            title: t('driverjs.s7Title'),
+            description: t('driverjs.s7Body'),
             side: 'top'
           }
         }
@@ -108,18 +106,21 @@
 
 <template>
   <div class="flex flex-col gap-10">
-    <SectionHeading eyebrow="Lab · driver.js" title="A guided tour of this site" as="h1">
-      <a href="https://driverjs.com" target="_blank" rel="noopener" class="link-accent"
-        >driver.js</a
-      >
-      does spotlight product tours in a few KB.
+    <SectionHeading :eyebrow="t('driverjs.eyebrow')" :title="t('driverjs.title')" as="h1">
+      <i18n-t keypath="driverjs.blurb" tag="span" scope="global">
+        <template #link>
+          <a href="https://driverjs.com" target="_blank" rel="noopener" class="link-accent">
+            {{ t('driverjs.linkText') }}
+          </a>
+        </template>
+      </i18n-t>
     </SectionHeading>
 
-    <Button id="btn-restart" class="w-fit" @click="start">Replay the tour</Button>
+    <Button id="btn-restart" class="w-fit" @click="start">{{ t('actions.replayTour') }}</Button>
 
     <section id="tour-stack" class="flex flex-col gap-3 scroll-mt-24">
       <h2 class="font-mono text-sm font-medium tracking-wide text-muted-foreground uppercase">
-        The stack
+        {{ t('driverjs.stackHeading') }}
       </h2>
       <div class="flex flex-wrap gap-1.5">
         <span class="chip">Nuxt 4</span>
@@ -129,22 +130,26 @@
         <span class="chip">shadcn-vue</span>
         <span class="chip">Static HTML</span>
       </div>
-      <p class="prose-measure text-sm text-muted-foreground">
-        Icons are inlined at build, fonts are self-hosted, and the whole colour system is OKLCH
-        custom properties with a designed dark counterpart.
-      </p>
+      <p class="prose-measure text-sm text-muted-foreground">{{ t('driverjs.stackProse') }}</p>
     </section>
 
     <section id="tour-data" class="flex flex-col gap-3 scroll-mt-24">
       <h2 class="font-mono text-sm font-medium tracking-wide text-muted-foreground uppercase">
-        The data layer
+        {{ t('driverjs.dataHeading') }}
       </h2>
-      <p class="prose-measure text-sm text-muted-foreground">
-        Projects, skills and the career timeline are plain typed arrays in
-        <code class="font-mono text-xs">app/data/</code>. Pure functions in
-        <code class="font-mono text-xs">app/utils/portfolio.ts</code> do the joins — skills resolved
-        by key, projects by slug.
-      </p>
+      <i18n-t
+        keypath="driverjs.dataProse"
+        tag="p"
+        scope="global"
+        class="prose-measure text-sm text-muted-foreground"
+      >
+        <template #dataDir>
+          <code class="font-mono text-xs">app/data/</code>
+        </template>
+        <template #utilFile>
+          <code class="font-mono text-xs">app/utils/portfolio.ts</code>
+        </template>
+      </i18n-t>
     </section>
   </div>
 </template>

@@ -1,13 +1,15 @@
 <script setup lang="ts">
+  const { t } = useI18n();
+
   useSeoMeta({
-    title: 'Solar System',
-    description: 'CSS-driven orbiting planets — Lab experiment.'
+    title: () => t('solar.seoTitle'),
+    description: () => t('solar.seoDescription')
   });
 </script>
 
 <template>
   <div class="solar-stage">
-    <h1 class="sr-only">Solar system</h1>
+    <h1 class="sr-only">{{ t('solar.h1') }}</h1>
     <div class="container">
       <div class="sun" />
       <div class="earth">

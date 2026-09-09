@@ -1,18 +1,20 @@
 <script setup lang="ts">
   import { socials, CONTACT_EMAIL, LOCATION } from '~/utils/contact';
 
+  const { t } = useI18n();
+
   useSeoMeta({
-    title: 'Contact',
-    description: 'Get in touch with Thomas La Salmonie — email and social links.'
+    title: () => t('contact.seoTitle'),
+    description: () => t('contact.seoDescription')
   });
 </script>
 
 <template>
   <div class="flex flex-col gap-10">
-    <h1 class="sr-only">Contact</h1>
+    <h1 class="sr-only">{{ t('contact.h1') }}</h1>
 
     <div class="flex flex-col gap-2">
-      <span class="eyebrow">Email</span>
+      <span class="eyebrow">{{ t('contact.email') }}</span>
       <a
         :href="`mailto:${CONTACT_EMAIL}`"
         class="link-accent w-fit font-display text-xl font-bold sm:text-2xl"

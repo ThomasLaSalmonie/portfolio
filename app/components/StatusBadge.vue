@@ -3,18 +3,16 @@
 
   const props = defineProps<{ status?: Project['status'] }>();
 
-  const map = {
-    play: { label: 'Shipped', cls: 'chip--play' },
-    pause: { label: 'Paused', cls: 'chip--pause' },
-    stop: { label: 'Archived', cls: 'chip--stop' }
-  } as const;
+  const { t } = useI18n();
 
-  const meta = computed(() => map[props.status ?? 'stop']);
+  const cls = { play: 'chip--play', pause: 'chip--pause', stop: 'chip--stop' } as const;
+
+  const status = computed(() => props.status ?? 'stop');
 </script>
 
 <template>
-  <span class="chip" :class="meta.cls">
+  <span class="chip" :class="cls[status]">
     <span class="chip__dot" aria-hidden="true" />
-    {{ meta.label }}
+    {{ t(`status.${status}`) }}
   </span>
 </template>

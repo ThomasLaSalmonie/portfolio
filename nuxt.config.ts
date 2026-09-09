@@ -10,10 +10,31 @@ export default defineNuxtConfig({
     '@nuxt/fonts',
     '@nuxt/image',
     '@nuxtjs/color-mode',
+    '@nuxtjs/i18n',
     '@nuxtjs/seo',
     'shadcn-nuxt'
   ],
   css: ['~/assets/css/main.css'],
+  // FR + EN. `prefix_except_default` → `/` is English, `/fr/**` is French. Every
+  // localized route is prerendered (the header language switcher + hreflang links
+  // are crawled from `/`, and `/fr` is seeded explicitly below). UI strings live
+  // in i18n/locales/*.json; translatable data fields use `loc()` (app/utils/i18n.ts).
+  i18n: {
+    strategy: 'prefix_except_default',
+    defaultLocale: 'en',
+    langDir: 'locales',
+    baseUrl: 'https://thomaslasalmonie.me',
+    locales: [
+      { code: 'en', language: 'en-CA', name: 'English', file: 'en.json' },
+      { code: 'fr', language: 'fr-CA', name: 'Français', file: 'fr.json' }
+    ],
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'i18n_redirected',
+      redirectOn: 'root',
+      fallbackLocale: 'en'
+    }
+  },
   // Canonical identity for @nuxtjs/seo (sitemap, robots, canonicals, OG tags,
   // schema.org). `url` must match the deployed origin.
   site: {
@@ -28,7 +49,7 @@ export default defineNuxtConfig({
   nitro: {
     prerender: {
       crawlLinks: true,
-      routes: ['/']
+      routes: ['/', '/fr']
     }
   },
   // Demo pages moved from /projects/* to /lab/* in Phase 1.

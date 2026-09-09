@@ -1,19 +1,27 @@
 <script setup lang="ts">
+  const { t } = useI18n();
+
+  // <html lang>/<dir>, hreflang alternates and og:locale come from @nuxtjs/i18n.
+  useHead(useLocaleHead());
+
   // Site-wide social-card defaults. Pages set their own title/description via
   // useSeoMeta; the image is one shared static card (see scripts/gen-og.mjs).
   useSeoMeta({
     ogImage: '/og.png',
     ogImageWidth: 1200,
     ogImageHeight: 630,
+    // The shared card is a fixed English design, so its alt text stays English.
     ogImageAlt: 'Thomas La Salmonie — full-stack web engineer',
     twitterCard: 'summary_large_image'
   });
 
   useHead({
-    htmlAttrs: { lang: 'en' },
-    // %s is the per-page title (set via useSeoMeta); pages that set none fall
-    // back to the bare site name.
-    titleTemplate: (title) => (title ? `${title} — Thomas La Salmonie` : 'Thomas La Salmonie'),
+    // Per-page title (from useSeoMeta) gets the site name appended; a missing
+    // title, or the site name itself, renders bare.
+    titleTemplate: (title) =>
+      !title || title === 'Thomas La Salmonie'
+        ? 'Thomas La Salmonie'
+        : `${title} — Thomas La Salmonie`,
     link: [
       { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico', sizes: '32x32' },
@@ -56,7 +64,7 @@
       href="#main"
       class="sr-only rounded-md border bg-card px-4 py-2 text-sm font-medium focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50"
     >
-      Skip to content
+      {{ t('nav.skipToContent') }}
     </a>
     <Header />
     <main id="main" tabindex="-1" class="container-page flex-1 py-10 outline-none sm:py-14">

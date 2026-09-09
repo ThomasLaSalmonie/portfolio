@@ -1,18 +1,20 @@
 <script setup lang="ts">
   import { getProjects, resolveSkills } from '~/utils/portfolio';
 
+  const { t } = useI18n();
+  const lang = useLang();
+
   useSeoMeta({
-    title: 'Work',
-    description:
-      'Client platforms and internal tools I have designed, built or led as a web engineer.'
+    title: () => t('work.seoTitle'),
+    description: () => t('work.seoDescription')
   });
 
-  const projects = getProjects();
+  const projects = computed(() => getProjects(lang.value));
 
   // Unique tech across every project, in first-seen order.
   const allTech = computed(() => {
     const seen = new Map<string, string>();
-    for (const project of projects) {
+    for (const project of projects.value) {
       for (const skill of resolveSkills(project.technologiesUsed)) {
         if (!seen.has(skill.key)) seen.set(skill.key, skill.name);
       }
@@ -29,8 +31,8 @@
   }
 
   const filtered = computed(() => {
-    if (!active.value.length) return projects;
-    return projects.filter((project) => {
+    if (!active.value.length) return projects.value;
+    return projects.value.filter((project) => {
       const keys = new Set(project.technologiesUsed ?? []);
       return active.value.some((k) => keys.has(k));
     });
@@ -39,14 +41,14 @@
 
 <template>
   <div class="flex flex-col gap-8">
-    <SectionHeading eyebrow="Work" title="Projects" as="h1">
-      Things I have designed, built or led — client platforms and internal tools.
+    <SectionHeading :eyebrow="t('work.eyebrow')" :title="t('work.title')" as="h1">
+      {{ t('work.intro') }}
     </SectionHeading>
 
     <div
       class="flex flex-wrap items-center gap-1.5"
       role="group"
-      aria-label="Filter projects by technology"
+      :aria-label="t('work.filterLabel')"
     >
       <button
         v-for="tech in allTech"
@@ -65,7 +67,7 @@
         class="ml-1 font-mono text-xs text-muted-foreground underline underline-offset-4"
         @click="active = []"
       >
-        clear
+        {{ t('work.clear') }}
       </button>
     </div>
 
@@ -76,7 +78,7 @@
     </ul>
 
     <p v-if="!filtered.length" role="status" class="text-sm text-muted-foreground">
-      No projects match that filter.
+      {{ t('work.empty') }}
     </p>
   </div>
 </template>

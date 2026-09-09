@@ -1,24 +1,26 @@
 <script setup lang="ts">
   import { getSkillGroups } from '~/utils/portfolio';
 
+  const { t } = useI18n();
+
   useSeoMeta({
-    title: 'Skills',
-    description: 'Languages, frameworks and platforms I work with, grouped by area and proficiency.'
+    title: () => t('skillsPage.seoTitle'),
+    description: () => t('skillsPage.seoDescription')
   });
 
   const groups = getSkillGroups();
 
-  const legend = [
-    { cls: 'chip--solid', label: 'Core', note: 'reach for daily; can lead work in it' },
-    { cls: 'chip--soft', label: 'Working', note: 'productive; used on real projects' },
-    { cls: '', label: 'Familiar', note: 'have shipped with it; not day-to-day' }
-  ];
+  const legend = computed(() => [
+    { cls: 'chip--solid', label: t('skills.levels.core'), note: t('skills.levels.coreNote') },
+    { cls: 'chip--soft', label: t('skills.levels.working'), note: t('skills.levels.workingNote') },
+    { cls: '', label: t('skills.levels.familiar'), note: t('skills.levels.familiarNote') }
+  ]);
 </script>
 
 <template>
   <div class="flex flex-col gap-10">
-    <SectionHeading eyebrow="Skills" title="What I work with" as="h1">
-      Grouped by area and tagged by how close it is to my day-to-day.
+    <SectionHeading :eyebrow="t('skillsPage.eyebrow')" :title="t('skillsPage.title')" as="h1">
+      {{ t('skillsPage.intro') }}
     </SectionHeading>
 
     <dl class="flex flex-wrap gap-x-6 gap-y-2">
@@ -30,7 +32,7 @@
 
     <section v-for="group in groups" :key="group.category" class="flex flex-col gap-3">
       <h2 class="font-mono text-sm font-medium tracking-wide text-muted-foreground uppercase">
-        {{ group.label }}
+        {{ t(`skills.categories.${group.category}`) }}
       </h2>
       <div class="flex flex-wrap gap-1.5">
         <SkillItem v-for="skill in group.skills" :key="skill.key" :skill="skill" />

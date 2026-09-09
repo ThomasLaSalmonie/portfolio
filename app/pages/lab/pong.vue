@@ -8,9 +8,11 @@
     ballColor: string;
   }
 
+  const { t } = useI18n();
+
   useSeoMeta({
-    title: 'Pong Wars',
-    description: 'A day-vs-night canvas simulation — Lab experiment.'
+    title: () => t('pong.seoTitle'),
+    description: () => t('pong.seoDescription')
   });
 
   const colorPalette = {
@@ -184,16 +186,16 @@
 
 <template>
   <div id="container">
-    <h1 class="sr-only">Pong Wars</h1>
+    <h1 class="sr-only">{{ t('pong.h1') }}</h1>
     <div id="canvas">
       <canvas
         id="pongCanvas"
         width="600"
         height="600"
         role="img"
-        aria-label="Day-vs-night Pong Wars simulation"
+        :aria-label="t('pong.canvasAlt')"
       />
-      <div id="score" role="status" aria-live="polite" aria-label="Score" />
+      <div id="score" role="status" aria-live="polite" :aria-label="t('pong.score')" />
     </div>
   </div>
 </template>
