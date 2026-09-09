@@ -4,6 +4,8 @@ export const projects: Project[] = [
   {
     slug: 'bell-iot',
     name: 'Bell IoT platform',
+    shortDescription:
+      'IoT application platform for Bell Business Markets — configurable telemetry APIs and reusable dashboard widgets across multiple product dashboards.',
     links: ['https://business.bell.ca/shop/medium-large/internet-of-things/iot-applications'],
     status: 'play',
     technologiesUsed: [
@@ -23,6 +25,8 @@ export const projects: Project[] = [
   {
     slug: 'baumpub',
     name: 'Baum publications',
+    shortDescription:
+      "Publishing platform behind Baum Publications' trade titles — Heavy Equipment Guide and Recycling Product News — on a Nuxt front-end with a PHP/Elasticsearch back-end.",
     banner: 'https://img.thomaslasalmonie.me/baum/banner.jpg',
     status: 'play',
     links: [
@@ -50,6 +54,7 @@ export const projects: Project[] = [
   {
     slug: 'ardatho',
     name: 'Ardatho',
+    shortDescription: 'Company website for Ardatho.',
     banner: 'https://img.thomaslasalmonie.me/ardatho/banner.jpg',
     status: 'play',
     links: ['https://ardatho.com/'],
@@ -58,6 +63,8 @@ export const projects: Project[] = [
   {
     slug: 'fillactive',
     name: 'Fillactive',
+    shortDescription:
+      'Content-management system and reporting dashboards for Fillactive, a Québec non-profit promoting physical activity for teenagers.',
     links: ['https://fillactive.ca/'],
     banner: 'https://img.thomaslasalmonie.me/fillactive/banner.jpg',
     status: 'stop',
@@ -81,10 +88,13 @@ export const projects: Project[] = [
     links: ['https://megaswords.com/'],
     banner: 'https://img.thomaslasalmonie.me/megaswords/banner.jpg',
     status: 'pause',
-    shortDescription: 'MMORPG mobile game',
+    shortDescription:
+      'Mobile MMORPG — a React Native game client with Node game services and a Nuxt companion site.',
     blocks: [],
     technologiesUsed: [
       'typescript',
+      'react',
+      'react-native',
       'vuejs',
       'nuxt',
       'nodejs',
@@ -94,14 +104,14 @@ export const projects: Project[] = [
       'docker',
       'redis',
       'github',
-      'mysql',
-      'unity',
-      'csharp'
+      'mysql'
     ]
   },
   {
     slug: 'ax2',
     name: 'Ax2',
+    shortDescription:
+      'Internal products for Ax2, a Montréal digital studio — an in-house intelligent CMS and the CI/CD automation around it.',
     links: ['https://ax2.ca/'],
     banner: 'https://img.thomaslasalmonie.me/ax2/banner.jpg',
     status: 'stop',
@@ -125,6 +135,8 @@ export const projects: Project[] = [
   {
     slug: 'canadiens',
     name: 'Canadiens',
+    shortDescription:
+      'Fan-club and membership sites for the Montréal Canadiens — Club 1909, the fan club, and the 7th Player program.',
     links: [
       'https://www.club1909.com/',
       'https://fanclub.canadiens.com/',
@@ -147,6 +159,8 @@ export const projects: Project[] = [
   {
     slug: 'lumenpulse',
     name: 'Lumenpulse',
+    shortDescription:
+      'Corporate and product sites for Lumenpulse / LMPG, an architectural lighting manufacturer, across its Lumenpulse and Exenia brands.',
     links: ['https://www.lumenpulse.com/', 'https://www.lmpg.com/', 'https://www.exenia.eu/en/'],
     banner: 'https://img.thomaslasalmonie.me/lumenpulse/banner.jpg',
     status: 'stop',
@@ -166,7 +180,9 @@ export const projects: Project[] = [
   },
   {
     slug: 'monet',
-    name: 'Librairie monet',
+    name: 'Librairie Monet',
+    shortDescription:
+      'Website and online catalogue for Librairie Monet, an independent Montréal bookstore, backed by Elasticsearch search and a RabbitMQ pipeline.',
     links: ['https://www.librairiemonet.com/', 'https://catalogue.librairiemonet.com/'],
     status: 'stop',
     technologiesUsed: [

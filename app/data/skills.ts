@@ -110,6 +110,24 @@ export const skills: Skill[] = [
     related: ['javascript']
   },
   {
+    key: 'react',
+    icon: 'react',
+    name: 'React',
+    category: 'frameworks',
+    level: 'working',
+    show: true,
+    related: ['javascript', 'react-native']
+  },
+  {
+    key: 'react-native',
+    icon: 'react',
+    name: 'React Native',
+    category: 'frameworks',
+    level: 'working',
+    show: true,
+    related: ['react']
+  },
+  {
     key: 'graphql',
     icon: 'graphql',
     name: 'GraphQL',
@@ -175,7 +193,7 @@ export const skills: Skill[] = [
     related: ['mysql', 'neo4j', 'redis']
   },
   { key: 'mysql', name: 'MySQL', category: 'data', level: 'core', show: true, related: ['db'] },
-  { key: 'redis', name: 'Redis', category: 'data', level: 'working', show: true, related: ['db'] },
+  { key: 'redis', name: 'Redis', category: 'data', level: 'core', show: true, related: ['db'] },
   {
     key: 'mongodb',
     name: 'MongoDB',

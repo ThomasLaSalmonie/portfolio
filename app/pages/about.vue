@@ -40,8 +40,7 @@
             v-if="item.tasks && item.tasks.length"
             class="prose-measure flex list-disc flex-col gap-1.5 pl-4 text-sm text-muted-foreground marker:text-border"
           >
-            <!-- v-html: trusted static copy from app/data/about.ts; sanitised in Phase 3 -->
-            <li v-for="(task, key) in item.tasks" :key="key" v-html="task" />
+            <li v-for="(task, key) in item.tasks" :key="key">{{ task }}</li>
           </ul>
 
           <div v-if="item.projects && item.projects.length" class="flex flex-col gap-1.5">

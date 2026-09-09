@@ -8,6 +8,10 @@
   const tags = computed(() => resolveSkills(props.project.technologiesUsed));
   const shownTags = computed(() => tags.value.slice(0, MAX_TAGS));
   const overflow = computed(() => Math.max(0, tags.value.length - MAX_TAGS));
+
+  // Banners are still on an external host that may not resolve — fall back to the
+  // slug placeholder rather than a broken image (RENOVATION.md Phase 3).
+  const bannerFailed = ref(false);
 </script>
 
 <template>
@@ -17,12 +21,13 @@
   >
     <div class="relative aspect-[16/9] overflow-hidden border-b bg-muted">
       <NuxtImg
-        v-if="project.banner"
+        v-if="project.banner && !bannerFailed"
         :src="project.banner"
         :alt="`${project.name} — screenshot`"
         class="size-full object-cover"
         loading="lazy"
         sizes="sm:100vw md:50vw lg:380px"
+        @error="bannerFailed = true"
       />
       <div
         v-else

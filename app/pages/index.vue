@@ -30,6 +30,8 @@
       eyebrow="Montréal · Full-stack web"
       title="I build web software, end to end."
       lead="Self-taught engineer working across Vue / Nuxt front-ends, Node services and the infrastructure under them. Curious, precise, and focused on quality and knowledge-sharing."
+      image="/profile.jpeg"
+      image-alt="Thomas La Salmonie"
     >
       <template #actions>
         <Button as-child>

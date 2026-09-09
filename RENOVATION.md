@@ -189,7 +189,7 @@ about it is moot — the data is synchronous).
 
 **Notes / deferred to later phases:**
 
-- View Transitions API page transitions — not wired yet (small; fold into Phase 3 polish).
+- View Transitions API page transitions — **done in Phase 3** (`experimental.viewTransition`).
 - Scroll-reveal — skipped by design (design system: "show the page at rest"); revisit only if wanted.
 - **CV download** on About — no asset yet; needs a PDF from the owner (Phase 3).
 - Skill tiers in `app/data/skills.ts` are a reasonable first pass — **owner should tune**.
@@ -198,14 +198,32 @@ about it is moot — the data is synchronous).
   `ProjectCard` shows a mono slug placeholder when `banner` is unset.
 - `@nuxtjs/i18n` / `@nuxtjs/seo` intentionally **not** added here — Phases 5 / 4.
 
-## Phase 3 — Content & polish
+## Phase 3 — Content & polish ✅ code-side done (branch `renovation/phase-3`) — owner content still outstanding
 
-- [ ] Rewrite copy; fix typos (`carreer`, `selftaught`, tighten the TL;DR).
-- [ ] Real project write-ups + screenshots; per-project OG images.
-- [ ] Image pipeline via `@nuxt/image` — responsive sizes, lazy, AVIF/WebP; move images
-      off the ad-hoc `img.thomaslasalmonie.me` host or route them through the optimizer.
-- [ ] Full favicon set + web manifest.
-- [ ] Sanitize or convert the `v-html`-rendered task strings in About.
+- [x] Typos: `personnal`→`personal`, `assitant`→`assistant`, `Pearheading`→`Spearheading` in
+      `app/data/about.ts` (`carreer`/`selftaught` were already fixed in Phase 2; the home
+      TL;DR was rewritten in Phase 2).
+- [x] `v-html` removed from `about.vue` — the one task carrying an `<a>` ("Le capitaine") is
+      now plain text; tasks render as `{{ task }}`. No sanitiser needed. (The blog link for
+      "Le capitaine" was dropped — re-add via a structured `AboutItem.links` field if wanted.)
+- [x] Every project now has a `shortDescription` — **conservative, first-face-value copy**
+      (sector + role, no invented metrics). **Owner: verify wording and expand.**
+- [x] Favicon set + manifest: `public/favicon.svg` (cobalt "T" monogram), `favicon-96x96.png`,
+      `apple-touch-icon.png` (180), `web-app-manifest-{192,512}.png` (512 also `maskable`),
+      `site.webmanifest`; wired in `app/app.vue` via `useHead` + light/dark `theme-color`.
+      Regenerate the PNGs with `node scripts/gen-favicons.mjs` after editing the SVG.
+- [x] `@nuxt/image`: `format: ['avif','webp']` + `screens` set. Broken/again-unreachable
+      banners now fall back to the slug placeholder (`@error` handler in `ProjectCard` +
+      `[slug].vue`) instead of a broken `<img>`.
+- [~] **Image host** — `img.thomaslasalmonie.me` deliberately left OUT of `image.domains`, so
+  those URLs pass through un-optimised (baking them through IPX needs the host reachable
+  at every build). Pull the banners in-repo / migrate the host, then add the domain. Tied
+  to the deferred hosting migration.
+- [x] Route cross-fade via `experimental.viewTransition` — 360ms `--ease-standard` on
+      `::view-transition-*(root)`, `animation: none` under `prefers-reduced-motion`.
+- [ ] **Owner-blocked, carried forward:** real project write-ups (`project.blocks`), real
+      screenshots, per-project OG images (OG generation lands with `@nuxtjs/seo` in Phase 4),
+      About CV-download PDF.
 
 ## Phase 4 — SEO, accessibility, performance
 

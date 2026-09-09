@@ -21,6 +21,10 @@
       next: i >= 0 && i < all.length - 1 ? all[i + 1] : undefined
     };
   });
+
+  // External banner host may not resolve — drop the block rather than show a broken image.
+  const bannerFailed = ref(false);
+  watch(slug, () => (bannerFailed.value = false));
 </script>
 
 <template>
@@ -49,12 +53,13 @@
       </div>
     </div>
 
-    <div v-if="project.banner" class="overflow-hidden rounded-xl border">
+    <div v-if="project.banner && !bannerFailed" class="overflow-hidden rounded-xl border">
       <NuxtImg
         :src="project.banner"
         :alt="`${project.name} — screenshot`"
         class="w-full object-cover"
         sizes="sm:100vw lg:1120px"
+        @error="bannerFailed = true"
       />
     </div>
 
