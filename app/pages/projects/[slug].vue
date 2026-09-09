@@ -13,6 +13,23 @@
     throw createError({ statusCode: 404, statusMessage: 'Project not found' });
   }
 
+  useSeoMeta({
+    title: () => project.value?.name ?? 'Project',
+    description: () => project.value?.shortDescription ?? '',
+    ogType: 'article'
+  });
+
+  // Attribute the project page to the Person identity. Prerendered per slug, so
+  // reading project.value here is stable.
+  useSchemaOrg([
+    defineWebPage({
+      '@type': ['WebPage', 'CollectionPage'],
+      name: project.value?.name ?? 'Project',
+      description: project.value?.shortDescription ?? '',
+      author: { '@id': '#identity' }
+    })
+  ]);
+
   const siblings = computed(() => {
     const all = getProjects();
     const i = all.findIndex((p) => p.slug === slug.value);
@@ -29,13 +46,6 @@
 
 <template>
   <div v-if="project" class="flex flex-col gap-16">
-    <Html lang="en">
-      <Head>
-        <Title>{{ project.name }} — Thomas La Salmonie</Title>
-        <Meta name="description" :content="project.shortDescription" />
-      </Head>
-    </Html>
-
     <div class="flex flex-col gap-5 py-6">
       <NuxtLink to="/work" class="flex w-fit items-center gap-1 text-sm text-muted-foreground">
         <Icon name="lucide:arrow-left" size="16" /> Work
@@ -108,6 +118,7 @@
 
     <nav
       v-if="siblings.prev || siblings.next"
+      aria-label="Project pagination"
       class="flex justify-between gap-4 border-t pt-6 text-sm"
     >
       <NuxtLink

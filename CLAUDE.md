@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Personal portfolio site for Thomas La Salmonie. Nuxt 4 + Vue 3, Tailwind v4 + shadcn-vue, TypeScript. Deployed as a fully static site.
 
-> **Renovation in progress.** A full modernization is underway. Track and update progress in [`RENOVATION.md`](./RENOVATION.md) — check off items as they land and keep its Decisions/Deferred sections current. Design spec: the "TLS Design System" artifact linked from that file. **Phases 0–3 done (foundation, data-layer cleanup, design system + full de-Vuetify, content & polish).** Remaining: Phase 4 (SEO/a11y/perf), Phase 5 (FR + EN i18n), plus owner-blocked content (real project write-ups + screenshots, CV PDF).
+> **Renovation in progress.** A full modernization is underway. Track and update progress in [`RENOVATION.md`](./RENOVATION.md) — check off items as they land and keep its Decisions/Deferred sections current. Design spec: the "TLS Design System" artifact linked from that file. **Phases 0–4 done (foundation, data-layer cleanup, design system + full de-Vuetify, content & polish, SEO/a11y/perf).** Remaining: Phase 5 (FR + EN i18n), plus owner-blocked content (real project write-ups + screenshots, per-project OG images, CV PDF) and ops (apply `deploy/nginx.conf.example`, run `npm run lighthouse`).
 
 ## Commands
 
@@ -18,6 +18,7 @@ npm run preview    # preview a production build locally
 npm run lint       # eslint .            (lint:fix to autofix)
 npm run typecheck  # nuxt typecheck (vue-tsc)
 npm run format     # prettier --write .
+npm run lighthouse # npx unlighthouse vs http://localhost:3000 (run `npm run preview` first) — manual, not in CI
 ```
 
 - Node 22 (`.nvmrc`). `.npmrc` sets `shamefully-hoist=true` **and `legacy-peer-deps=true`** — the latter works around an npm 10.9.x arborist crash on Nuxt 4's peer graph. Install with npm, not pnpm.
@@ -65,10 +66,13 @@ Data is synchronous, so pages just call a helper at the top of `<script setup>` 
 - **Fonts:** `@nuxt/fonts` self-hosts Schibsted Grotesk (display), IBM Plex Sans (body/UI), IBM Plex Mono (labels/dates/tags/code) at build. Exposed as `--font-display` / `--font-sans` / `--font-mono` and the `font-display|sans|mono` utilities.
 - **Dark mode:** `@nuxtjs/color-mode` (`classSuffix: ''` → bare `.dark` on `<html>`, system default, persisted). `ThemeToggle.vue` flips `colorMode.preference` and renders a single `<Icon>` (sun/moon by `colorMode.value`) inside `<ClientOnly>` with a sun fallback, so there's no SSR mismatch.
 - **Images:** `@nuxt/image` — `<NuxtImg>` on project media (`ProjectCard`, `[slug].vue`), with an `@error` fallback to the slug placeholder. `img.thomaslasalmonie.me` is **not** in `image.domains` on purpose — those remote banners pass through un-optimised until the host is migrated / images are pulled in-repo.
-- **Head / favicons:** `app/app.vue` sets `htmlAttrs.lang`, the favicon set (`favicon.svg` + `.ico` + `-96x96.png` + `apple-touch-icon.png`), `site.webmanifest`, and light/dark `theme-color` via `useHead`. Regenerate the PNGs from `public/favicon.svg` with `node scripts/gen-favicons.mjs` (not part of the build).
+- **Head / favicons:** `app/app.vue` sets `htmlAttrs.lang`, the `titleTemplate` (`%s — Thomas La Salmonie`), the favicon set (`favicon.svg` + `.ico` + `-96x96.png` + `apple-touch-icon.png`), `site.webmanifest`, light/dark `theme-color`, and a `<meta http-equiv>` **CSP** via `useHead`. Regenerate the PNGs from `public/favicon.svg` with `node scripts/gen-favicons.mjs` (not part of the build).
+- **SEO:** `@nuxtjs/seo` v5 + `site: { url, name, description, defaultLocale }` in nuxt.config. It emits `/sitemap.xml` + `/robots.txt` (static files), per-page `canonical` / `og:*` / `twitter:*` / `robots` meta, and a schema.org `@graph` (`WebSite` + `WebPage` + `Person` `#identity` from `schemaOrg.identity` + `ImageObject`). Pages set `useSeoMeta({ title, description })` in `<script setup>` (no more inline `<Html><Head>`); `app.vue` owns `titleTemplate` and the shared `ogImage` (`/og.png`) + `twitterCard` defaults. `projects/[slug].vue` adds `useSchemaOrg(defineWebPage(...))` to attribute the page to `#identity`.
+- **OG image:** `nuxt-og-image` runtime generation is **disabled** (`ogImage: { enabled: false }` — v6 needs a satori/takumi renderer + build-time fonts, not worth the CI surface). One shared static card `public/og.png` (built by `node scripts/gen-og.mjs`, sharp) is referenced from `app.vue`. Per-project cards are an owner follow-up.
+- **Security headers:** static deploy behind nginx, so Nitro `routeRules` headers are inert — real headers live in `deploy/nginx.conf.example` (apply on the droplet; keep its CSP in sync with `app.vue`'s `<meta>` CSP).
 - **Route transitions:** `experimental.viewTransition` — a 360ms cross-fade (`::view-transition-*(root)` in `main.css`), disabled under `prefers-reduced-motion`.
+- **A11y:** skip link + `<main id="main">` in `app.vue`; `sr-only` `<h1>` on pages with no visible heading (`about`, `contact`, `lab/pong`, `lab/solar-system`); card grids are `<ul><li>`; `<nav>`s and the work-page filter `role="group"` are labelled. Light `--success`/`--warning` are tuned for WCAG AA on the status chips.
 - Shared building blocks: `Hero`, `SectionHeading` (mono eyebrow + rule + `h2`), `ProjectCard`, `SkillItem` (chip, variant by `level`), `StatusBadge` (`play→Shipped` / `pause→Paused` / `stop→Archived`).
-- Per-page SEO is still done inline with `<Html><Head><Title>/<Meta></Head></Html>` (moves to `useSeoMeta` in Phase 4).
 - Static output is configured via `nitro.prerender` (`crawlLinks: true` from `/`), so every linked route — including all `projects/*` detail pages — is prerendered to HTML.
 
 ## Conventions enforced by lint/format

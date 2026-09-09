@@ -1,6 +1,11 @@
 <script setup lang="ts">
   import { getSkillGroups } from '~/utils/portfolio';
 
+  useSeoMeta({
+    title: 'Skills',
+    description: 'Languages, frameworks and platforms I work with, grouped by area and proficiency.'
+  });
+
   const groups = getSkillGroups();
 
   const legend = [
@@ -12,16 +17,6 @@
 
 <template>
   <div class="flex flex-col gap-10">
-    <Html lang="en">
-      <Head>
-        <Title>Skills — Thomas La Salmonie</Title>
-        <Meta
-          name="description"
-          content="Languages, frameworks and platforms I work with, by proficiency."
-        />
-      </Head>
-    </Html>
-
     <SectionHeading eyebrow="Skills" title="What I work with" as="h1">
       Grouped by area and tagged by how close it is to my day-to-day.
     </SectionHeading>

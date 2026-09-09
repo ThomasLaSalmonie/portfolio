@@ -1,0 +1,62 @@
+# ---------------------------------------------------------------------------
+# nginx server block for thomaslasalmonie.me
+#
+# The site deploys as static files (see .semaphore/deployment.yml) — there is no
+# Nitro server at runtime, so Nuxt `routeRules` headers are NOT applied in
+# production. Real response headers have to live here, on the droplet.
+#
+# This file is documentation, not wired into any pipeline. Apply it by hand on
+# the server (178.128.238.94), then `nginx -t && systemctl reload nginx`.
+# The Content-Security-Policy below must stay in sync with the <meta http-equiv>
+# CSP in app/app.vue.
+# ---------------------------------------------------------------------------
+
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    server_name thomaslasalmonie.me www.thomaslasalmonie.me;
+
+    root /var/www/thomaslasalmonie.me/current;
+    index index.html;
+
+    # --- TLS (managed by certbot / your provider) -------------------------
+    # ssl_certificate     /etc/letsencrypt/live/thomaslasalmonie.me/fullchain.pem;
+    # ssl_certificate_key /etc/letsencrypt/live/thomaslasalmonie.me/privkey.pem;
+
+    # --- Security headers ------------------------------------------------
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header X-Frame-Options "DENY" always;
+    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+    add_header Permissions-Policy "camera=(), microphone=(), geolocation=(), interest-cohort=()" always;
+    add_header Cross-Origin-Opener-Policy "same-origin" always;
+    add_header Cross-Origin-Resource-Policy "same-origin" always;
+    add_header Content-Security-Policy "default-src 'self'; img-src 'self' data: https://img.thomaslasalmonie.me; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; connect-src 'self'; manifest-src 'self'; worker-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests" always;
+
+    # --- Caching ------------------------------------------------------------
+    # Fingerprinted build assets — immutable.
+    location /_nuxt/ {
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+    }
+    location /_ipx/ {
+        expires 30d;
+        add_header Cache-Control "public";
+    }
+
+    # Static-site routing: try the file, then the prerendered directory index,
+    # then fall back to the 404 page.
+    location / {
+        try_files $uri $uri.html $uri/index.html /200.html =404;
+    }
+
+    error_page 404 /404.html;
+}
+
+# Redirect http -> https and the apex/www split.
+server {
+    listen 80;
+    listen [::]:80;
+    server_name thomaslasalmonie.me www.thomaslasalmonie.me;
+    return 301 https://thomaslasalmonie.me$request_uri;
+}

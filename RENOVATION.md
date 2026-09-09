@@ -196,7 +196,7 @@ about it is moot — the data is synchronous).
 - Contact email is `tlasalmonie@gmail.com` (owner's personal address) in `app/utils/contact.ts`.
 - Real project screenshots / `shortDescription` copy still missing for most projects (Phase 3);
   `ProjectCard` shows a mono slug placeholder when `banner` is unset.
-- `@nuxtjs/i18n` / `@nuxtjs/seo` intentionally **not** added here — Phases 5 / 4.
+- `@nuxtjs/i18n` intentionally **not** added here — Phase 5. (`@nuxtjs/seo` landed in Phase 4.)
 
 ## Phase 3 — Content & polish ✅ code-side done (branch `renovation/phase-3`) — owner content still outstanding
 
@@ -222,18 +222,61 @@ about it is moot — the data is synchronous).
 - [x] Route cross-fade via `experimental.viewTransition` — 360ms `--ease-standard` on
       `::view-transition-*(root)`, `animation: none` under `prefers-reduced-motion`.
 - [ ] **Owner-blocked, carried forward:** real project write-ups (`project.blocks`), real
-      screenshots, per-project OG images (OG generation lands with `@nuxtjs/seo` in Phase 4),
-      About CV-download PDF.
+      screenshots, per-project OG images (Phase 4 ships one shared static card;
+      `nuxt-og-image` is available but disabled), About CV-download PDF.
 
-## Phase 4 — SEO, accessibility, performance
+## Phase 4 — SEO, accessibility, performance ✅ code-side done (branch `renovation/phase-4`)
 
-- [ ] `@nuxtjs/seo`: sitemap, robots, OG image generation, schema.org Person /
-      CreativeWork, canonicals.
-- [ ] Replace inline `<Html><Head>` blocks with `useSeoMeta` per page.
-- [ ] Accessibility pass: contrast, visible focus rings, landmarks, alt text, keyboard
-      nav, aria on the mobile nav, fixed list markup.
-- [ ] Add Unlighthouse (or Lighthouse CI) with a budget; target 95+ across the board.
-- [ ] Security headers via Nitro `routeRules`.
+- [x] `@nuxtjs/seo` v5 added (`site: { url, name, description, defaultLocale }`). Gives:
+  - `/sitemap.xml` (prerendered, image entries for banners/profile) + `/robots.txt`
+    (indexable, Sitemap line) — both plain static files nginx serves.
+  - `<link rel="canonical">`, `og:*`, `twitter:*`, `robots` meta on every page via
+    `nuxt-seo-utils` defaults.
+  - schema.org `@graph` — `WebSite` + `WebPage` (+ `AboutPage`/`CollectionPage` where
+    it applies) + `Person` (`#identity`, `jobTitle`, `sameAs` socials) + `ImageObject`,
+    from `schemaOrg.identity` in `nuxt.config.ts`. Project pages attribute the page to
+    `#identity` via `useSchemaOrg(defineWebPage(...))`.
+- [x] Inline `<Html><Head><Title>` blocks removed from every page; each page sets
+      `useSeoMeta({ title, description })`. `app/app.vue` owns the `titleTemplate`
+      (`%s — Thomas La Salmonie`, bare name on the home page) and the shared
+      `ogImage` / `twitterCard` defaults.
+- [~] **OG images** — `nuxt-og-image` runtime generation is **disabled**
+  (`ogImage: { enabled: false }`): v6 needs a satori/takumi renderer + build-time
+  font resolution, which is real CI surface for little gain here. Instead the site
+  ships **one static branded card** `public/og.png` (dark ground + cobalt), built by
+  `node scripts/gen-og.mjs` (sharp), referenced from `app.vue`. Per-project OG art
+  stays an owner follow-up — revisit `nuxt-og-image` if it's wanted.
+- [x] **Accessibility pass:**
+  - Skip-to-content link + `<main id="main" tabindex="-1">` in `app.vue`.
+  - `sr-only` `<h1>` added to pages that intentionally have no visible heading
+    (`about`, `contact`, `lab/pong`, `lab/solar-system`).
+  - Project/lab card grids are `<ul><li>` (were bare `<div>` grids); `<nav>`s labelled
+    (`Primary` / `Mobile` / `Project pagination`); the work-page tech filter is a
+    labelled `role="group"`; `<canvas>` on `lab/pong` has `role="img"` + `aria-label`,
+    the score node is a polite live region.
+  - `lab/solar-system` no longer renders a nested `<body>` (invalid) — plain `<div>`
+    now, with a `prefers-reduced-motion` stop on the orbit animations.
+  - Contrast: light-mode `--success` / `--warning` darkened (`0.58→0.52`, `0.66→0.55`
+    L) so the status-chip text clears WCAG AA at 0.75rem. Everything else already
+    passed (`muted-foreground` 5.7:1, `primary` 5.9:1; all dark-mode pairs ≥6:1).
+  - Focus rings (global `:focus-visible`) and reduced-motion handling already in place
+    from Phase 2 — unchanged.
+- [x] `npm run lighthouse` → `npx unlighthouse` against `http://localhost:3000`
+      (run `npm run preview` first). Deliberately **not** wired into CI (would pull
+      Chromium into every `npm ci`); it's a local/manual budget check. Target 95+.
+- [~] **Security headers** — the deploy is static files behind nginx, so Nitro
+  `routeRules` headers would be inert. Instead:
+  - `app/app.vue` sets a `<meta http-equiv="Content-Security-Policy">` (locked to
+    `'self'` + `img.thomaslasalmonie.me` for banners; `'unsafe-inline'` kept for
+    scripts/styles so Nuxt hydration + colour-mode no-flash can't break).
+  - `deploy/nginx.conf.example` documents the real response headers (HSTS,
+    X-Frame-Options DENY, X-Content-Type-Options, Referrer-Policy, Permissions-Policy,
+    COOP/CORP, the same CSP with `frame-ancestors`) + caching + static routing.
+    **Owner: apply on the droplet (`178.128.238.94`) and keep the CSP in sync with
+    `app.vue`.**
+- [ ] **Owner-blocked, carried forward:** run `npm run lighthouse` on a deployed/preview
+      build and act on the report; apply `deploy/nginx.conf.example`; per-project OG
+      images; real project write-ups + screenshots; About CV-download PDF.
 
 ## Phase 5 — i18n (FR + EN)
 
