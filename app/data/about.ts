@@ -66,7 +66,8 @@ export const aboutItems: RawAboutItem[] = [
       'kubernetes',
       'devops',
       'redis',
-      'github'
+      'gitlab',
+      'mongodb'
     ]
   },
   {
