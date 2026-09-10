@@ -213,7 +213,7 @@ export const skills: Skill[] = [
     key: 'genai',
     name: 'Generative AI',
     category: 'ai',
-    level: 'working',
+    level: 'core',
     show: true,
     related: ['ai-agents', 'rag', 'python']
   },
@@ -221,7 +221,7 @@ export const skills: Skill[] = [
     key: 'ai-agents',
     name: 'AI agents',
     category: 'ai',
-    level: 'working',
+    level: 'core',
     show: true,
     related: ['genai', 'rag']
   },
@@ -256,6 +256,30 @@ export const skills: Skill[] = [
     level: 'familiar',
     show: true,
     related: ['ai-agents']
+  },
+  {
+    key: 'agentic-dev',
+    name: 'Agentic development',
+    category: 'ai',
+    level: 'core',
+    show: true,
+    related: ['claude-code', 'mcp', 'ai-agents']
+  },
+  {
+    key: 'claude-code',
+    name: 'Claude Code',
+    category: 'ai',
+    level: 'core',
+    show: true,
+    related: ['agentic-dev', 'mcp']
+  },
+  {
+    key: 'mcp',
+    name: 'MCP',
+    category: 'ai',
+    level: 'working',
+    show: true,
+    related: ['agentic-dev', 'ai-agents']
   },
 
   // ---- Data & messaging ----

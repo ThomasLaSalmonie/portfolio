@@ -23,16 +23,28 @@ export const aboutItems: RawAboutItem[] = [
         fr: "Développement de milo-agents-sdk, un SDK Python qui simplifie la création d'agents avec des utilitaires d'intégration à Google GenAI / Vertex AI / ADK et des formats de messages interactifs riches (texte, markdown, sections repliables, Chart.js, fichiers, JSON)"
       },
       {
+        en: 'Champion of agentic development across teams — standing up coding harnesses (Claude Code, Oh My Pi) with bespoke skills, MCP servers, and subagents, plus onboarding, shared workflows, a delivery methodology, and a leadership presentation on AI and security',
+        fr: "Porte-étendard du développement agentique dans plusieurs équipes — mise en place de harnais de codage (Claude Code, Oh My Pi) avec des compétences, des serveurs MCP et des sous-agents sur mesure, en plus de l'intégration, de flux de travail partagés, d'une méthodologie de livraison et d'une présentation à la direction sur l'IA et la sécurité"
+      },
+      {
         en: 'Implemented platform-wide features: multi-language support, usage analytics, dynamic agent configuration, conversation history, and enterprise-grade security',
         fr: "Mise en place de fonctionnalités transversales : prise en charge multilingue, analytique d'utilisation, configuration dynamique des agents, historique des conversations et sécurité de niveau entreprise"
       },
       {
-        en: 'Led the build and integration of several production AI agents across use cases such as meeting summarization, business intelligence, workflow automation, and data analysis',
-        fr: "Pilotage de la réalisation et de l'intégration de plusieurs agents IA en production pour des cas d'usage comme le résumé de réunions, l'informatique décisionnelle, l'automatisation de flux de travail et l'analyse de données"
+        en: 'Led the build and integration of several production AI agents (meeting summarization, business intelligence, workflow automation, data analysis), plus a self-serve agent configuration UI and support for other teams integrating their own agents',
+        fr: "Pilotage de la réalisation et de l'intégration de plusieurs agents IA en production (résumé de réunions, informatique décisionnelle, automatisation de flux de travail, analyse de données), ainsi que d'une interface de configuration des agents en libre-service et de l'accompagnement d'autres équipes intégrant leurs propres agents"
       },
       {
         en: 'Designed advanced agent capabilities: dynamic initial messages, custom event mapping for analytics, file upload, and a customizable feedback system',
         fr: "Conception de capacités avancées pour les agents : messages initiaux dynamiques, mappage d'événements personnalisés pour l'analytique, téléversement de fichiers et système de rétroaction personnalisable"
+      },
+      {
+        en: 'Tech lead of a shared Vue component library, and built its Figma-to-component pipeline as a set of custom agent skills and MCP servers',
+        fr: "Responsable technique d'une bibliothèque de composants Vue partagée, dont la chaîne de génération de composants à partir de Figma est réalisée sous forme de compétences d'agent et de serveurs MCP sur mesure"
+      },
+      {
+        en: 'Led the architecture of a multi-phase HR virtual assistant on ServiceNow, spanning conversational and transactional use cases, and supported the delivery team through rollout',
+        fr: "Pilotage de l'architecture d'un assistant virtuel RH multiphase sur ServiceNow, couvrant des cas d'usage conversationnels et transactionnels, avec accompagnement de l'équipe de livraison jusqu'au déploiement"
       }
     ],
     relatedProjects: [],
@@ -42,6 +54,9 @@ export const aboutItems: RawAboutItem[] = [
       'nodejs',
       'java',
       'go',
+      'agentic-dev',
+      'claude-code',
+      'mcp',
       'genai',
       'ai-agents',
       'vertexai',
