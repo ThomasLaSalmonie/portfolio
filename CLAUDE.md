@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Personal portfolio site for Thomas La Salmonie. Nuxt 4 + Vue 3, Tailwind v4 + shadcn-vue, TypeScript. Deployed as a fully static site.
 
-> **Renovation in progress.** A full modernization is underway. Track and update progress in [`RENOVATION.md`](./RENOVATION.md) — check off items as they land and keep its Decisions/Deferred sections current. Design spec: the "TLS Design System" artifact linked from that file. **Phases 0–5 done (foundation, data-layer cleanup, design system + full de-Vuetify, content & polish, SEO/a11y/perf, FR + EN i18n).** The renovation plan is complete; what's left is owner-blocked content (real project write-ups + screenshots, per-project OG images, CV PDF; review the machine-drafted FR copy) and ops (apply `deploy/nginx.conf.example`, run `npm run lighthouse`).
+> **Renovation complete.** This site was modernized Nuxt 3.8 + Vuetify → Nuxt 4 + Tailwind v4 + shadcn-vue: typed data modules, fully static, dark mode, `@nuxtjs/seo`, an a11y pass, and FR + EN i18n. Rationale (locked decisions), the deferred backlog, and the remaining owner/ops items live in [`RENOVATION.md`](./RENOVATION.md); the visual spec is [`DESIGN_SYSTEM.md`](./DESIGN_SYSTEM.md) (transcribed from the "TLS Design System" artifact). What's left is owner-blocked content (real project write-ups + screenshots, per-project OG images, CV PDF; review the machine-drafted FR copy) and ops (apply `deploy/nginx.conf.example`, run `npm run lighthouse`).
 
 ## Commands
 

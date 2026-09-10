@@ -159,5 +159,7 @@ Nitro `routeRules` headers are inert for a static deploy, so the real headers li
 ## More
 
 - `CLAUDE.md` — conventions, architecture notes, gotchas (for both humans and Claude Code).
-- `RENOVATION.md` — the modernization log (Phases 0–5, complete) and remaining owner-blocked
-  content / ops items.
+- `RENOVATION.md` — the modernization rationale (locked decisions), the deferred backlog,
+  and the remaining owner-content / ops items. The renovation itself is complete.
+- `DESIGN_SYSTEM.md` — the visual spec: tokens, type, spacing, components, the `main.css`
+  token contract.
