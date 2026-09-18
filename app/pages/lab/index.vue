@@ -8,6 +8,7 @@
   });
 
   const experiments = computed(() => [
+    { slug: 'trail-run', title: t('lab.trailTitle'), description: t('lab.trailDescription') },
     { slug: 'pong', title: t('lab.pongTitle'), description: t('lab.pongDescription') },
     { slug: 'solar-system', title: t('lab.solarTitle'), description: t('lab.solarDescription') },
     { slug: 'driverjs', title: t('lab.driverjsTitle'), description: t('lab.driverjsDescription') }

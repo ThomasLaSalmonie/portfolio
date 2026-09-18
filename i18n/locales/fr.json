@@ -134,7 +134,9 @@
     "solarTitle": "Système solaire",
     "solarDescription": "Planètes en orbite, pilotées en CSS.",
     "driverjsTitle": "Visite driver.js",
-    "driverjsDescription": "Démo de visite guidée réalisée avec driver.js."
+    "driverjsDescription": "Démo de visite guidée réalisée avec driver.js.",
+    "trailTitle": "One More Summit",
+    "trailDescription": "Un jeu de trail en pixel art. Courez, sautez et trouvez votre rythme."
   },
   "pong": {
     "seoTitle": "Pong Wars",
@@ -182,5 +184,62 @@
     "notFoundBody": "Cette page n’existe pas ou a été déplacée.",
     "genericTitle": "Une erreur est survenue",
     "status": "Erreur {code}"
+  },
+  "trail": {
+    "title": "One More Summit",
+    "description": "Un petit sentier, une petite aventure. Trouvez votre rythme, atteignez le sommet et repartez.",
+    "eyebrow": "Lab · Trail en pixel art",
+    "course": "Parcours",
+    "forestName": "Boucle forestière",
+    "keyboard": "Au clavier",
+    "time": "Temps",
+    "energy": "Énergie",
+    "choose": "Choisir un parcours",
+    "forestDescription": "À travers les pins, jusqu’à la crête, puis de l’autre côté. Votre première boucle en montagne commence ici.",
+    "easy": "Facile",
+    "seconds": "s",
+    "profile": "Profil altimétrique du parcours",
+    "best": "Record personnel",
+    "noBest": "Le sentier vous attend",
+    "start": "Prendre le départ",
+    "breathe": "Reprenez votre souffle",
+    "resume": "Continuer",
+    "newBest": "Nouveau record personnel",
+    "wellRun": "Parcours terminé",
+    "falls": "Chutes",
+    "retry": "Recommencer",
+    "pause": "Pause",
+    "gameScale": "Distances à l’échelle du jeu",
+    "move": "se déplacer",
+    "space": "Espace",
+    "jump": "sauter · maintenir pour monter",
+    "sprint": "sprinter",
+    "tip": "Gérez votre effort dans la montée. Les drapeaux enregistrent votre progression ; un saut manqué coûte juste un peu de temps.",
+    "touch": "Cette première version se joue au clavier. Vous pouvez tout de même découvrir le parcours ici.",
+    "storageFailed": "Votre record est disponible pour cette visite, mais ce navigateur n’a pas pu le sauvegarder pour la prochaine fois.",
+    "canvas": "Jeu de trail de profil. Flèches ou A/D pour avancer, Espace pour sauter, Maj pour sprinter. Échap quitte le plein écran ou met en pause. Tab passe aux commandes du jeu.",
+    "errorHelp": "Le jeu n’a pas pu démarrer. Rechargez la page pour réessayer ou retournez au Lab avec le lien ci-dessus.",
+    "respawn": "Retour au point de contrôle",
+    "sections": {
+      "forest": "Au milieu des pins",
+      "climb": "La montée",
+      "summit": "Au sommet",
+      "descent": "La dernière descente"
+    },
+    "states": {
+      "selecting": "Choisissez votre sentier",
+      "running": "Sur le sentier",
+      "paused": "Pause sur le sentier",
+      "finished": "Vous y êtes !",
+      "error": "Sentier indisponible"
+    },
+    "preview": "Aperçu en pixel art de la Boucle forestière",
+    "launch": "Lancer le jeu",
+    "fullscreenHint": "Aventure en plein écran · Clavier requis",
+    "exit": "Quitter le jeu",
+    "controlsTitle": "Comment jouer",
+    "controlsIntro": "Le sentier vous attend. Découvrez les commandes, puis prenez le départ. Le chrono vous attend.",
+    "escapeHint": "quitter le plein écran / pause",
+    "backToPreview": "Retour à l’aperçu"
   }
 }

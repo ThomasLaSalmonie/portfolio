@@ -42,7 +42,7 @@ npm run format     # prettier --write .
 npm run lighthouse # npx unlighthouse vs localhost:3000 — run `npm run preview` first (manual)
 ```
 
-There is **no test suite**. A `pre-commit` hook (`simple-git-hooks` → `lint-staged`) runs
+The trail game has a focused simulation suite: `npm run test:trail` (Node 22). A `pre-commit` hook (`simple-git-hooks` → `lint-staged`) runs
 eslint + prettier on staged files. `nuxt typecheck` prints one harmless
 `vue-router/volar/sfc-route-blocks` line and still exits 0.
 
@@ -156,8 +156,17 @@ Deploy is **push-triggered**, not run locally. Security headers are served by ng
 Nitro `routeRules` headers are inert for a static deploy, so the real headers live in
 `deploy/nginx.conf.example` (keep its CSP in sync with the `<meta>` CSP in `app.vue`).
 
+## Trail game
+
+Open `/lab/trail-run` for the first playable **One More Summit** prototype. Move with arrow
+keys or A/D, jump with Space (hold for height), and sprint with Shift. Escape pauses and R
+restarts. Forest Loop is the first course; the [PRD](./TRAIL_RUN_PRD.md) tracks remaining
+polish, validation, and additional courses. Game artwork is drawn directly in Canvas.
+
 ## More
 
+- `TRAIL_RUN_PRD.md` — One More Summit game requirements, course roadmap, acceptance criteria,
+  and implementation progress tracker.
 - `CLAUDE.md` — conventions, architecture notes, gotchas (for both humans and Claude Code).
 - `RENOVATION.md` — the modernization rationale (locked decisions), the deferred backlog,
   and the remaining owner-content / ops items. The renovation itself is complete.

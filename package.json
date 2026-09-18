@@ -13,7 +13,8 @@
     "typecheck": "nuxt typecheck",
     "lighthouse": "npx --yes unlighthouse@latest --site http://localhost:3000",
     "postinstall": "nuxt prepare",
-    "prepare": "simple-git-hooks"
+    "prepare": "simple-git-hooks",
+    "test:trail": "node --experimental-strip-types --test tests/trail-run.test.mjs"
   },
   "engines": {
     "node": ">=22.0.0"

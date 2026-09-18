@@ -134,7 +134,9 @@
     "solarTitle": "Solar System",
     "solarDescription": "CSS-driven orbiting planets.",
     "driverjsTitle": "Driver.js Tour",
-    "driverjsDescription": "Guided product-tour demo built with driver.js."
+    "driverjsDescription": "Guided product-tour demo built with driver.js.",
+    "trailTitle": "One More Summit",
+    "trailDescription": "A pixel-art trail platformer. Run, jump, and find your rhythm."
   },
   "pong": {
     "seoTitle": "Pong Wars",
@@ -182,5 +184,62 @@
     "notFoundBody": "That page doesn’t exist or has moved.",
     "genericTitle": "Something went wrong",
     "status": "Error {code}"
+  },
+  "trail": {
+    "title": "One More Summit",
+    "description": "A little trail, a little adventure. Find your rhythm, reach the summit, and run it back.",
+    "eyebrow": "Lab · A pixel-art trail run",
+    "course": "Course",
+    "forestName": "Forest Loop",
+    "keyboard": "Keyboard play",
+    "time": "Time",
+    "energy": "Energy",
+    "choose": "Choose a course",
+    "forestDescription": "Through the pines, up to the ridge, and down the other side. Your first mountain loop starts here.",
+    "easy": "Easy",
+    "seconds": "sec",
+    "profile": "Course elevation profile",
+    "best": "Personal best",
+    "noBest": "Your first trail awaits",
+    "start": "Hit the trail",
+    "breathe": "Take a breath",
+    "resume": "Keep running",
+    "newBest": "New personal best",
+    "wellRun": "Trail complete",
+    "falls": "Falls",
+    "retry": "Run again",
+    "pause": "Pause",
+    "gameScale": "Game-scale estimates",
+    "move": "move",
+    "space": "Space",
+    "jump": "jump · hold for height",
+    "sprint": "sprint",
+    "tip": "Pace yourself on the climb. Flags save your progress; a missed jump just costs a little time.",
+    "touch": "This first version needs a keyboard to play. You can still explore the course here.",
+    "storageFailed": "Your best time is available for this visit, but this browser could not save it for next time.",
+    "canvas": "Side-view trail platformer. Move with arrows or A/D, jump with Space, sprint with Shift. Escape leaves fullscreen or pauses. Tab moves to the game controls.",
+    "errorHelp": "The game could not start. Reload the page to retry, or return to the Lab using the link above.",
+    "respawn": "Back to the checkpoint",
+    "sections": {
+      "forest": "Among the pines",
+      "climb": "The climb",
+      "summit": "At the summit",
+      "descent": "The home stretch"
+    },
+    "states": {
+      "selecting": "Choose your trail",
+      "running": "On the trail",
+      "paused": "Trail paused",
+      "finished": "You made it.",
+      "error": "Trail unavailable"
+    },
+    "preview": "Pixel-art preview of Forest Loop",
+    "launch": "Start game",
+    "fullscreenHint": "Fullscreen adventure · Keyboard required",
+    "exit": "Exit game",
+    "controlsTitle": "How to play",
+    "controlsIntro": "Your trail is ready. Learn the controls, then start when you’re ready. The timer will wait.",
+    "escapeHint": "leave fullscreen / pause",
+    "backToPreview": "Back to preview"
   }
 }
