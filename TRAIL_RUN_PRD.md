@@ -1,6 +1,7 @@
 # One More Summit — Product Requirements Document
 
-Status: first playable prototype implemented; V1 validation and polish remain in progress.  
+Status: three-course playable build implemented; release validation and human playtesting remain in progress.
+
 Created: 2026-09-17 · Last updated: 2026-09-18  
 Product owner: Thomas La Salmonie  
 Working title: **One More Summit**  
@@ -79,7 +80,8 @@ and local performance measurements.
 
 1. Open the game from its Lab card. The page shows a single still course preview with a large
    Start game button, rather than an embedded HUD and persistent controls.
-2. Start opens the fullscreen game view. If native fullscreen is unavailable or declined,
+2. Start opens the fullscreen course picker. Choose Forest Loop, Alpine Ascent, or Downhill Rush.
+   If native fullscreen is unavailable or declined,
    a viewport-filling modal provides the same game layout.
 3. A focused “How to play” modal explains the keyboard controls before the timer starts.
 4. Activate Hit the trail to dismiss the modal and begin the run.
@@ -91,9 +93,9 @@ The game preserves its aspect ratio within fullscreen, letterboxing where needed
 and browser fullscreen exit stop the attempt and return to the preview. Both dialogs use
 native modal focus containment. Controls are localized in English and French.
 
-V1 has one playable course. Future releases add course selection within the launch flow,
-with preview, difficulty, estimated duration, distance, elevation profile, and personal best.
-New courses remain available immediately without unlocking.
+Three courses are now playable, selected inside fullscreen before the controls modal. Each
+card includes a scene preview, difficulty, duration estimate, distance, elevation gain/loss,
+profile, and course-specific personal best. All courses are available without unlocking.
 
 ### Game states
 
@@ -314,15 +316,15 @@ Status vocabulary: Not started / In progress / Blocked / Done. Mark an item comp
 its exit criteria have evidence. Add an implementation PR/commit or manual verification note to
 the milestone table. Update this file in the same change that completes a milestone.
 
-| Milestone                                | Status      | Depends on | Evidence / notes                                                                        |
-| ---------------------------------------- | ----------- | ---------- | --------------------------------------------------------------------------------------- |
-| M0 — PRD recorded                        | Done        | —          | Initial PRD created 2026-09-17; proposed defaults remain subject to prototype feedback. |
-| M1 — Movement prototype                  | In progress | M0         | —                                                                                       |
-| M2 — Course architecture and Forest Loop | In progress | M1         | —                                                                                       |
-| M3 — Complete run flow                   | In progress | M2         | —                                                                                       |
-| M4 — Art and portfolio integration       | In progress | M3         | —                                                                                       |
-| M5 — V1 release validation               | In progress | M4         | —                                                                                       |
-| M6 — Multiple courses                    | Not started | M5         | —                                                                                       |
+| Milestone                                | Status      | Depends on            | Evidence / notes                                                                                         |
+| ---------------------------------------- | ----------- | --------------------- | -------------------------------------------------------------------------------------------------------- |
+| M0 — PRD recorded                        | Done        | —                     | Initial PRD created 2026-09-17; proposed defaults remain subject to prototype feedback.                  |
+| M1 — Movement prototype                  | In progress | M0                    | —                                                                                                        |
+| M2 — Course architecture and Forest Loop | Done        | M1                    | Three typed routes share the engine; catalog, metadata, checkpoint and full-route simulation tests pass. |
+| M3 — Complete run flow                   | In progress | M2                    | —                                                                                                        |
+| M4 — Art and portfolio integration       | In progress | M3                    | —                                                                                                        |
+| M5 — V1 release validation               | In progress | M4                    | —                                                                                                        |
+| M6 — Multiple courses                    | In progress | M5 validation ongoing | Three courses implemented; automated traversal and Chrome switching verified. Human playtesting remains. |
 
 ### M1 — Movement prototype
 
@@ -334,11 +336,11 @@ the milestone table. Update this file in the same change that completes a milest
 
 ### M2 — Course architecture and Forest Loop
 
-- [ ] Define typed course schema, shared unit scale, versioning, and validation.
+- [x] Define typed course schema, shared unit scale, versioning, and validation.
 - [x] Implement course loading, start/finish triggers, ordered checkpoints, and respawn.
 - [x] Author Forest Loop's four sections and validate reachable jumps.
 - [x] Generate/validate route distance, gain/loss, profile, and position marker.
-- [ ] Verify the engine accepts a second minimal test definition without movement changes.
+- [x] Verify the engine accepts a second minimal test definition without movement changes.
 
 ### M3 — Complete run flow
 
@@ -358,7 +360,7 @@ the milestone table. Update this file in the same change that completes a milest
 
 ### M5 — V1 release validation
 
-- [ ] Add focused simulation tests for timing, jumps/collisions, checkpoint behavior, and record replacement.
+- [x] Add focused simulation tests for timing, jumps/collisions, checkpoint behavior, and record replacement.
 - [ ] Run `npm run lint`, `npm run typecheck`, and `npm run generate`.
 - [ ] Smoke-test static output in Chrome, Firefox, and Safari; record versions/devices.
 - [ ] Verify each V1 acceptance criterion, including storage and asset failures.
@@ -373,10 +375,10 @@ to be expanded.
 
 ### M6 — Multiple courses (V1.1)
 
-- [ ] Author Alpine Ascent with a sustained-climb identity.
-- [ ] Author Downhill Rush with a descent-focused identity.
-- [ ] Add previews, translations, difficulty, duration estimates, and validated profiles.
-- [ ] Verify switching courses resets attempt state and keeps records separate.
+- [x] Author Alpine Ascent with a sustained-climb identity.
+- [x] Author Downhill Rush with a descent-focused identity.
+- [x] Add previews, translations, difficulty, duration estimates, and validated profiles.
+- [x] Verify switching courses resets attempt state and keeps records separate.
 - [ ] Playtest both routes and verify AC-15 / AC-16 plus applicable V1 regression checks.
 
 ## 14. Risks and open decisions
@@ -453,3 +455,25 @@ issues.
 
 This feedback supersedes the original inline control strip and V1 course-detail selector.
 The multiple-course roadmap remains unchanged.
+
+### Multiple-course implementation — 2026-09-18
+
+- Added Alpine Ascent (2,059 game-scale metres, +178 m, 120–180 seconds) and Downhill Rush
+  (1,329 game-scale metres, -136 m, 75–120 seconds). Forest Loop remains unchanged.
+- Fullscreen now opens a three-card course picker, followed by the existing controls modal.
+  Cards have generated scene previews, normalized elevation profiles, metadata, and best times.
+- Added theme-driven alpine rock and sunset forest palettes. Section labels come from course
+  definitions rather than Forest Loop coordinates. The same simulation drives all courses.
+- Added catalog validation for duplicate IDs, finite/ordered geometry, gaps, obstacles,
+  checkpoints, sections, finish bounds, and versions. Game scale is explicitly 10 world units/m.
+- Best times remain keyed by course and rules version; the pure record-update helper rejects
+  abandoned, slower, tied, invalid, and non-positive attempts. Existing Forest Loop records
+  keep their original key and gameplay-rules version.
+- Fourteen Node tests pass, covering all three full routes without sprint/falls, each checkpoint,
+  profile bounds, malformed definitions, independent records, timing, and variable jumps.
+- Chrome: verified selecting Alpine, controls-to-run transition, switching to Downhill during
+  a run, and reset timer/energy/progress. Fixed toolbar reflow on canvas blur that swallowed
+  a course-switch click. Picker actions stay visible while cards scroll on shorter screens.
+- This phase brings forward the planned V1.1 content while M5 validation remains open. It does
+  not mark the broader release complete: human difficulty feedback, Firefox/Safari, and measured
+  frame performance are still outstanding.

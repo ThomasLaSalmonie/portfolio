@@ -160,8 +160,9 @@ Nitro `routeRules` headers are inert for a static deploy, so the real headers li
 
 Open `/lab/trail-run` for the first playable **One More Summit** prototype. Move with arrow
 keys or A/D, jump with Space (hold for height), and sprint with Shift. Escape pauses and R
-restarts. Forest Loop is the first course; the [PRD](./TRAIL_RUN_PRD.md) tracks remaining
-polish, validation, and additional courses. Game artwork is drawn directly in Canvas.
+restarts. Start opens a fullscreen picker for Forest Loop, Alpine Ascent, and Downhill Rush,
+then shows the controls before the timer starts. Each course keeps its own local best time.
+The [PRD](./TRAIL_RUN_PRD.md) tracks remaining polish and validation. Game artwork is drawn directly in Canvas.
 
 ## More
 

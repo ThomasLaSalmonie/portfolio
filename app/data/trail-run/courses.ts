@@ -3,6 +3,14 @@ import type { Course } from '../../utils/trail-run/engine';
 export const courses: Course[] = [
   {
     id: 'forest',
+    theme: 'forest',
+    difficulty: 'easy',
+    sections: [
+      { x: 0, label: 'forest' },
+      { x: 2900, label: 'climb' },
+      { x: 6400, label: 'summit' },
+      { x: 6850, label: 'descent' }
+    ],
     version: 1,
     duration: '60–90',
     finish: 10800,
@@ -36,5 +44,92 @@ export const courses: Course[] = [
     ],
     logs: [600, 1250, 2600, 3700, 4200, 5050, 6050, 8000, 9450, 10300],
     checkpoints: [2900, 4400, 6400, 8500]
+  },
+  {
+    id: 'alpine',
+    version: 1,
+    theme: 'alpine',
+    difficulty: 'medium',
+    duration: '120–180',
+    finish: 20500,
+    summit: 19400,
+    sections: [
+      { x: 0, label: 'foothills' },
+      { x: 5200, label: 'climb' },
+      { x: 12500, label: 'ridge' },
+      { x: 19400, label: 'summit' }
+    ],
+    points: [
+      { x: 0, y: 1600 },
+      { x: 900, y: 1600 },
+      { x: 2400, y: 1490 },
+      { x: 3800, y: 1320 },
+      { x: 5200, y: 1220 },
+      { x: 6700, y: 1050 },
+      { x: 8000, y: 950 },
+      { x: 9500, y: 770 },
+      { x: 11000, y: 640 },
+      { x: 12500, y: 500 },
+      { x: 14100, y: 360 },
+      { x: 15700, y: 200 },
+      { x: 17400, y: 50 },
+      { x: 18700, y: -90 },
+      { x: 19400, y: -180 },
+      { x: 20500, y: -180 }
+    ],
+    gaps: [
+      [1800, 1860],
+      [4100, 4160],
+      [6100, 6165],
+      [8600, 8660],
+      [10300, 10365],
+      [13400, 13465],
+      [16400, 16460],
+      [18400, 18465]
+    ],
+    logs: [600, 2800, 3500, 5550, 7200, 9200, 11600, 14500, 15200, 17800, 19800],
+    checkpoints: [3600, 7600, 11900, 15800, 19400]
+  },
+  {
+    id: 'downhill',
+    version: 1,
+    theme: 'sunset',
+    difficulty: 'medium',
+    duration: '75–120',
+    finish: 13200,
+    summit: 0,
+    sections: [
+      { x: 0, label: 'ridge' },
+      { x: 3200, label: 'descent' },
+      { x: 7600, label: 'forest' },
+      { x: 11200, label: 'valley' }
+    ],
+    points: [
+      { x: 0, y: 0 },
+      { x: 800, y: 0 },
+      { x: 1800, y: 150 },
+      { x: 3200, y: 320 },
+      { x: 4500, y: 520 },
+      { x: 5800, y: 680 },
+      { x: 6900, y: 830 },
+      { x: 7600, y: 840 },
+      { x: 8800, y: 1010 },
+      { x: 10100, y: 1180 },
+      { x: 11200, y: 1300 },
+      { x: 12200, y: 1360 },
+      { x: 13200, y: 1360 }
+    ],
+    gaps: [
+      [1500, 1575],
+      [2700, 2780],
+      [4100, 4180],
+      [5400, 5480],
+      [6600, 6680],
+      [8500, 8580],
+      [9800, 9880],
+      [11700, 11775]
+    ],
+    logs: [650, 2200, 3600, 4850, 6050, 7250, 7950, 9200, 10600, 12500],
+    checkpoints: [3200, 5800, 7600, 10100]
   }
 ];

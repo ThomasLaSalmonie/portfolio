@@ -6,6 +6,9 @@ export interface Course {
   id: string;
   version: number;
   duration: string;
+  theme: 'forest' | 'alpine' | 'sunset';
+  difficulty: 'easy' | 'medium';
+  sections: { x: number; label: string }[];
   points: Point[];
   gaps: [number, number][];
   logs: number[];
@@ -37,6 +40,7 @@ export interface Runner {
 }
 export const STEP = 1 / 120;
 export const RULES_VERSION = 1;
+export const WORLD_UNITS_PER_METER = 10;
 export function ground(course: Course, x: number): number {
   const points = course.points;
   for (let i = 1; i < points.length; i++) {
@@ -142,23 +146,77 @@ export function metrics(course: Course) {
     loss += Math.max(0, b.y - a.y);
   }
   return {
-    distance: Math.round(distance / 10),
-    gain: Math.round(gain / 10),
-    loss: Math.round(loss / 10)
+    distance: Math.round(distance / WORLD_UNITS_PER_METER),
+    gain: Math.round(gain / WORLD_UNITS_PER_METER),
+    loss: Math.round(loss / WORLD_UNITS_PER_METER)
   };
 }
 export function validateCourse(course: Course) {
+  const finite = (value: number) => Number.isFinite(value);
+  if (!course.id || !Number.isInteger(course.version) || course.version < 1)
+    throw new Error('Invalid identity');
   if (course.points.length < 2 || course.points[0]!.x !== 0) throw new Error('Invalid route');
-  for (let i = 1; i < course.points.length; i++) {
-    if (course.points[i]!.x <= course.points[i - 1]!.x) throw new Error('Unordered terrain');
+  for (let i = 0; i < course.points.length; i++) {
+    const point = course.points[i]!;
+    if (!finite(point.x) || !finite(point.y) || (i > 0 && point.x <= course.points[i - 1]!.x))
+      throw new Error('Unordered terrain');
   }
-  if (course.finish > course.points[course.points.length - 1]!.x) throw new Error('Invalid finish');
+  if (!finite(course.finish) || course.finish < 200 || course.finish !== course.points.at(-1)!.x)
+    throw new Error('Invalid finish');
+  if (!finite(course.summit) || course.summit < 0 || course.summit > course.finish)
+    throw new Error('Invalid summit');
+  let end = 100;
+  for (const [a, b] of course.gaps) {
+    if (!finite(a) || !finite(b) || a <= end || b <= a || b >= course.finish - 100)
+      throw new Error('Invalid gap');
+    end = b;
+  }
+  let logEnd = 100;
+  for (const x of course.logs) {
+    if (
+      !finite(x) ||
+      x <= logEnd ||
+      x >= course.finish - 100 ||
+      course.gaps.some(([a, b]) => x + 30 > a && x - 30 < b)
+    )
+      throw new Error('Invalid obstacle');
+    logEnd = x + 26;
+  }
   let previous = 70;
   for (const x of course.checkpoints) {
-    if (x <= previous || x >= course.finish || surface(course, x) !== ground(course, x))
+    if (
+      !finite(x) ||
+      x <= previous ||
+      x >= course.finish ||
+      [-20, 0, 20].some((offset) => surface(course, x + offset) !== ground(course, x + offset))
+    )
       throw new Error('Unsafe checkpoint');
     previous = x;
   }
+  if (!course.sections.length || course.sections[0]!.x !== 0) throw new Error('Missing sections');
+  previous = -1;
+  for (const section of course.sections) {
+    if (!finite(section.x) || section.x <= previous || section.x >= course.finish || !section.label)
+      throw new Error('Invalid section');
+    previous = section.x;
+  }
+}
+export function validateCatalog(courses: Course[]) {
+  if (!courses.length || new Set(courses.map((course) => course.id)).size !== courses.length)
+    throw new Error('Duplicate or missing courses');
+  courses.forEach(validateCourse);
+}
+export function elevationProfile(course: Course) {
+  const heights = course.points.map((point) => point.y);
+  const min = Math.min(...heights);
+  const range = Math.max(1, Math.max(...heights) - min);
+  return course.points
+    .map((point) => `${(point.x / course.finish) * 300},${10 + ((point.y - min) / range) * 50}`)
+    .join(' ');
+}
+export function improvedBest(previous: number | null, elapsed: number, finished: boolean) {
+  if (!finished || !Number.isFinite(elapsed) || elapsed <= 0) return previous;
+  return previous === null || elapsed < previous ? elapsed : previous;
 }
 export function formatTime(seconds: number) {
   return `${Math.floor(seconds / 60)

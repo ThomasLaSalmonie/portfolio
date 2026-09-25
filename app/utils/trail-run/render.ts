@@ -1,9 +1,42 @@
 import { ground, surface } from './engine';
 import type { Course, Runner } from './engine';
 
+const palettes = {
+  forest: {
+    sky: '#c6ded9',
+    sun: '#f6e7b7',
+    mountains: ['#a9c6c1', '#83a9a5', '#5d8986'],
+    soil: '#716451',
+    top: '#b9ae7c',
+    edge: '#8c875d',
+    fleck: '#95816a',
+    trees: ['#315e55', '#497467']
+  },
+  alpine: {
+    sky: '#d4e5ed',
+    sun: '#fff5d8',
+    mountains: ['#b6c9d7', '#8a9eaf', '#647c91'],
+    soil: '#626c77',
+    top: '#e8ece9',
+    edge: '#a2adb2',
+    fleck: '#909da7',
+    trees: ['#3a6063', '#4d777b']
+  },
+  sunset: {
+    sky: '#efceb3',
+    sun: '#ffe6a4',
+    mountains: ['#c7aaa8', '#a78f97', '#7a7985'],
+    soil: '#796052',
+    top: '#c7ad73',
+    edge: '#978356',
+    fleck: '#ac8c70',
+    trees: ['#495f53', '#69775a']
+  }
+};
 export const WIDTH = 768;
 export const HEIGHT = 432;
 export function render(ctx: CanvasRenderingContext2D, course: Course, p: Runner, reduced: boolean) {
+  const palette = palettes[course.theme];
   const camera = Math.max(0, Math.min(course.finish - WIDTH + 100, p.x - 230));
   const cy = ground(course, p.x) - 295;
   ctx.imageSmoothingEnabled = false;
@@ -11,11 +44,11 @@ export function render(ctx: CanvasRenderingContext2D, course: Course, p: Runner,
     ctx.fillStyle = color;
     ctx.fillRect(Math.round(x), Math.round(y), w, h);
   };
-  rect(0, 0, WIDTH, HEIGHT, '#c6ded9');
-  rect(590, 47, 36, 36, '#f6e7b7');
+  rect(0, 0, WIDTH, HEIGHT, palette.sky);
+  rect(590, 47, 36, 36, palette.sun);
   for (let layer = 0; layer < 3; layer++) {
     const shift = reduced ? 0 : camera * (0.035 + layer * 0.035);
-    ctx.fillStyle = ['#a9c6c1', '#83a9a5', '#5d8986'][layer]!;
+    ctx.fillStyle = palette.mountains[layer]!;
     ctx.beginPath();
     ctx.moveTo(-200, HEIGHT);
     for (let x = -200; x <= WIDTH + 220; x += 8) {
@@ -30,13 +63,21 @@ export function render(ctx: CanvasRenderingContext2D, course: Course, p: Runner,
   for (let wx = Math.floor((camera - 100) / 115) * 115; wx < camera + WIDTH + 100; wx += 115) {
     const x = wx - camera;
     const y = ground(course, wx) - cy;
-    const high = wx > 4800 && wx < 7000;
-    if (high) continue;
+    const high =
+      course.theme === 'alpine' ||
+      (course.theme === 'forest' && Math.abs(wx - course.summit) < 1400);
+    if (high) {
+      // Background crags sit behind the trail; obstacles use a brighter top edge.
+      const size = 12 + Math.abs(Math.sin(wx)) * 20;
+      rect(x - size / 2, y - size, size, size, palette.mountains[2]!);
+      rect(x - size / 2 + 4, y - size - 5, size - 8, 5, palette.mountains[1]!);
+      continue;
+    }
     const size = 45 + Math.abs(Math.sin(wx)) * 40;
     rect(x - 3, y - size, 6, size, '#42665e');
     for (let tier = 0; tier < 4; tier++) {
       const w = 16 + tier * 13;
-      rect(x - w / 2, y - size - 20 + tier * 18, w, 23, wx % 230 === 0 ? '#315e55' : '#497467');
+      rect(x - w / 2, y - size - 20 + tier * 18, w, 23, palette.trees[wx % 230 === 0 ? 0 : 1]!);
     }
   }
   for (let x = 0; x < WIDTH; x += 4) {
@@ -49,18 +90,18 @@ export function render(ctx: CanvasRenderingContext2D, course: Course, p: Runner,
       continue;
     }
     const y = ground(course, wx) - cy;
-    rect(x, y, 4, Math.max(0, HEIGHT - y), '#716451');
-    rect(x, y, 4, 7, '#b9ae7c');
-    rect(x, y + 7, 4, 5, '#8c875d');
+    rect(x, y, 4, Math.max(0, HEIGHT - y), palette.soil);
+    rect(x, y, 4, 7, palette.top);
+    rect(x, y + 7, 4, 5, palette.edge);
     for (let d = 24; d < HEIGHT - y; d += 27) {
-      if (Math.floor(wx / 4 + d) % 7 === 0) rect(x, y + d, 4, 3, '#95816a');
+      if (Math.floor(wx / 4 + d) % 7 === 0) rect(x, y + d, 4, 3, palette.fleck);
     }
   }
   for (const wx of course.logs) {
     const x = wx - camera;
     const y = ground(course, wx) - cy;
-    rect(x - 13, y - 18, 26, 18, '#624c3c');
-    rect(x - 10, y - 15, 20, 4, '#a5845b');
+    rect(x - 13, y - 18, 26, 18, course.theme === 'alpine' ? '#424d62' : '#624c3c');
+    rect(x - 10, y - 15, 20, 4, course.theme === 'alpine' ? '#d2dbe0' : '#a5845b');
     rect(x + 7, y - 14, 4, 11, '#c6a77a');
   }
   for (const [index, wx] of course.checkpoints.entries()) {

@@ -224,7 +224,10 @@
       "forest": "Among the pines",
       "climb": "The climb",
       "summit": "At the summit",
-      "descent": "The home stretch"
+      "descent": "The home stretch",
+      "foothills": "The foothills",
+      "ridge": "On the ridge",
+      "valley": "Into the valley"
     },
     "states": {
       "selecting": "Choose your trail",
@@ -240,6 +243,25 @@
     "controlsTitle": "How to play",
     "controlsIntro": "Your trail is ready. Learn the controls, then start when you’re ready. The timer will wait.",
     "escapeHint": "leave fullscreen / pause",
-    "backToPreview": "Back to preview"
+    "backToPreview": "Back to preview",
+    "medium": "Moderate",
+    "chooseIntro": "Three trails. Three different rhythms. Pick your next adventure.",
+    "continueCourse": "Run {name}",
+    "noRecord": "Not run yet",
+    "previewCourse": "Pixel-art preview of {name}",
+    "courses": {
+      "forest": {
+        "name": "Forest Loop",
+        "description": "Rolling trails, pine trees, and a little summit. Find your feet on this welcoming loop."
+      },
+      "alpine": {
+        "name": "Alpine Ascent",
+        "description": "Leave the trees behind. A sustained rocky climb, high ridges, and a summit finish."
+      },
+      "downhill": {
+        "name": "Downhill Rush",
+        "description": "From the ridge to the valley at golden hour. Link the gaps and settle into the descent."
+      }
+    }
   }
 }

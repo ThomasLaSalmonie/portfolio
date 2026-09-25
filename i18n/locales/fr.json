@@ -224,7 +224,10 @@
       "forest": "Au milieu des pins",
       "climb": "La montée",
       "summit": "Au sommet",
-      "descent": "La dernière descente"
+      "descent": "La dernière descente",
+      "foothills": "Au pied de la montagne",
+      "ridge": "Sur la crête",
+      "valley": "Vers la vallée"
     },
     "states": {
       "selecting": "Choisissez votre sentier",
@@ -240,6 +243,25 @@
     "controlsTitle": "Comment jouer",
     "controlsIntro": "Le sentier vous attend. Découvrez les commandes, puis prenez le départ. Le chrono vous attend.",
     "escapeHint": "quitter le plein écran / pause",
-    "backToPreview": "Retour à l’aperçu"
+    "backToPreview": "Retour à l’aperçu",
+    "medium": "Intermédiaire",
+    "chooseIntro": "Trois sentiers. Trois rythmes différents. Choisissez votre prochaine aventure.",
+    "continueCourse": "Courir : {name}",
+    "noRecord": "Pas encore couru",
+    "previewCourse": "Aperçu en pixel art : {name}",
+    "courses": {
+      "forest": {
+        "name": "Boucle forestière",
+        "description": "Des sentiers vallonnés, des pins et un petit sommet. Trouvez vos marques sur cette boucle accessible."
+      },
+      "alpine": {
+        "name": "Ascension alpine",
+        "description": "Laissez les arbres derrière vous. Une longue montée rocheuse, des crêtes et une arrivée au sommet."
+      },
+      "downhill": {
+        "name": "Descente express",
+        "description": "De la crête à la vallée à la lumière du soir. Enchaînez les sauts et trouvez votre rythme."
+      }
+    }
   }
 }
