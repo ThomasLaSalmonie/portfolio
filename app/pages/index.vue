@@ -87,9 +87,9 @@
 
     <section class="flex flex-col gap-4">
       <SectionHeading :eyebrow="t('home.writingEyebrow')" :title="t('home.writingTitle')" />
-      <div class="rounded-lg border border-dashed p-6">
+      <!-- <div class="rounded-lg border border-dashed p-6">
         <p class="prose-measure text-sm text-muted-foreground">{{ t('home.writingBody') }}</p>
-      </div>
+      </div> -->
     </section>
   </div>
 </template>
