@@ -207,6 +207,14 @@ export const skills: Skill[] = [
     show: true,
     related: ['javascript']
   },
+  {
+    key: 'maplibre',
+    name: 'MapLibre GL',
+    category: 'frameworks',
+    level: 'working',
+    show: true,
+    related: ['javascript']
+  },
 
   // ---- AI & LLMs ----
   {
@@ -327,6 +335,14 @@ export const skills: Skill[] = [
     show: true,
     related: ['db']
   },
+  {
+    key: 'postgresql',
+    name: 'PostgreSQL',
+    category: 'data',
+    level: 'working',
+    show: true,
+    related: ['db']
+  },
 
   // ---- Platforms & DevOps ----
   {
@@ -411,6 +427,14 @@ export const skills: Skill[] = [
     related: ['kubernetes']
   },
   {
+    key: 'stripe',
+    name: 'Stripe',
+    category: 'platforms',
+    level: 'working',
+    show: true,
+    related: []
+  },
+  {
     key: 'gitlab',
     icon: 'gitlab',
     name: 'GitLab',
@@ -447,6 +471,14 @@ export const skills: Skill[] = [
     level: 'working',
     show: true,
     related: ['javascript', 'mocha']
+  },
+  {
+    key: 'playwright',
+    name: 'Playwright',
+    category: 'testing',
+    level: 'working',
+    show: true,
+    related: ['javascript', 'cypress']
   },
   {
     key: 'mocha',

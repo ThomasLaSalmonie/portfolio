@@ -5,6 +5,61 @@ import type { RawProject } from '~/utils/types/projects.types';
 // take { en, fr } too. FR copy below is a first pass — owner should review voice.
 export const projects: RawProject[] = [
   {
+    slug: 'traceprints',
+    name: 'TracePrints',
+    shortDescription: {
+      en: 'Turn the GPX file of a ride, run or hike into a minimalist map poster — designed in the browser, sold as a 300 DPI download or a printed poster shipped to your door.',
+      fr: "Transformez le fichier GPX d'une sortie vélo, course ou randonnée en affiche cartographique minimaliste — conçue dans le navigateur, vendue en fichier 300 DPI ou imprimée et livrée chez vous."
+    },
+    banner: '/projects/traceprints/banner.webp',
+    status: 'play',
+    links: ['https://traceprints.art/'],
+    blocks: [
+      {
+        title: {
+          en: 'A poster editor in the browser',
+          fr: 'Un éditeur d’affiche dans le navigateur'
+        },
+        content: {
+          en: 'Drop a GPX export from Strava, Garmin Connect or Komoot and the track is parsed client-side into a simplified route, an elevation profile and stats. The poster is drawn with MapLibre GL on OpenStreetMap vector tiles, with a custom map style generated per theme (Ivory, Charcoal, Blueprint, Trace Orange) and five layouts. The draft is kept locally, so nothing is uploaded until you buy.',
+          fr: 'Déposez un export GPX de Strava, Garmin Connect ou Komoot : le tracé est analysé côté client en un parcours simplifié, un profil d’élévation et des statistiques. L’affiche est dessinée avec MapLibre GL sur des tuiles vectorielles OpenStreetMap, avec un style de carte généré pour chaque thème (Ivory, Charcoal, Blueprint, Trace Orange) et cinq mises en page. Le brouillon reste en local : rien n’est envoyé avant l’achat.'
+        },
+        image: '/projects/traceprints/editor.webp',
+        imagePosition: 'left'
+      },
+      {
+        title: { en: 'Print-ready rendering', fr: 'Un rendu prêt pour l’impression' },
+        content: {
+          en: 'After a guest Stripe Checkout, a webhook claims the order and a queued headless Chromium (Playwright) renders the exact same Vue poster at 300 DPI. The buyer gets a signed download link by email; physical prints (5×7, A4, A3) are sent to Gelato for print-on-demand, with shipping updates forwarded by email. Failed renders retry, alert the admin and recover on restart.',
+          fr: 'Après un paiement Stripe Checkout sans compte, un webhook réserve la commande et un Chromium headless (Playwright) en file d’attente rend exactement la même affiche Vue à 300 DPI. L’acheteur reçoit un lien de téléchargement signé par courriel ; les tirages (5×7, A4, A3) partent chez Gelato en impression à la demande, avec le suivi d’expédition relayé par courriel. Les rendus échoués sont relancés, signalés à l’admin et repris au redémarrage.'
+        },
+        image: '/projects/traceprints/poster.webp',
+        imagePosition: 'right'
+      },
+      {
+        title: { en: 'Built and run solo', fr: 'Conçu et exploité en solo' },
+        content: {
+          en: 'A single Nuxt 4 app (Nuxt UI, Nitro server routes, shared zod schemas) on Supabase Postgres via Drizzle, shipped as a Docker image to a DigitalOcean droplet behind Caddy by GitHub Actions. Bilingual FR/EN with a Markdown blog, Sentry error monitoring and self-hosted, cookie-free Umami analytics with privacy scrubbing.',
+          fr: 'Une seule application Nuxt 4 (Nuxt UI, routes serveur Nitro, schémas zod partagés) sur Supabase Postgres via Drizzle, livrée en image Docker sur un droplet DigitalOcean derrière Caddy par GitHub Actions. Bilingue FR/EN avec un blogue Markdown, suivi des erreurs Sentry et statistiques Umami auto-hébergées, sans cookie et anonymisées.'
+        }
+      }
+    ],
+    technologiesUsed: [
+      'typescript',
+      'vuejs',
+      'nuxt',
+      'nodejs',
+      'maplibre',
+      'postgresql',
+      'stripe',
+      'playwright',
+      'docker',
+      'digital-ocean',
+      'github',
+      'claude-code'
+    ]
+  },
+  {
     slug: 'bell-iot',
     name: 'Bell IoT platform',
     shortDescription: {
