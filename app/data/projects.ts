@@ -117,13 +117,46 @@ export const projects: RawProject[] = [
     slug: 'ardatho',
     name: 'Ardatho',
     shortDescription: {
-      en: 'Company website for Ardatho.',
-      fr: "Site vitrine de l'entreprise Ardatho."
+      en: 'My freelance software studio — custom platforms, integrations between business tools (ERP, CRM, CMS) and AI connected to a company’s own data. The site is a bilingual one-pager I designed and built.',
+      fr: 'Mon studio de développement indépendant — plateformes sur mesure, intégrations entre outils d’affaires (ERP, CRM, CMS) et IA branchée sur les données de l’entreprise. Le site est un one-pager bilingue que j’ai conçu et développé.'
     },
-    banner: 'https://img.thomaslasalmonie.me/ardatho/banner.jpg',
+    banner: '/projects/ardatho/banner.webp',
     status: 'play',
     links: ['https://ardatho.com/'],
-    technologiesUsed: []
+    blocks: [
+      {
+        title: {
+          en: 'Three offers, written for owners',
+          fr: 'Trois offres, écrites pour les dirigeants'
+        },
+        content: {
+          en: 'Ardatho builds the software a business can’t buy off the shelf: custom websites and platforms, connections between the tools a company already runs on, and AI assistants that can actually see its clients and orders (via MCP servers, read-only by default). Each offer is framed around the situation that triggers the call and concrete example projects, rather than a list of technologies.',
+          fr: 'Ardatho développe le logiciel qu’une entreprise ne peut pas acheter tout fait : sites et plateformes sur mesure, connexions entre les outils qu’elle utilise déjà, et assistants IA qui voient réellement ses clients et ses commandes (via des serveurs MCP, en lecture seule par défaut). Chaque offre part de la situation qui déclenche l’appel et d’exemples de projets concrets, plutôt que d’une liste de technologies.'
+        },
+        image: '/projects/ardatho/services.webp',
+        imagePosition: 'left'
+      },
+      {
+        title: { en: 'A transparent process', fr: 'Un processus transparent' },
+        content: {
+          en: 'One or two clients at a time and no middleman: a 30-minute first call, a few days of written scoping, a new build to try every week on staging, then launch with the code in the client’s repositories from day one. Engagements are a short diagnostic, a fixed-price project or a monthly retainer.',
+          fr: 'Un ou deux clients à la fois, sans intermédiaire : un premier appel de 30 minutes, quelques jours de cadrage écrit, une nouvelle version à essayer chaque semaine en préproduction, puis la mise en ligne, avec le code dans les dépôts du client dès le premier jour. Les mandats prennent la forme d’un diagnostic, d’un projet à prix fixe ou d’un forfait mensuel.'
+        },
+        image: '/projects/ardatho/process.webp',
+        imagePosition: 'right'
+      },
+      {
+        title: {
+          en: 'Built like the rest of my work',
+          fr: 'Construit comme le reste de mon travail'
+        },
+        content: {
+          en: 'A statically generated Nuxt 4 one-pager with Tailwind CSS v4 and shadcn-vue on top of a custom, dark-first design system. French by default with a full English version (@nuxtjs/i18n), SEO metadata and sitemaps from @nuxtjs/seo, self-hosted fonts and inlined icons, linted and type-checked on every commit.',
+          fr: 'Un one-pager Nuxt 4 généré en statique, avec Tailwind CSS v4 et shadcn-vue sur un système de design maison, sombre par défaut. Français par défaut avec une version anglaise complète (@nuxtjs/i18n), métadonnées SEO et plans de site via @nuxtjs/seo, polices auto-hébergées et icônes intégrées, lint et vérification des types à chaque commit.'
+        }
+      }
+    ],
+    technologiesUsed: ['typescript', 'vuejs', 'nuxt', 'html', 'css', 'mcp']
   },
   {
     slug: 'fillactive',
